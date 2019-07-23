@@ -39,8 +39,8 @@ namespace CarreMagique
         public int[] TotalParColonnes { get => totalParColonnes; set => totalParColonnes = value; }
         public int DiagAsc { get => diagAsc; set => diagAsc = value; }
         public int DiagDesc { get => diagDesc; set => diagDesc = value; }
-        public Cellule Cellule1 { get => cellule1; set => cellule1 = value; }
-        public Cellule Cellule2 { get => cellule2; set => cellule2 = value; }
+        public Cellule Cellule1 { get => cellule1;  set => cellule1 = value; }
+        public Cellule Cellule2 { get => cellule2;  set => cellule2 = value; }
         public int Iteration { get => iteration; set => iteration = value; }
         internal Persistance Persistance { get => persistance; set => persistance = value; }
         public bool CarreMagiqueResolu { get => carreMagiqueResolu; set => carreMagiqueResolu = value; }

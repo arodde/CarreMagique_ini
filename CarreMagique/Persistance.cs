@@ -127,7 +127,7 @@ namespace CarreMagique
                             for (int i = 0; i < grillePersistance.Nombre; i++)
                             {
                                 grillePersistance.Cellule1 = grillePersistance.Damier[i, j];
-                                Console.WriteLine("i : "+ i +" j : "+ j+" Cellule1 : "+ grillePersistance.Cellule1 +" Damier i j"+ grillePersistance.Damier[i, j]);
+                                //Console.WriteLine("i : "+ i +" j : "+ j+" Cellule1 : "+ grillePersistance.Cellule1 +" Damier i j"+ grillePersistance.Damier[i, j]);
                                 sw.Write(grillePersistance.Cellule1.Valeur + "_");
                             }
                             sw.WriteLine();
