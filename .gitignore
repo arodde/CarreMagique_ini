@@ -1,4 +1,5 @@
 # exclusions
 .vs/
 divers/
+CarreMagique/test/
 
