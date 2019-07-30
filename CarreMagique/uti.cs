@@ -158,6 +158,17 @@ namespace CarreMagique
                 return false;
             }
         }
+        static public bool EstPair(int nombre)
+        {
+            if ( (nombre % 2) == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }            
+        }
     }
     public static class utiExemple
     {

@@ -39,8 +39,8 @@ namespace CarreMagique
         public int[] TotalParColonnes { get => totalParColonnes; set => totalParColonnes = value; }
         public int DiagAsc { get => diagAsc; set => diagAsc = value; }
         public int DiagDesc { get => diagDesc; set => diagDesc = value; }
-        public Cellule Cellule1 { get => cellule1;  set => cellule1 = value; }
-        public Cellule Cellule2 { get => cellule2;  set => cellule2 = value; }
+        public Cellule Cellule1 { get => cellule1; set => cellule1 = value; }
+        public Cellule Cellule2 { get => cellule2; set => cellule2 = value; }
         public int Iteration { get => iteration; set => iteration = value; }
         internal Persistance Persistance { get => persistance; set => persistance = value; }
         public bool CarreMagiqueResolu { get => carreMagiqueResolu; set => carreMagiqueResolu = value; }
@@ -151,7 +151,7 @@ namespace CarreMagique
                     if (valeur < 3)
                     {
                         saisieOK = false;
-                        Console.WriteLine("le plus petit carré magique comprend 3 cases sur 3.");  
+                        Console.WriteLine("le plus petit carré magique comprend 3 cases sur 3.");
                     }
                     else
                     {
@@ -289,7 +289,7 @@ namespace CarreMagique
                                 return;
                             }
                         }
-                        
+
                         j++;
                     }
                     // passage à une nouvelle ligne
@@ -510,9 +510,7 @@ namespace CarreMagique
         {
             // contrôle que les valeurs du tableau en parmètres sont égales.
             int i = 0;
-
             bool ok = false;
-
             do
             {
                 if (tab[i] != tab[i + 1])
@@ -534,12 +532,10 @@ namespace CarreMagique
         }
         public void AffiTotalLignes()
         {
-
             foreach (int elt in totalParLignes)
             {
                 GestionEspaces(elt);
             }
-
         }
         public void ReinitialisationTotaux()
         {
@@ -630,9 +626,25 @@ namespace CarreMagique
                 return null;
             }
         }
+        public int SommeATrouver()
+        {
+            Uti.Info("Grille", "SommeATrouver", "");
+            int nombreAtrouver = 0;
+            int valeurDeMilieu = Nombre * Nombre / 2;
+            int retroCompteur = valeurDeMilieu;
+            int compteur = 0;
 
+            nombreAtrouver = nombre/2 * (1 + (nombre * nombre));
+            Console.WriteLine("nombre à trouver : " + nombreAtrouver);
+            if((Nombre % 2) != 0)
+            {// si nombre est impair               
+                Console.WriteLine("impair");
+                nombreAtrouver += ((nombre * nombre-1) / 2)+1;
+            }
 
-
+            Console.WriteLine(nombreAtrouver);
+            return nombreAtrouver;
+        }
     }
 
 }

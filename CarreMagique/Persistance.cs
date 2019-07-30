@@ -115,23 +115,42 @@ namespace CarreMagique
                     //        créer fichier
                     using (StreamWriter sw = File.CreateText(nomFichier))
                     {
-                        Console.WriteLine(nomFichier);
                         sw.WriteLine(nomFichier);
                         sw.WriteLine();
                         sw.WriteLine("Carré magique de " + grillePersistance.Nombre);
                         sw.WriteLine("***");
                         // remplir avec le damier le fichier 
-
-                        for (int j = 0; j < grillePersistance.Nombre; j++)
+                        try
                         {
-                            for (int i = 0; i < grillePersistance.Nombre; i++)
+                            // code provoquant une exception
+                            for (int j = 0; j < grillePersistance.Nombre; j++)
                             {
-                                grillePersistance.Cellule1 = grillePersistance.Damier[i, j];
-                                //Console.WriteLine("i : "+ i +" j : "+ j+" Cellule1 : "+ grillePersistance.Cellule1 +" Damier i j"+ grillePersistance.Damier[i, j]);
-                                sw.Write(grillePersistance.Cellule1.Valeur + "_");
+                                for (int i = 0; i < grillePersistance.Nombre; i++)
+                                {                                   
+                                    // inscrire dans le fichier                                    
+                                    sw.Write(grillePersistance.Damier[i, j].Valeur);
+                                }
+                                sw.WriteLine("");
                             }
-                            sw.WriteLine();
                         }
+                        catch (FormatException ex)
+                        {
+                            Console.WriteLine("Erreur de format : " + ex);
+                        }
+                        catch (NullReferenceException ex)
+                        {
+                            Console.WriteLine("Erreur de référence nulle : " + ex);
+                        }
+                        catch (SystemException ex)
+                        {
+                            Console.WriteLine("Erreur système autres que FormatException et NullReferenceException : " + ex);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Toutes les autres exceptions : " + ex);
+                        }
+                      
+
                     }
                     ok = true;
                     /////

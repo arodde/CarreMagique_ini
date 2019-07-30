@@ -25,6 +25,13 @@ namespace CarreMagique
             // contenu de Main chargé dans le menu
             Persistance persistance = new Persistance();
             Grille grille = new Grille(persistance);
+            if (grille.Nombre != 0)
+            {
+                grille.SommeATrouver().ToString();
+            } else
+            {
+                Console.WriteLine("y a rien!!!");
+            }
 
 
             /*
@@ -35,6 +42,7 @@ namespace CarreMagique
              * d'un damier d'une taille définie?
              */
             grille.AffiDamier();
+
             bool quitter = false;
             int cpt = 0;
             do
@@ -42,7 +50,7 @@ namespace CarreMagique
                 grille.ProposerPermutation();
                 if (grille.Gagne())
                 {
-                    
+
                     quitter = true;
                 }
                 else
