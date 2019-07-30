@@ -119,6 +119,8 @@ namespace CarreMagique
                         sw.WriteLine();
                         sw.WriteLine("Carré magique de " + grillePersistance.Nombre);
                         sw.WriteLine("***");
+                        sw.WriteLine(grillePersistance.SommeATrouver().ToString());
+                        sw.WriteLine("***");
                         // remplir avec le damier le fichier 
                         try
                         {
@@ -128,7 +130,7 @@ namespace CarreMagique
                                 for (int i = 0; i < grillePersistance.Nombre; i++)
                                 {                                   
                                     // inscrire dans le fichier                                    
-                                    sw.Write(grillePersistance.Damier[i, j].Valeur);
+                                    sw.Write(grillePersistance.Damier[i, j].Valeur+"-");
                                 }
                                 sw.WriteLine("");
                             }

@@ -492,19 +492,29 @@ namespace CarreMagique
         public bool ControleTotaux()
         {
             // control des valeurs des tableaux
-            if (ValeursEgales(TotalParColonnes) && ValeursEgales(TotalParLignes))
-                if (TotalParColonnes[0] == TotalParLignes[0])
-                    if (TotalParColonnes[0] == DiagAsc)
-                        if (DiagAsc == DiagDesc)
-                            return true;
+            if (totalParColonnes[0] == SommeATrouver()) /* si la première valeur du tableau ne donne 
+                                                           rien ne correspond pas à la SommeATrouver()
+                                                           alors inutile de continuer */
+            {
+
+                if (ValeursEgales(TotalParColonnes) && ValeursEgales(TotalParLignes))
+                    if (TotalParColonnes[0] == TotalParLignes[0])
+                        if (TotalParColonnes[0] == DiagAsc)
+                            if (DiagAsc == DiagDesc)
+                                return true;
+                            else
+                                return false;
                         else
                             return false;
                     else
                         return false;
                 else
                     return false;
+            }
             else
+            {
                 return false;
+            }
         }
         public bool ValeursEgales(int[] tab)
         {
@@ -629,20 +639,16 @@ namespace CarreMagique
         public int SommeATrouver()
         {
             Uti.Info("Grille", "SommeATrouver", "");
+            // identifie la valeur de la somme à trouver sur les verticales, les horizontales et les grandes diagonales
             int nombreAtrouver = 0;
-            int valeurDeMilieu = Nombre * Nombre / 2;
-            int retroCompteur = valeurDeMilieu;
-            int compteur = 0;
-
-            nombreAtrouver = nombre/2 * (1 + (nombre * nombre));
+            // nombre divisé par deux donne un entier 
+            nombreAtrouver = nombre / 2 * (1 + (nombre * nombre));
             Console.WriteLine("nombre à trouver : " + nombreAtrouver);
-            if((Nombre % 2) != 0)
+            if ((Nombre % 2) != 0)
             {// si nombre est impair               
                 Console.WriteLine("impair");
-                nombreAtrouver += ((nombre * nombre-1) / 2)+1;
+                nombreAtrouver += ((nombre * nombre - 1) / 2) + 1;
             }
-
-            Console.WriteLine(nombreAtrouver);
             return nombreAtrouver;
         }
     }
