@@ -84,6 +84,7 @@ namespace CarreMagique
         public void CarreMagiqueEnMemoire()
         {
             Uti.Info("Menu", "CarreMagiqueEnMemoire", "");
+            string NomFichier = "";
             /*
              *  consulter le dossier de sauvegarde et le fichier de 
              *  sauvegarde si dossier n'existe pas le créer sinon 
@@ -92,7 +93,9 @@ namespace CarreMagique
              *  remplir de chaque valeur rencontrée
              */
             Persistance persistance = new Persistance();
-            persistance.VerifExistenceSauvegarde();
+            NomFichier = persistance.VerifExistenceSauvegarde();
+            persistance.OuvrirFichier(NomFichier);
+        
         }
         public void MenuJeu()
         {
