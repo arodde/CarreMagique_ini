@@ -49,6 +49,21 @@ namespace CarreMagique
         private Persistance persistance;
         public void T2dimDyna()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("DesTableaux", "T2dim", "");
             DeterminationTaille();
 
@@ -61,6 +76,21 @@ namespace CarreMagique
         }
         public Grille(Persistance pPersistance)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "Grille", "1p");
             Persistance = new Persistance();
             Persistance = pPersistance;
@@ -81,6 +111,21 @@ namespace CarreMagique
 
         public void InitialisationDamier()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "InitialisationDamier", "");
 
             // remplissage du tableau
@@ -119,6 +164,21 @@ namespace CarreMagique
         }
         public void GestionEspaces(int valeur)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             //Uti.Info("Grille", "GestionEspaces", "");
             if (valeur < 10)
             {
@@ -135,6 +195,21 @@ namespace CarreMagique
         }
         public void DeterminationTaille()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "DeterminationTaille()", "");
             Console.WriteLine("Indiquez la taille du carré magique à résoudre?");
             bool saisieOK = false;
@@ -166,7 +241,22 @@ namespace CarreMagique
             }
         }
         public void AffiDamier()
-        {
+        {         /* ***************************************************************
+             +
+             * Fonction pour afficher le damier de taille grille.Nombre et les totaux 
+             * des lignes, des colonnes et des diagonales
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
             Uti.Info("Grille", "AffiDamier", "");
             ReinitialisationTotaux();
             // réalisation des totaux
@@ -197,6 +287,21 @@ namespace CarreMagique
         }
         public void ProposerPermutation()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "ProposerPermutation", "");
 
             Console.WriteLine("Quelles valeurs de damier souhaitez-vous permuter?");
@@ -211,6 +316,21 @@ namespace CarreMagique
         }
         public int SaisieValeurPossible()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "SaisieValeurPossible", "");
             int valeur = 0;
             while (valeur < 1 || valeur > Nombre * Nombre)
@@ -237,6 +357,21 @@ namespace CarreMagique
         }
         public void TrouverCellule(int SaisieJoueur1, int SaisieJoueur2)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "TrouverCellule", "");
             // Chercher une valeur du tableau
             int i = 0;
@@ -304,6 +439,21 @@ namespace CarreMagique
         }
         public void PermuterValeurCellules()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             /*
               avec les valeurs de coordonnées récupérées dans les 
               cellules cellule1 et cellule2. les valeurs correspondantes
@@ -360,6 +510,21 @@ namespace CarreMagique
         }
         public void ProcederTotaux()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "ProcederTotaux", "");
             // appel des méthodes
             SommeColonnes();
@@ -378,7 +543,21 @@ namespace CarreMagique
             //Console.WriteLine("DiagDesc : " + DiagDesc);
         }
         public void SommeColonne(int IndiceColonne)
-        {
+        {         /* ***************************************************************
+             +
+             * Fonction pour +
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
             //Uti.Info("Grille", "SommeColonne", "");
             // somme des nombres d'une colonne            
             bool valeurOk = false;
@@ -401,7 +580,21 @@ namespace CarreMagique
             }
         }
         public void SommeColonnes()
-        {
+        {         /* ***************************************************************
+             +
+             * Fonction pour +
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
             // somme des nombres de chaque colonne et affectation du résultat dans le tableau totalColonne 
             Uti.Info("Grille", "SommeColonnes", "");
             int valeur = 0;
@@ -415,6 +608,21 @@ namespace CarreMagique
         }
         public void SommeLigne(int IndiceLigne)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             //Uti.Info("Grille", "SommeLigne", "");
             // somme des nombres d'une ligne            
             bool valeurOk = false;
@@ -438,6 +646,21 @@ namespace CarreMagique
         }
         public void SommeLignes()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // somme des nombres de chaque Ligne et affectation du résultat dans le tableau totalLigne 
             //Uti.Info("Grille", "SommeLignes", "");
             int valeur = 0;
@@ -451,6 +674,21 @@ namespace CarreMagique
         }
         public void SommeDiagDesc()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // calcule la somme des valeur de la diagonale principale descendante
             int i = 0;
             int j = 0;
@@ -463,6 +701,21 @@ namespace CarreMagique
         }
         public void SommeDiagAsc()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // calcule la somme des valeur de la diagonale principale ascendante
             int i = nombre - 1;
             int j = 0;
@@ -475,6 +728,21 @@ namespace CarreMagique
         }
         public bool Gagne()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "Gagne", "");
 
             if (ControleTotaux())
@@ -491,6 +759,21 @@ namespace CarreMagique
         }
         public bool ControleTotaux()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // control des valeurs des tableaux
             if (totalParColonnes[0] == SommeATrouver()) /* si la première valeur du tableau ne donne 
                                                            rien ne correspond pas à la SommeATrouver()
@@ -518,6 +801,21 @@ namespace CarreMagique
         }
         public bool ValeursEgales(int[] tab)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // contrôle que les valeurs du tableau en parmètres sont égales.
             int i = 0;
             bool ok = false;
@@ -533,6 +831,21 @@ namespace CarreMagique
         }
         public void AffiTotalColonnes()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour afficher le total des colonnes dans une couleur déterminée
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Blue;
             foreach (int elt in totalParColonnes)
             {
@@ -542,6 +855,21 @@ namespace CarreMagique
         }
         public void AffiTotalLignes()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour afficher le total des lignes dans une couleur déterminée
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             foreach (int elt in totalParLignes)
             {
                 GestionEspaces(elt);
@@ -549,6 +877,22 @@ namespace CarreMagique
         }
         public void ReinitialisationTotaux()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour raz des totaux de colonnes, lignes, et diagonales depuis 
+    * la précédente modification du damier
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             TotalParColonnes = new int[nombre];
             TotalParLignes = new int[nombre];
             DiagAsc = 0;
@@ -556,6 +900,22 @@ namespace CarreMagique
         }
         public void AffiDiagAsc()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour la gestion des espaces selon la valeur du total de la 
+    * diagonale ascendante
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Yellow;
             if (DiagAsc < 100)
                 Console.Write("  " + DiagAsc + " ");
@@ -565,6 +925,22 @@ namespace CarreMagique
         }
         public void AffiDiagDesc()
         {
+            /* ***************************************************************
+            +
+            * Fonction pour la gestion des espaces selon la valeur du total de la 
+            * diagonale descendante
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Yellow;
             if (DiagDesc < 100)
                 Console.WriteLine("  " + DiagDesc + " ");
@@ -580,6 +956,22 @@ namespace CarreMagique
         }
         public Cellule TrouverValeur(int valeurATrouver)
         {
+            /* ***************************************************************
+            +
+            * Fonction pour trouver au sein du damier la cellule dont la valeur est celle en paramètre
+            * les paramètres:
+            * 1 : valeurATrouver : la valeur de la cellule à trouver (int)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: compteur qui est chargée des coordonnées de la cellule de la grille avec la valeur cherchée  (cellule)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+            //
             if (valeurATrouver >= damier[0, 0].Valeur || valeurATrouver <= damier[(Nombre - 1), (Nombre - 1)].Valeur)
             {
                 Console.WriteLine("damier[0,0].Valeur : " + damier[0, 0].Valeur + " damier[Nombre, Nombre].Valeur : " + damier[(Nombre - 1), (Nombre - 1)].Valeur);
@@ -605,15 +997,11 @@ namespace CarreMagique
                             Damier[i, j].Valeur = compteur.Valeur;
                             Damier[i, j].CoorHori = compteur.CoorHori;
                             Damier[i, j].CoorVerti = compteur.CoorVerti;
-                            //Console.WriteLine(compteur.Valeur +
-                            //    " Damier[i, j].Valeur : " + 
-                            //    Damier[i, j].Valeur + " Damier[i, j].CoorHori : "
-                            //    + Damier[i, j].CoorHori + 
-                            //    " Damier[i, j].CoorVerti : " +
-                            //    Damier[i, j].CoorVerti);
+                 
                             if (valeurATrouver == Damier[i, j].Valeur)
                             {
-                                // si la valeur est trouvée elles est copiée dans le compteur
+                                // si la valeur est trouvée elle est copiée dans le compteur
+                                // avec les coordonnées dans le damier
                                 compteur.Valeur = Damier[i, j].Valeur;
                                 compteur.CoorHori = Damier[i, j].CoorHori;
                                 compteur.CoorVerti = Damier[i, j].CoorVerti;
@@ -638,6 +1026,22 @@ namespace CarreMagique
         }
         public int SommeATrouver()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour pour trouver la valeur de la somme du carré resolu
+    * pour le carré magique
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: la somme correcte du carré magique (int)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Grille", "SommeATrouver", "");
             // identifie la valeur de la somme à trouver sur les verticales, les horizontales et les grandes diagonales
             int nombreAtrouver = 0;

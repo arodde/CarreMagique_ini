@@ -7,7 +7,7 @@ namespace CarreMagique
     class Menu
     {
         public void DefinitionCarreMagique()
-        {
+        {// les régles du jeu...
             Console.WriteLine("Règles du carré magique");
             Console.WriteLine("Ce jeu mathématique consiste à disposer dans une grille carré " +
                 "les nombres en commençant par 1 et en incrémentant de 1. La plus forte valeur " +
@@ -21,6 +21,23 @@ namespace CarreMagique
 
         public void NouveauCarreMagique()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour créer une instance de menu qui va 
+    *   - créer l'instance de persistance
+    *   - créer la grille la persistance en paramètre
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Menu", "NouveauCarreMagique", "");
             // contenu de Main chargé dans le menu
             Persistance persistance = new Persistance();
@@ -28,19 +45,14 @@ namespace CarreMagique
             if (grille.Nombre != 0)
             {
                 grille.SommeATrouver().ToString();
-            } else
+            }
+            else
             {
                 Console.WriteLine("y a rien!!!");
             }
 
 
-            /*
-             * Comment charger depuis la mémoire le fichier en cours?    
-             * Quel objet créé avant le damier avec son constructeur 
-             * qui définit sa taille?
-             * Ou la persistance qui permet de sélectionner une sauvegarde
-             * d'un damier d'une taille définie?
-             */
+            // affichage du damier
             grille.AffiDamier();
 
             bool quitter = false;
@@ -70,12 +82,8 @@ namespace CarreMagique
             {
                 if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
                 {
-                    // l'objet persistance est implémenté à ce stade pour ne pas encombrer la mémoire
-                    /*
-                     * si la persistance au moyen d'un objet extérieur
-                     * n'est pas concluante, les fonctions de la classe 
-                     * seront réintégrées dans la classe qui a le damier
-                     */
+
+
 
                     persistance.SauvegarderDansFichierTxt(grille);
                 }
@@ -83,8 +91,23 @@ namespace CarreMagique
         }
         public void CarreMagiqueEnMemoire()
         {
+            /* ***************************************************************
+    +
+    * Fonction pour aller chercher le contenu d'un fichier en mémoire s'il existe
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Uti.Info("Menu", "CarreMagiqueEnMemoire", "");
-            string NomFichier = "";
+
             /*
              *  consulter le dossier de sauvegarde et le fichier de 
              *  sauvegarde si dossier n'existe pas le créer sinon 
@@ -93,12 +116,30 @@ namespace CarreMagique
              *  remplir de chaque valeur rencontrée
              */
             Persistance persistance = new Persistance();
-            NomFichier = persistance.VerifExistenceSauvegarde();
-            persistance.OuvrirFichier(NomFichier);
-        
+            string NomFichier = persistance.RetourneAdresseDossierSvg();
+            persistance.AfficheListeFichiersExistants();
+            // choix du fichier à ouvrir
+            persistance.ChoixFichierAOuvrir();
+
+
         }
         public void MenuJeu()
         {
+            /* ***************************************************************
+            +
+            * Fonction pour afficher les options disponibles au menu
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Uti.Info("Menu", "MenuJeu", "");
             // mise en forme
             string sl = "\n";
@@ -113,6 +154,22 @@ namespace CarreMagique
         }
         public void MethodesMenuJeu()
         {
+            /* ***************************************************************
+            +
+            * Fonction pour permettre au programme de vérifier la saisie utilisateur 
+            * et le diriger si elle est correcte vers le bon embranchement de switch
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Uti.Info("Menu", "MethodesMenuJeu", "");
             //string sl = "\n";
             //string tbl = "\t";

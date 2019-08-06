@@ -62,6 +62,21 @@ namespace CarreMagique
         }
         static public void Mess(string message)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Info("Program", "Mess", "");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(message);
@@ -69,6 +84,21 @@ namespace CarreMagique
         }
         static public void MessErr(string message)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Info("Program", "Mess", "");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(message);
@@ -76,6 +106,21 @@ namespace CarreMagique
         }
         static public void Sep(string message, int nombre)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Red;
             for (int i = 0; i < nombre; i++)
             {
@@ -86,16 +131,61 @@ namespace CarreMagique
         }
         public static void Echanger<T>(ref T t1, ref T t2)
         {// méthode d'échange générique
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             T temp = t1;
             t1 = t2;
             t2 = temp;
         }
         public static bool EstEgal<T, U>(T t, U u)
         {// teste qu'il s'agit de la même instance
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             return t.Equals(u);
         }
         static void Titrer(string message)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\n\t");
             PremierTierLeTexte(message);
@@ -104,18 +194,63 @@ namespace CarreMagique
         }
         private static void CentrerLeTexte(string texte)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             int nbEspaces = (Console.WindowWidth - texte.Length) / 2;
             Console.SetCursorPosition(nbEspaces, Console.CursorTop);
             Console.WriteLine(texte);
         }
         private static void PremierTierLeTexte(string texte)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             int nbEspaces = (Console.WindowWidth - texte.Length) / 3;
             Console.SetCursorPosition(nbEspaces, Console.CursorTop);
             Console.WriteLine(texte);
         }
         static public void Avertissement(string message)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\n*****\n");
             PremierTierLeTexte("AVERTISSEMENT!!!");
@@ -126,6 +261,21 @@ namespace CarreMagique
         }
         static public void GestionEspaces(int valeur)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             //Uti.Info("Uti", "GestionEspaces", "");
             // affiche la valeur avec une série d'espace en fonction de l'importance de la valeur
             if (valeur < 10)
@@ -143,6 +293,21 @@ namespace CarreMagique
         }
         static public bool Quitter(string commentaire)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // true pour quitter ; false pour continuer
             Console.Write("Voulez-vous quitter");
             if (commentaire != "")
@@ -166,6 +331,22 @@ namespace CarreMagique
         }
         static public bool Action(string verbeAction, string actionSiOui, string actionSiNon, string commentaire)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour soumettre une action à l'utilisateur et renvoyer un booléen 
+    * correspondant à sa décision
+    * les paramètres:
+    * 1 : verbeAction (string)
+    * 2 : actionSiOui (string)
+    * 3 : actionSiNon (string)
+    * 4 : commentaire (string) (pour apporter une précision s'il y a lieur
+    * 5 : + (+)
+    * retour: si oui true si non false (bool)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             // pour lancer une éventuelle action
             Uti.Info("Uti", "Action", "sauvegarde");
             Console.Write("Voulez-vous " + verbeAction);
@@ -190,6 +371,21 @@ namespace CarreMagique
         }
         static public bool EstPair(int nombre)
         {
+            /* ***************************************************************
+    +
+    * Fonction pour préciser si le nombre en paramètre est pair
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: true: pair, false: impair (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
             if ((nombre % 2) == 0)
             {
                 return true;
@@ -226,17 +422,13 @@ namespace CarreMagique
              * extraire quelque chose de plus grand que la chaîne ou donner le même caractère et la même occurence 
              * dans les paramètres 2 , 3 et 4 , 5
             */
-
-
-
-
             int i = 0;// compteur d'occurrence
             string sousChaine = "";
             int a = 0;
             int b = 0;
 
-            char[] cchaine = new char[chaine.Length];
-            // identifie les bonnes occurrences de motif1 et de motif2
+           
+            // identifie les bonnes occurrences de motif1 
             int k = 0;
             while (k < chaine.Length)
             {
@@ -253,6 +445,7 @@ namespace CarreMagique
             }
             i = 0;
             k = 0;
+            // et de motif2
             while (k < chaine.Length)
             {
                 if (chaine[k] == motif2)
@@ -274,7 +467,7 @@ namespace CarreMagique
             }
             else
             {
-                Console.WriteLine("Impossible la longueur est est nulle.");
+                Console.WriteLine("Impossible la longueur de la sous-chaine est nulle.");
             }
             return sousChaine;
         }
@@ -345,7 +538,7 @@ public static class utiExemple
             Console.WriteLine("Il faut entrer un nombre.");
         }
     }
-
+  
     //public void T1dim()
     //{
     //    Uti.Info("DesTableaux", "T1dim", "");
@@ -779,6 +972,6 @@ public class ListeChainee<T>
         }
     }
 }
-}
+
 
 

@@ -57,7 +57,21 @@ namespace CarreMagique
 
         public override string ToString()
         {
-
+            /* ***************************************************************
+    +
+    * Fonction pour +
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
 
             string description = "Valeur " + Valeur + " CoorHori " + CoorHori + " coorVerti " + CoorVerti;
             return description;
