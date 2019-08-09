@@ -78,7 +78,7 @@ namespace CarreMagique
         {
             /* ***************************************************************
     +
-    * Fonction pour +
+    * Fonction pour créer la persistance suite à la création d'une grille à sauvegarder
     * les paramètres:
     * 1 : + (+)
     * 2 : + (+)
@@ -102,13 +102,40 @@ namespace CarreMagique
             TotalParLignes = new int[nombre];
             cellule1 = new Cellule();
             cellule2 = new Cellule();
+            //// initialisation 
+            //InitialisationDamier();
+
+           
+        }
+        public Grille()
+        {
+            Uti.Info("Grille", "Grille", "");
+            /* ***************************************************************
+             +
+             * Fonction pour créer la grille suite à la création d'une persistance pour charger une grille en mémoire
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            DeterminationTaille();
+            CarreMagiqueResolu = false;
+            // instanciations 
+            Damier = new Cellule[Nombre, Nombre];
+            TotalParColonnes = new int[nombre];
+            TotalParLignes = new int[nombre];
+            cellule1 = new Cellule();
+            cellule2 = new Cellule();
             // initialisation 
             InitialisationDamier();
-
-            Uti.Mess("Besoin de compléter les méthodes de persistance " +
-                "pour poursuivre la réalisation de la persistance");
         }
-
         public void InitialisationDamier()
         {
             /* ***************************************************************
@@ -197,7 +224,7 @@ namespace CarreMagique
         {
             /* ***************************************************************
     +
-    * Fonction pour +
+    * Fonction pour déterminer la taille du carré magique qui va être instancié
     * les paramètres:
     * 1 : + (+)
     * 2 : + (+)
@@ -211,7 +238,7 @@ namespace CarreMagique
     * +
    **************************************************************** */
             Uti.Info("Grille", "DeterminationTaille()", "");
-            Console.WriteLine("Indiquez la taille du carré magique à résoudre?");
+            Console.WriteLine("Indiquez la taille du carré magique?");
             bool saisieOK = false;
             string saisie = "";
             int valeur = 0;
@@ -1047,12 +1074,13 @@ namespace CarreMagique
             int nombreAtrouver = 0;
             // nombre divisé par deux donne un entier 
             nombreAtrouver = nombre / 2 * (1 + (nombre * nombre));
-            Console.WriteLine("nombre à trouver : " + nombreAtrouver);
+          
             if ((Nombre % 2) != 0)
             {// si nombre est impair               
                 Console.WriteLine("impair");
                 nombreAtrouver += ((nombre * nombre - 1) / 2) + 1;
             }
+            //Console.WriteLine("nombre à trouver : " + nombreAtrouver);
             return nombreAtrouver;
         }
     }

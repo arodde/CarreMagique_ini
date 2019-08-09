@@ -10,12 +10,16 @@ namespace CarreMagique
         Grille grillePersistance;
         private string racine;
         private string dossSvg;
-        private string typeFinalisationCarreMagique;
+        private string typeCMLongs;
+        private string typeCMCours;
+        private string typeCMLongsLib;
+        List<string> listeFichiersCibles;
         enum typeCarreMagique
         {// ce sont des entiers à compter de zéro
             ec = 1,
             r
         }
+       
         public Persistance()
         {
             /* ***************************************************************
@@ -292,9 +296,34 @@ namespace CarreMagique
                 Console.WriteLine("Création dossier à l'emplacement " + chemin + ".");
             }
         }
-        public void PresenceDossier(string nomDossier)
+        public bool PresenceDossierSvg()
         {
-
+            if (Directory.Exists(racine))
+            {
+                if (Directory.Exists(racine + dossSvg))
+                    return true;
+                else
+                {
+                    Console.WriteLine("Le dossier " + racine + " existe mais le dossier " + dossSvg + " est manquant.");
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool PresenceDossier(string nomDossier)
+        {
+            if (Directory.Exists(racine + dossSvg + nomDossier))
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("le dossier " + nomDossier + " n'existe pas.");
+                return false;
+            }
         }
         public void AfficheListeFichiersExistants()
         {
@@ -315,7 +344,7 @@ namespace CarreMagique
     * +
    **************************************************************** */
             Uti.Info("Persistance", "AfficheListeFichiersExistants", "");
-            bool sauvegardeARestaurer = true;
+            //bool sauvegardeARestaurer = true;
 
             // tant que sauvegardeARestaurer est vrai
 
@@ -325,118 +354,84 @@ namespace CarreMagique
             string str = racine + dossSvg;
             int nResultat = 0;
             string sResultat = "";
-            if (!Directory.Exists(racine + dossSvg))
+            //if (!Directory.Exists(racine + dossSvg))
+            //{
+            //    sauvegardeARestaurer = false;
+            //    Console.WriteLine("Aucun dossier de sauvegarde à restaurer.");
+            //    //Console.WriteLine(racine + dossSvg);
+            //}
+            //else
+            //{
+            if (!PresenceDossierSvg())
             {
-                sauvegardeARestaurer = false;
-                Console.WriteLine("Aucun dossier de sauvegarde à restaurer.");
-                //Console.WriteLine(racine + dossSvg);
+                Console.WriteLine("Aucune sauvegarde à ce jour.");
             }
             else
             {
                 Console.WriteLine("fichier de sauvegarde trouvé.");
-                string[] tabec = new string[100];
-                string[] tabr = new string[100];
-                List<string> listeFichiersEC = new List<string>();
-                List<string> listeFichiersR = new List<string>();
+                // -- -- --
                 int i = 0;
-                // récupération des chemins de dossiers contenant les fichiers de 
-                // sauvegarde s'ils existent
-                if (Directory.Exists(racine + dossSvg + "en-cours"))
-                {
-                    // afficher les fichiers existants
-                    Console.WriteLine("le fichier en-cours existe");
-                    //sauvegardeARestaurer = true;
-                    tabec = Directory.GetFiles(racine + dossSvg + "en-cours");
-                }
-                //else
-                //{
-                //    sauvegardeARestaurer = false;
-                //}
-                if (Directory.Exists(racine + dossSvg + "resolus"))
-                {
-                    // afficher les fichiers existants
-                    Console.WriteLine("le fichier resolus existe");
-                    //sauvegardeARestaurer = true;
-                    tabr = Directory.GetFiles(racine + dossSvg + "resolus");
-                }
-                //else
-                //{
-                //    sauvegardeARestaurer = false;
-                //}
-
-                // ajout au tableau des titres de fichiers existants dans les listes 'en cours' et 'resolus'
-
-                foreach (string s in tabec)
-                {
-                    if (s != "")
-                    {
-                        i++;
-                        listeFichiersEC.Add("** " + i + " ** " + s);
-                    }
-
-                }
-
-
-                foreach (string s in tabr)
-                {
-
-                    if (s != "")
-                    {
-                        i++;
-                        listeFichiersR.Add("** " + i + " ** " + s);
-                    }
-
-                }
-                // affichage de la liste de fichiers
-                Console.WriteLine(" Les carrés magiques en cours :");
-                foreach (string s in listeFichiersEC)
-                {
-
-                    //Console.WriteLine(s);
-                    nResultat = s.LastIndexOf(@"\");
-                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
-                    // prélève la sous-chaine correspondant au non du dossier
-                    sResultat = s.Substring((nResultat + 1), (s.Length - nResultat - 1));
-                    // donne le nom du fichier seul
-                    Console.WriteLine(sResultat);
-
-                    // ouvrir le fichier
-                    //OuvrirFichier(sResultat);
-                }
-                // affichage de la liste de fichiers
-                Console.WriteLine(" Les carrés magiques résolus :");
-                foreach (string s in listeFichiersR)
-                {
-
-                    //Console.WriteLine(s);
-                    nResultat = s.LastIndexOf(@"\");
-                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
-                    // prélève la sous-chaine correspondant au non du dossier
-                    sResultat = s.Substring((nResultat + 1), (s.Length - nResultat - 1));
-                    // donne le nom du fichier seul
-                    Console.WriteLine(sResultat);
-
-                    //// ouvrir le fichier
-                    //OuvrirFichier(sResultat);
-                }
-
-
-                //sauvegardeARestaurer = false;
-                // saisir la taille du carré magique - le nombre après cm dans le fichier
-                // saisir le numéro du fichier - le nombre après r ou ec dans le fichier
-                // lire le fichier trouver les ***
-                // collecter dans une chaine tout le damier
-                // tant que la chaine n'est pas terminée
-                //  décomposer la chaîne pour récupérer les souschaines de nombres et 
-                //  la convertir en entier pour 
-                //  la placer dans le damier
-                // afficher le damier
-                // jouer comme dans l'option 2 du menu avec ce damier
+                // choisi entre fichiers résolus ou en cours
+                ChoixTypeFichier();
+                // affiche les fichiers selon le choix réalisé
+                AfficheListeFichiersExistantsCibles();
+                
             }
+
+
+            //}
             //}
 
-
         }
+        public void AfficheListeFichiersExistantsCibles()
+        {
+            // -- -- --
+            Uti.Info("Persistance", "AfficheListeFichiersExistantsEC", "");
+            int nResultat = 0;
+            string sResultat = "";
+            int i = 0;
+            string[] tabCibles = new string[100];
+            listeFichiersCibles = new List<string>();
+            // récupération des chemins de dossiers contenant les fichiers de sauvegarde s'ils existent
+            if (typeCMLongs == @"en-cours\" || typeCMLongs == @"resolus\")
+            {
+                if (PresenceDossier(typeCMLongs))
+                {
+                    // afficher les fichiers existants
+                    Console.WriteLine("le fichier "+ typeCMLongsLib +" existe");
+                    //sauvegardeARestaurer = true;
+                    tabCibles = Directory.GetFiles(racine + dossSvg + typeCMLongs);
+                }
+                //else
+                //{
+                //    sauvegardeARestaurer = false;
+                //}
+                // ajout au tableau des titres de fichiers existants dans la liste concernée 
+
+
+                foreach (string s in tabCibles)
+                {
+                    if (s != "")
+                    {
+                        i++;
+                        listeFichiersCibles.Add("** " + i + " ** " + s);
+                    }
+                }
+                // affichage de la liste de fichiers
+                Console.WriteLine(" Les carrés magiques "+ typeCMLongsLib +":");
+                foreach (string s in listeFichiersCibles)
+                {
+                    //Console.WriteLine(s);
+                    nResultat = s.LastIndexOf(@"\");
+                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
+                    // prélève la sous-chaine correspondant au nom du dossier
+                    sResultat = s.Substring((nResultat + 1), (s.Length - nResultat - 1));
+                    // donne le nom du fichier seul
+                    Console.WriteLine(sResultat);
+                }
+            }
+        }
+     
         public void OuvrirFichier(string nomFichier)
         {
             Uti.Info("Persistance", "OuvrirFichier", "");
@@ -468,13 +463,13 @@ namespace CarreMagique
             Console.WriteLine("ouvrir fichiers de carrés magiques résolus ou en cours?");
 
             ChoixTypeFichier();
-            string chemin = racine + dossSvg + typeFinalisationCarreMagique;
+            string chemin = racine + dossSvg + typeCMLongs;
             Console.WriteLine(chemin);
+
             
-            ChoixFichierAOuvrir();
         }
 
-        public void ChoixFichierAOuvrir()
+        public void ChoixFichierAOuvrir(Grille grille)
         {
             Uti.Info("Persistance", "ChoixFichierAOuvrir", "");
             /* ***************************************************************
@@ -497,23 +492,53 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            string nomFichier = "cm";
-            Console.WriteLine("Tapez le nom du fichier");
-
+            string nomFichier = "";
+            //Console.WriteLine("Tapez le nom du fichier");
+            // fichier en-cours ou résolus?
+            ChoixTypeFichier();
+            // vérification que ce dossier existe ...
             string chemin = racine + dossSvg;
-            if (Directory.Exists(chemin + typeFinalisationCarreMagique + nomFichier))
+            if (Directory.Exists(chemin + typeCMLongs + nomFichier))
             {
                 // alors chercher le dossier
-                Console.WriteLine("Ce dossier est trouvable.");
+                Console.WriteLine("Ce dossier est existe.");
             }
             else
             {
                 Console.WriteLine("Ce dossier est introuvable.");
             }
-            ChoixTypeFichier();
+            // affichage des fichiers de ce dossiers
 
 
 
+
+        }
+        public void InterrogeUtilisateurSurFichierAOuvrir(Grille pGrille)
+        {
+            /* ***************************************************************
+                  OuvrirFichier
+
+            * Fonction pour 
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+            Uti.Info("Persistance", "InterrogeUtilisateurSurFichierAOuvrir", "");
+            //// choix entre fichier résolu et en cours
+            //ChoixTypeFichier();
+            // demander la taille du carré
+            grillePersistance = pGrille;
+            Uti.MessErr("grille toujours nulle?");
+            grillePersistance.DeterminationTaille();
+            
         }
         public void ChoixTypeFichier()
         {
@@ -545,7 +570,7 @@ namespace CarreMagique
             {
                 Console.WriteLine("Choisisser le fichier de carré magique à ouvrir:");
                 Console.WriteLine("1. en cours");
-                Console.WriteLine("2. résolu");
+                Console.WriteLine("2. résolus");
                 saisie = Console.ReadLine();
                 if (int.TryParse(saisie, out nSaisie))
                 {
@@ -558,16 +583,20 @@ namespace CarreMagique
                         if (nSaisie == 1)
                         {
                             choix = typeCarreMagique.ec;
-                            typeFinalisationCarreMagique = @"en-cours\";
+                            typeCMCours = "ec";
+                            typeCMLongs = @"en-cours\";
+                            typeCMLongsLib = "en cours";
                         }
                         else
                         {
                             choix = typeCarreMagique.r;
-                            typeFinalisationCarreMagique = @"resolus\";
+                            typeCMCours = "r";
+                            typeCMLongs = @"resolus\";
+                            typeCMLongsLib = "résolus";
                         }
-                        typeFinalisationCarreMagique = choix.ToString();
-                        Console.WriteLine(typeFinalisationCarreMagique);
-                      
+                   
+                        Console.WriteLine(typeCMLongs);
+
                     }
 
                 }

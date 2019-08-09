@@ -42,6 +42,8 @@ namespace CarreMagique
             // contenu de Main chargé dans le menu
             Persistance persistance = new Persistance();
             Grille grille = new Grille(persistance);
+            // initialisation 
+            grille.InitialisationDamier();
             if (grille.Nombre != 0)
             {
                 grille.SommeATrouver().ToString();
@@ -117,9 +119,18 @@ namespace CarreMagique
              */
             Persistance persistance = new Persistance();
             string NomFichier = persistance.RetourneAdresseDossierSvg();
+            Uti.Mess("affichage de tous les fichiers confondus");
             persistance.AfficheListeFichiersExistants();
+            // création grille
+            Grille grille = new Grille();
+
+            // demander la taille du carré
+           
+            
+            grille.DeterminationTaille();
+            
             // choix du fichier à ouvrir
-            persistance.ChoixFichierAOuvrir();
+           persistance.ChoixFichierAOuvrir(grille);
 
 
         }
