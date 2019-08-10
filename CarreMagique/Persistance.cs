@@ -657,8 +657,8 @@ namespace CarreMagique
             Console.WriteLine("les propositions:");
             foreach (string proposition in propositionsCM)
             {
-                indice++;
                 Console.WriteLine(indice + ". " + proposition);
+                indice++;
             }
 
         }
@@ -752,35 +752,41 @@ namespace CarreMagique
          * +
         **************************************************************** */
             string saisie = "";
-            int nSaisie = 0;
+            //int nSaisie = 0;
             int indice = 99;
             string chaine = "";
             int nResultat = 0;
             string sResultat = "";
+            bool okIndice = false;
             // conversion liste en tableau
             string[] choixPossibles = listeFichiersCibles.ToArray();
             // demande le fichier à ouvrir jusqu'à avoir une proposition acceptable et l'ouvre
             // ouverture de fichier avec le chemin
-            while ( indice < 0 || indice >= choixPossibles.Length)
+            while (!okIndice)
             {
                 Console.WriteLine("votre proposition?");
                 saisie = Console.ReadLine();
-                if (int.TryParse(saisie, out nSaisie))
+                if (int.TryParse(saisie, out indice))
                 {
-                    indice = nSaisie - 1;
-                    chaine = choixPossibles[indice];
-                    //
-                    nResultat = chaine.LastIndexOf(@"\");
-                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
-                    // prélève la sous-chaine correspondant au nom du dossier
-                    sResultat = chaine.Substring((nResultat + 1), (chaine.Length - nResultat - 1));
-                    Console.WriteLine(sResultat);
+                    //indice = indice - 1;
+                    if (indice >= 0 && indice < choixPossibles.Length)
+                    {
+                        chaine = choixPossibles[indice];
+                        //
+                        nResultat = chaine.LastIndexOf(@"\");
+                        //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
+                        // prélève la sous-chaine correspondant au nom du dossier
+                        sResultat = chaine.Substring((nResultat + 1), (chaine.Length - nResultat - 1));
+                        Console.WriteLine(sResultat);
+                        okIndice = true;
+                    }
                 }
                 else
                 {
                     Console.WriteLine("impossible");
                 }
             }
+            // C'est ici que s'ouvre le fichier choisi pour compléter le damier
         }
         public void Intru_ManipulationDeString()
         {
