@@ -41,7 +41,7 @@ namespace CarreMagique
             Uti.Info("Menu", "NouveauCarreMagique", "");
             // contenu de Main chargé dans le menu
             Persistance persistance = new Persistance();
-            Grille grille = new Grille(persistance);
+            Grille grille = new Grille();
             // initialisation 
             grille.InitialisationDamier();
             if (grille.Nombre != 0)

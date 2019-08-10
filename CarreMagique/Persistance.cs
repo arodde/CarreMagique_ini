@@ -19,7 +19,7 @@ namespace CarreMagique
             ec = 1,
             r
         }
-       
+
         public Persistance()
         {
             /* ***************************************************************
@@ -375,7 +375,13 @@ namespace CarreMagique
                 ChoixTypeFichier();
                 // affiche les fichiers selon le choix réalisé
                 AfficheListeFichiersExistantsCibles();
-                
+                // choix du numéro du carré magique
+                SelectionCMSelonTaille();
+                // limitation liste à des propostions pour une seule liste de fichiers de mêmes taille
+                ChoixOccurrence();
+                // choix de l'utilisateur
+                ChoixOccurrenceFichierTailleDeterminee();
+
             }
 
 
@@ -398,7 +404,7 @@ namespace CarreMagique
                 if (PresenceDossier(typeCMLongs))
                 {
                     // afficher les fichiers existants
-                    Console.WriteLine("le fichier "+ typeCMLongsLib +" existe");
+                    Console.WriteLine("le fichier " + typeCMLongsLib + " existe");
                     //sauvegardeARestaurer = true;
                     tabCibles = Directory.GetFiles(racine + dossSvg + typeCMLongs);
                 }
@@ -409,16 +415,16 @@ namespace CarreMagique
                 // ajout au tableau des titres de fichiers existants dans la liste concernée 
 
 
-                foreach (string s in tabCibles)
+                foreach (string cheminFichier in tabCibles)
                 {
-                    if (s != "")
+                    if (cheminFichier != "")
                     {
                         i++;
-                        listeFichiersCibles.Add("** " + i + " ** " + s);
+                        listeFichiersCibles.Add(cheminFichier);
                     }
                 }
                 // affichage de la liste de fichiers
-                Console.WriteLine(" Les carrés magiques "+ typeCMLongsLib +":");
+                Console.WriteLine(" Les carrés magiques " + typeCMLongsLib + ":");
                 foreach (string s in listeFichiersCibles)
                 {
                     //Console.WriteLine(s);
@@ -431,7 +437,7 @@ namespace CarreMagique
                 }
             }
         }
-     
+
         public void OuvrirFichier(string nomFichier)
         {
             Uti.Info("Persistance", "OuvrirFichier", "");
@@ -466,7 +472,7 @@ namespace CarreMagique
             string chemin = racine + dossSvg + typeCMLongs;
             Console.WriteLine(chemin);
 
-            
+
         }
 
         public void ChoixFichierAOuvrir(Grille grille)
@@ -538,7 +544,123 @@ namespace CarreMagique
             grillePersistance = pGrille;
             Uti.MessErr("grille toujours nulle?");
             grillePersistance.DeterminationTaille();
-            
+
+        }
+        public void SelectionCMSelonTaille()
+        {
+            /* ***************************************************************
+           * Fonction pour afficher les carrés magiques de même taille de la liste sans le chemin.
+           * les paramètres:
+           * 1 : + (+)
+           * 2 : + (+)
+           * 3 : + (+)
+           * 4 : + (+)
+           * 5 : + (+)
+           * retour: + (+)
+           * exemple(s):
+           * +
+           * Ce qui est impossible:
+           * +
+          **************************************************************** */
+            Uti.Info("Persistance", "SelectionCMSelonTaille", "");
+            char carac = ' ';
+            string sResultat = "";
+            int ordre = 0;
+            int nResultat = 0;
+            int precedent = 0;
+            //int tailleDemandee = 0;
+            //string chaine = "";
+            List<string> listeFichiersRetenus = new List<string>();
+            // demande taille pour carré magique
+
+            // instanciation grille
+            grillePersistance = new Grille(Grille.DeterminationTailleSansInstance());
+            //grillePersistance.SaisieValeurPossible();
+            //chaine = Console.ReadLine();
+
+
+            // affichage
+            if (typeCMCours == "ec")
+            {
+                carac = 'e';
+                foreach (string nomFichier in listeFichiersCibles)
+                {
+                    nResultat = nomFichier.LastIndexOf(@"\");
+                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
+                    // prélève la sous-chaine correspondant au nom du dossier
+                    sResultat = nomFichier.Substring((nResultat + 1), (nomFichier.Length - nResultat - 1));
+                    if (nResultat != precedent)
+                    {
+                        //ordre++;
+                        ordre = listeFichiersCibles.IndexOf(nomFichier) + 1;
+                        // si le fichier correspond à la valeur du carré magique, afficher le nom
+                        // du fichier et le stocker dans la list
+                        if (Uti.ExtractionChainesEntreDeuxCaracteres(sResultat, 'm', 1, carac, 1) == grillePersistance.Nombre.ToString())
+                        {
+                            //Console.WriteLine(" " + ordre + " " + Uti.ExtractionChainesEntreDeuxCaracteres(sResultat, 'm', 1, carac, 1));
+                            listeFichiersRetenus.Add(nomFichier);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                carac = 'r';
+                foreach (string nomFichier in listeFichiersCibles)
+                {
+                    nResultat = nomFichier.LastIndexOf(@"\");
+                    //Console.WriteLine("position de " + @"\" + " dans " + nomFichier +" est "+ nResultat.ToString());
+                    // prélève la sous-chaine correspondant au nom du dossier
+                    sResultat = nomFichier.Substring((nResultat + 1), (nomFichier.Length - nResultat - 1));
+                    if (nResultat != precedent)
+                    {
+                        //ordre++;
+                        ordre = listeFichiersCibles.IndexOf(nomFichier) + 1;
+                        // si le fichier correspond à la valeur du carré magique, afficher le nom
+                        // du fichier et le stocker dans la list
+                        if (Uti.ExtractionChainesEntreDeuxCaracteres(sResultat, 'm', 1, carac, 1) == grillePersistance.Nombre.ToString())
+                        {
+                            //Console.WriteLine(" " + ordre + " " + Uti.ExtractionChainesEntreDeuxCaracteres(sResultat, 'm', 1, carac, 1));
+                            listeFichiersRetenus.Add(nomFichier);
+                        }
+                    }
+                }
+            }
+            listeFichiersCibles = null;
+            listeFichiersCibles = listeFichiersRetenus;
+
+        }
+        public void ChoixOccurrence()
+        {
+            /* ***************************************************************
+                   
+
+             * Fonction pour afficher indiquer la quantité d'occurrences d'un même fichier
+             * la liste de l'instance ne contient que les fichiers de mêmes taille de carré
+             * magique
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Persistance", "ChoixOccurrence", "");
+            string[] propositionsCM;
+            int indice = 0;
+            propositionsCM = listeFichiersCibles.ToArray();
+            Console.WriteLine("les propositions:");
+            foreach (string proposition in propositionsCM)
+            {
+                indice++;
+                Console.WriteLine(indice + ". " + proposition);
+            }
+
         }
         public void ChoixTypeFichier()
         {
@@ -594,7 +716,7 @@ namespace CarreMagique
                             typeCMLongs = @"resolus\";
                             typeCMLongsLib = "résolus";
                         }
-                   
+
                         Console.WriteLine(typeCMLongs);
 
                     }
@@ -608,6 +730,57 @@ namespace CarreMagique
 
 
 
+        }
+        public void ChoixOccurrenceFichierTailleDeterminee()
+        {
+            Uti.Info("TestsDeveloppement", "ChoixOccurrenceFichierTailleDetermine", "");
+            /* ***************************************************************
+               Ouvrir occurence fichier précise
+
+         * Fonction pour déterminer s'il s'agit d'un fichier en cours ou
+         * d'un fichier resolus et renseigne la variable de classe typeDossier
+         * les paramètres:
+         * 1 : + (+)
+         * 2 : + (+)
+         * 3 : + (+)
+         * 4 : + (+)
+         * 5 : + (+)
+         * retour: + (+)
+         * exemple(s):
+         * +
+         * Ce qui est impossible:
+         * +
+        **************************************************************** */
+            string saisie = "";
+            int nSaisie = 0;
+            int indice = 99;
+            string chaine = "";
+            int nResultat = 0;
+            string sResultat = "";
+            // conversion liste en tableau
+            string[] choixPossibles = listeFichiersCibles.ToArray();
+            // demande le fichier à ouvrir jusqu'à avoir une proposition acceptable et l'ouvre
+            // ouverture de fichier avec le chemin
+            while ( indice < 0 || indice >= choixPossibles.Length)
+            {
+                Console.WriteLine("votre proposition?");
+                saisie = Console.ReadLine();
+                if (int.TryParse(saisie, out nSaisie))
+                {
+                    indice = nSaisie - 1;
+                    chaine = choixPossibles[indice];
+                    //
+                    nResultat = chaine.LastIndexOf(@"\");
+                    //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
+                    // prélève la sous-chaine correspondant au nom du dossier
+                    sResultat = chaine.Substring((nResultat + 1), (chaine.Length - nResultat - 1));
+                    Console.WriteLine(sResultat);
+                }
+                else
+                {
+                    Console.WriteLine("impossible");
+                }
+            }
         }
         public void Intru_ManipulationDeString()
         {

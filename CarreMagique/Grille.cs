@@ -74,27 +74,26 @@ namespace CarreMagique
             AffiDamier();
 
         }
-        public Grille(Persistance pPersistance)
+        public Grille(int taille)
         {
+            Uti.Info("Grille", "Grille", "");
             /* ***************************************************************
-    +
-    * Fonction pour créer la persistance suite à la création d'une grille à sauvegarder
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
-            Uti.Info("Grille", "Grille", "1p");
-            Persistance = new Persistance();
-            Persistance = pPersistance;
-            DeterminationTaille();
+             +
+             * Fonction pour créer la grille suite à la création d'une persistance pour charger une grille en mémoire
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Nombre = taille;
+            //DeterminationTaille();
             CarreMagiqueResolu = false;
             // instanciations 
             Damier = new Cellule[Nombre, Nombre];
@@ -102,10 +101,8 @@ namespace CarreMagique
             TotalParLignes = new int[nombre];
             cellule1 = new Cellule();
             cellule2 = new Cellule();
-            //// initialisation 
-            //InitialisationDamier();
-
-           
+            // initialisation 
+            InitialisationDamier();
         }
         public Grille()
         {
@@ -219,6 +216,55 @@ namespace CarreMagique
             {
                 Console.Write(" " + valeur + " ");
             }
+        }
+
+        public static int DeterminationTailleSansInstance()
+        {
+            /* ***************************************************************
+    +
+    * Fonction pour déterminer la taille du carré magique qui va être instancié
+    * les paramètres:
+    * 1 : + (+)
+    * 2 : + (+)
+    * 3 : + (+)
+    * 4 : + (+)
+    * 5 : + (+)
+    * retour: + (+)
+    * exemple(s):
+    * +
+    * Ce qui est impossible:
+    * +
+   **************************************************************** */
+            Uti.Info("Grille", "DeterminationTaille()", "");
+            Console.WriteLine("Indiquez la taille du carré magique?");
+            bool saisieOK = false;
+            string saisie = "";
+            int valeur = 0;
+            while (!saisieOK)
+            {
+                saisie = "";
+                valeur = 0;
+                saisie = Console.ReadLine();
+                if (int.TryParse(saisie, out valeur))
+                {
+                    //Console.WriteLine("conversion réussie : " + valeur);
+                    if (valeur < 3)
+                    {
+                        saisieOK = false;
+                        Console.WriteLine("le plus petit carré magique comprend 3 cases sur 3.");
+                    }
+                    else
+                    {
+                        saisieOK = true;
+                        return valeur;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Conversion impossible.");
+                }
+            }
+            return 0;
         }
         public void DeterminationTaille()
         {

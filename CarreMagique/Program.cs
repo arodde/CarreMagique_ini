@@ -1,63 +1,60 @@
 ﻿using System;
+//using System.Collections.Generic;
 
 namespace CarreMagique
 {
+   
     class Program
     {
         static void Main(string[] args)
         {
             Uti.Info("Program", "Main", "");
-            //Grille grille = new Grille();
-            //Persistance persistance =  new Persistance(Grille);
+            
 
-            ///*
-            // * Comment charger depuis la mémoire le fichier en cours?    
-            // * Quel objet créé avant le damier avec son constructeur 
-            // * qui définit sa taille?
-            // * Ou la persistance qui permet de sélectionner une sauvegarde
-            // * d'un damier d'une taille définie?
-            // */
-            //Grille.AffiDamier();
-            //bool quitter = false;
-            //int cpt = 0;
-            //do
-            //{
-            //    Grille.ProposerPermutation();
-            //    if (Grille.Gagne())
-            //    {
-            //        quitter = true;
-            //    }
-            //    else
-            //    {
-            //        // proposer d'arrêter toutes les 4 permutations 
-            //        if (cpt == 4)
-            //        {
-
-            //            quitter = Uti.Quitter("");
-
-            //            cpt = 0;
-            //        }
-            //    }
-            //    cpt++;
-            //} while (!quitter);
-            //// proposer de sauvegarder si le joueur quitte le jeu en ayant résolu le carré magique ou non.
-            //if (quitter)
-            //{
-            //    if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
-            //    {
-            //        // l'objet persistance est implémenté à ce stade pour ne pas encombrer la mémoire
-            //        /*
-            //         * si la persistance au moyen d'un objet extérieur
-            //         * n'est pas concluante, les fonctions de la classe 
-            //         * seront réintégrées dans la classe qui a le damier
-            //         */
-
-            //        persistance.SauvegarderDansFichier();
-            //    }
-            //}
+            
             Menu menu = new Menu();
             menu.MethodesMenuJeu();
             Console.WriteLine();
         }
     }
+
+/*
+     class Program
+{
+    static void Main(string[] args)
+    {
+
+        List<string> AuthorList = new List<string>();
+        AuthorList.Add("Mahesh Chand");
+        AuthorList.Add("Praveen Kumar");
+        AuthorList.Add("Raj Kumar");
+        AuthorList.Add("Nipun Tomar");
+        AuthorList.Add("Mahesh Chand");
+        AuthorList.Add("Dinesh Beniwal");
+        foreach (var author in AuthorList)
+        {
+            Console.WriteLine(author);
+        }
+        Console.WriteLine("-------------");
+        // Contains - Check if an item is in the list    
+        if (AuthorList.Contains("Mahesh Chand"))
+        {
+            Console.WriteLine("Author found!");
+        }
+
+        // Find an item and replace it with new item  
+        int idx = AuthorList.IndexOf("Nipun Tomar");
+        if (idx >= 0)
+        {
+            AuthorList[idx] = "New Author";
+        }
+        Console.WriteLine("\nIndexOf ");
+        foreach (var author in AuthorList)
+        {
+            Console.WriteLine(author);
+        }
+            Console.WriteLine();
+    }
+} 
+*/
 }
