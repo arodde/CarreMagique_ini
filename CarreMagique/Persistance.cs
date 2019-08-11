@@ -13,8 +13,9 @@ namespace CarreMagique
         private string typeCMLongs;
         private string typeCMCours;
         private string typeCMLongsLib;
+     
         List<string> listeFichiersCibles;
-        enum typeCarreMagique
+        enum TypeCarreMagique
         {// ce sont des entiers à compter de zéro
             ec = 1,
             r
@@ -354,6 +355,7 @@ namespace CarreMagique
             string str = racine + dossSvg;
             int nResultat = 0;
             string sResultat = "";
+            string cheminFichier = "";
             //if (!Directory.Exists(racine + dossSvg))
             //{
             //    sauvegardeARestaurer = false;
@@ -380,8 +382,9 @@ namespace CarreMagique
                 // limitation liste à des propostions pour une seule liste de fichiers de mêmes taille
                 ChoixOccurrence();
                 // choix de l'utilisateur
-                ChoixOccurrenceFichierTailleDeterminee();
-
+                cheminFichier = ChoixOccurrenceFichierTailleDeterminee();
+                // ouverture du fichier
+                OuvrirFichier(cheminFichier);
             }
 
 
@@ -438,7 +441,7 @@ namespace CarreMagique
             }
         }
 
-        public void OuvrirFichier(string nomFichier)
+        public void OuvrirFichier(string cheminFichier)
         {
             Uti.Info("Persistance", "OuvrirFichier", "");
             /* ***************************************************************
@@ -464,15 +467,25 @@ namespace CarreMagique
 
             // récupérer l'occurrence du carré magique
 
-
+            List<string> listeContenuFichier = new List<string>();
             //string resultat = "";
-            Console.WriteLine("ouvrir fichiers de carrés magiques résolus ou en cours?");
+            Console.WriteLine(cheminFichier);
+           
 
-            ChoixTypeFichier();
-            string chemin = racine + dossSvg + typeCMLongs;
-            Console.WriteLine(chemin);
-
-
+            // Open the file to read from.
+            using (StreamReader sr = File.OpenText(cheminFichier))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    listeContenuFichier.Add(s);
+                }
+            }
+            foreach (string stf in listeContenuFichier)
+            {
+                Console.WriteLine(stf);
+            }
+            Console.WriteLine();
         }
 
         public void ChoixFichierAOuvrir(Grille grille)
@@ -683,7 +696,7 @@ namespace CarreMagique
              * +
             **************************************************************** */
             // déterminer si c'est un fichier en cours ou resolus
-            typeCarreMagique choix = typeCarreMagique.ec;
+            TypeCarreMagique choix = TypeCarreMagique.ec;
             string saisie = "";
             int nSaisie = 0;
 
@@ -696,22 +709,22 @@ namespace CarreMagique
                 saisie = Console.ReadLine();
                 if (int.TryParse(saisie, out nSaisie))
                 {
-                    if (nSaisie < (int)typeCarreMagique.ec || nSaisie > (int)typeCarreMagique.r)
+                    if (nSaisie < (int)TypeCarreMagique.ec || nSaisie > (int)TypeCarreMagique.r)
                     {
-                        Console.WriteLine("La saisie doit être comprise entre " + (int)typeCarreMagique.ec + " et " + (int)typeCarreMagique.r);
+                        Console.WriteLine("La saisie doit être comprise entre " + (int)TypeCarreMagique.ec + " et " + (int)TypeCarreMagique.r);
                     }
                     else
                     {
                         if (nSaisie == 1)
                         {
-                            choix = typeCarreMagique.ec;
+                            choix = TypeCarreMagique.ec;
                             typeCMCours = "ec";
                             typeCMLongs = @"en-cours\";
                             typeCMLongsLib = "en cours";
                         }
                         else
                         {
-                            choix = typeCarreMagique.r;
+                            choix = TypeCarreMagique.r;
                             typeCMCours = "r";
                             typeCMLongs = @"resolus\";
                             typeCMLongsLib = "résolus";
@@ -731,7 +744,7 @@ namespace CarreMagique
 
 
         }
-        public void ChoixOccurrenceFichierTailleDeterminee()
+        public string ChoixOccurrenceFichierTailleDeterminee()
         {
             Uti.Info("TestsDeveloppement", "ChoixOccurrenceFichierTailleDetermine", "");
             /* ***************************************************************
@@ -768,7 +781,7 @@ namespace CarreMagique
                 saisie = Console.ReadLine();
                 if (int.TryParse(saisie, out indice))
                 {
-                    //indice = indice - 1;
+                    // l'indicie d'occurrence commence à partir de 0
                     if (indice >= 0 && indice < choixPossibles.Length)
                     {
                         chaine = choixPossibles[indice];
@@ -786,7 +799,8 @@ namespace CarreMagique
                     Console.WriteLine("impossible");
                 }
             }
-            // C'est ici que s'ouvre le fichier choisi pour compléter le damier
+            // retourne le chemin du fichier à ouvrir
+            return chaine;
         }
         public void Intru_ManipulationDeString()
         {
