@@ -13,7 +13,7 @@ namespace CarreMagique
         private string typeCMLongs;
         private string typeCMCours;
         private string typeCMLongsLib;
-     
+
         List<string> listeFichiersCibles;
         enum TypeCarreMagique
         {// ce sont des entiers à compter de zéro
@@ -127,6 +127,7 @@ namespace CarreMagique
             // créer le fichier de sauvegarde
             CreationFichierSauvegarde(racine + dossSvg, dossParent);
         }
+
         public void ChargerDepuisFichierTxt()
         {         /* ***************************************************************
              +
@@ -188,6 +189,18 @@ namespace CarreMagique
                 else
                 {
                     //        créer fichier
+                    /*
+                     le contenu du fichier doit obéir à la structure suivante
+                     ligne 1 : chemin du fichier lors sauvegarde
+                     ligne 2 : "Carré magique de "
+                     ligne 3 : grille.Nombre
+                     ligne  : ***
+                     ligne  : total à obtenir sur la résolution du carré magique
+                     ligne  : ***
+                     lignes suivantes  : les valeurs du carré magique par ligne. 
+                     chaque valeur est suivi du tiret "-". Le tiret est directement 
+                     suivi de la valeur suivante de la même ligne.
+                     */
                     using (StreamWriter sw = File.CreateText(nomFichier))
                     {
                         sw.WriteLine(nomFichier);
@@ -463,29 +476,127 @@ namespace CarreMagique
 
             // le fichier comprend seulement le nom du fichier.
 
-            // récupérer la taille du carré magique
+            // récupérer la taille du carré magique 
 
             // récupérer l'occurrence du carré magique
 
             List<string> listeContenuFichier = new List<string>();
-            //string resultat = "";
-            Console.WriteLine(cheminFichier);
-           
+            int compteurMarqueur = 0;
+            int valeur = 0;
 
-            // Open the file to read from.
+            string fragment = "";
+            //string resultat = "";
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            int l = 0;
+            int[] tab;
+            int lecteur = 0;
+            string ligne = "";
+            string[] tabContenuFichier;
+            Console.WriteLine(cheminFichier);
+
+
+            // remplissage liste contenu fichier
             using (StreamReader sr = File.OpenText(cheminFichier))
             {
                 string s;
+
                 while ((s = sr.ReadLine()) != null)
                 {
                     listeContenuFichier.Add(s);
                 }
             }
-            foreach (string stf in listeContenuFichier)
+            tabContenuFichier = listeContenuFichier.ToArray();
+            /*
+             convention liée à la structure du fichier
+             ligne 1 d'indice l 0 de tabContenuFichier
+             ligne 4 d'incice l 3 nombre 
+             ligne 6 d'incice l 5 total à trouver
+             ligne 8 d'incice l 7 début des valeurs du carré magique             
+             */
+            // affichage contenu fichier
+            tab = new int[grillePersistance.Nombre * grillePersistance.Nombre];
+            for (l = 0; l < tabContenuFichier.Length; l++)
             {
-                Console.WriteLine(stf);
+                if (l >= 7)
+                {
+                    ligne = tabContenuFichier[l];
+                    // ligne à traiter pour extraire les valeurs
+                    foreach (char caractere in ligne)
+                    {
+                        if (caractere != '-')
+                        {
+                            fragment += caractere;
+                            // conversion du fragment en entier
+                            if (int.TryParse(fragment, out valeur))
+                            {
+                                //tab[i, j] = valeur;
+                                tab[k] = valeur;
+                                Console.WriteLine("indice " + k + " valeur " + tab[k]);
+                                k++;
+                            }
+                            else
+                            {
+                                Console.WriteLine("impossible");
+                            }
+                        }
+                        else
+                        {
+                            fragment = "";
+                        }
+
+                    }
+
+                }
             }
+      //
+            i = 0;           
+            j = 0;
+            k = 0;
+            l = 0;
+           
+            while (lecteur < tabContenuFichier.Length)
+            {
+                if (tabContenuFichier[lecteur] != "***")
+                {
+                
+                    ligne = tabContenuFichier[lecteur];
+                    //  extraction des nombres de la ligne et conversion en entier
+                    // affichage
+                    Console.WriteLine("tableau d'entiers");
+                    for (k = 0; k < grillePersistance.Nombre; k++)
+                    {
+                        Console.Write(tab[k] + " ");
+                        l++;
+                        if (l == 3)
+                        {
+                            l = 0;
+                            Console.WriteLine();
+                        }
+                    }
+                    // remplissage à partir du tableau de valeur de la grille
+                    i = 0;
+                    j = 0;
+                    k = 0;
+                    l = 0;
+                    for (i = 0; i < grillePersistance.Nombre; i++)
+                    {
+                        for (j = 0; j < grillePersistance.Nombre; j++)
+                        {
+                            grillePersistance.ChangeValeurCelluleGrille(i, j, tab[k]);
+                        }
+                    }
+                }
+                lecteur++;
+            }
+
+
+
+
+            grillePersistance.AffiDamier();
             Console.WriteLine();
+
         }
 
         public void ChoixFichierAOuvrir(Grille grille)

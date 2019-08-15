@@ -15,6 +15,7 @@ namespace CarreMagique
             }
             private set
             {
+                Console.WriteLine("nombre est actualisé à " + value);
                 nombre = value;
             }
         }
@@ -186,6 +187,20 @@ namespace CarreMagique
                 }
             }
         }
+        public void ChangeValeurCelluleGrille(int i, int j, int valeur)
+        {
+            while (i >= 0 && i < nombre)
+            {
+                while (j >= 0 && j < nombre)
+                {
+                    Console.WriteLine(damier[i, j].Valeur + " passe à " + valeur);
+                    damier[i, j].Valeur = valeur;
+                    j++;
+                }
+                j = 0;
+                i++;
+            }
+        }
         public void GestionEspaces(int valeur)
         {
             /* ***************************************************************
@@ -217,7 +232,25 @@ namespace CarreMagique
                 Console.Write(" " + valeur + " ");
             }
         }
-
+        public void ModifierNombre(int valeur)
+        {         /* ***************************************************************
+             +
+             * Fonction pour modifier nombre sans changer le caractère private du set de Nombre
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: la valeur de nombre (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Persistance", "ModifierNombre", "");
+            Nombre = valeur;
+        }
         public static int DeterminationTailleSansInstance()
         {
             /* ***************************************************************
