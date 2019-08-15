@@ -551,45 +551,45 @@ namespace CarreMagique
                 }
             }
       //
-            i = 0;           
-            j = 0;
-            k = 0;
-            l = 0;
+            //i = 0;           
+            //j = 0;
+            //k = 0;
+            //l = 0;
            
-            while (lecteur < tabContenuFichier.Length)
-            {
-                if (tabContenuFichier[lecteur] != "***")
-                {
+            //while (lecteur < tabContenuFichier.Length)
+            //{
+            //    if (tabContenuFichier[lecteur] != "***")
+            //    {
                 
-                    ligne = tabContenuFichier[lecteur];
-                    //  extraction des nombres de la ligne et conversion en entier
-                    // affichage
-                    Console.WriteLine("tableau d'entiers");
-                    for (k = 0; k < grillePersistance.Nombre; k++)
-                    {
-                        Console.Write(tab[k] + " ");
-                        l++;
-                        if (l == 3)
-                        {
-                            l = 0;
-                            Console.WriteLine();
-                        }
-                    }
-                    // remplissage à partir du tableau de valeur de la grille
-                    i = 0;
-                    j = 0;
-                    k = 0;
-                    l = 0;
-                    for (i = 0; i < grillePersistance.Nombre; i++)
-                    {
-                        for (j = 0; j < grillePersistance.Nombre; j++)
-                        {
-                            grillePersistance.ChangeValeurCelluleGrille(i, j, tab[k]);
-                        }
-                    }
-                }
-                lecteur++;
-            }
+            //        ligne = tabContenuFichier[lecteur];
+            //        //  extraction des nombres de la ligne et conversion en entier
+            //        // affichage
+            //        Console.WriteLine("tableau d'entiers");
+            //        for (k = 0; k < grillePersistance.Nombre; k++)
+            //        {
+            //            Console.Write(tab[k] + " ");
+            //            l++;
+            //            if (l == 3)
+            //            {
+            //                l = 0;
+            //                Console.WriteLine();
+            //            }
+            //        }
+            //        // remplissage à partir du tableau de valeur de la grille
+            //        i = 0;
+            //        j = 0;
+            //        k = 0;
+            //        l = 0;
+            //        for (i = 0; i < grillePersistance.Nombre; i++)
+            //        {
+            //            for (j = 0; j < grillePersistance.Nombre; j++)
+            //            {
+            //                grillePersistance.ChangeValeurCelluleGrille(i, j, tab[k]);
+            //            }
+            //        }
+            //    }
+            //    lecteur++;
+            //}
 
 
 
