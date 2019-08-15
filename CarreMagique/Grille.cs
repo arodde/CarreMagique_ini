@@ -189,17 +189,33 @@ namespace CarreMagique
         }
         public void ChangeValeurCelluleGrille(int i, int j, int valeur)
         {
-            while (i >= 0 && i < nombre)
-            {
-                while (j >= 0 && j < nombre)
-                {
-                    Console.WriteLine(damier[i, j].Valeur + " passe à " + valeur);
+            /* ***************************************************************
+            +
+            * Fonction pour modifier la valeur d'une cellule en fonction des coordonnées du damier
+            * les paramètres:
+            * 1 : i (int) numéro de ligne du damier
+            * 2 : j (int) numéro de colonne du damier
+            * 3 : valeur (int) valeur à stocker dans la cellule du damier
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+            Uti.Info("Grille", "ChangeValeurCelluleGrille", "");
+            //while (i >= 0 && i < nombre)
+            //{
+            //    while (j >= 0 && j < nombre)
+            //    {
+            Console.WriteLine(damier[i, j].Valeur + " passe à " + valeur);
                     damier[i, j].Valeur = valeur;
-                    j++;
-                }
-                j = 0;
-                i++;
-            }
+            //        j++;
+            //    }
+            //    j = 0;
+            //    i++;
+            //}
         }
         public void GestionEspaces(int valeur)
         {
