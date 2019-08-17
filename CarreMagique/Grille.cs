@@ -204,18 +204,11 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "ChangeValeurCelluleGrille", "");
-            //while (i >= 0 && i < nombre)
-            //{
-            //    while (j >= 0 && j < nombre)
-            //    {
-            Console.WriteLine(damier[i, j].Valeur + " passe à " + valeur);
+            //Uti.Info("Grille", "ChangeValeurCelluleGrille", "");
+            
+            //Console.WriteLine(damier[i, j].Valeur + " passe à " + valeur);
                     damier[i, j].Valeur = valeur;
-            //        j++;
-            //    }
-            //    j = 0;
-            //    i++;
-            //}
+         
         }
         public void GestionEspaces(int valeur)
         {

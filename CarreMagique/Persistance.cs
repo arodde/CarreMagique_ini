@@ -204,8 +204,8 @@ namespace CarreMagique
                     using (StreamWriter sw = File.CreateText(nomFichier))
                     {
                         sw.WriteLine(nomFichier);
-                        sw.WriteLine();
-                        sw.WriteLine("Carré magique de " + grillePersistance.Nombre);
+                        sw.WriteLine("Carré magique de ");
+                        sw.WriteLine(grillePersistance.Nombre);
                         sw.WriteLine("***");
                         sw.WriteLine(grillePersistance.SommeATrouver().ToString());
                         sw.WriteLine("***");
@@ -474,6 +474,14 @@ namespace CarreMagique
              * +
             **************************************************************** */
 
+            /*
+          convention liée à la structure du fichier
+          indice l 0 de tabContenuFichier
+          incice l 2 nombre 
+          incice l 4 total à trouver
+          incice l 6 début des valeurs du carré magique             
+          */
+
             List<string> listeContenuFichier = new List<string>();
             int compteurMarqueur = 0;
             int valeur = 0;
@@ -483,11 +491,15 @@ namespace CarreMagique
             int i = 0;
             int j = 0;
             int k = 0;
+            int c = 0;
             int l = 0;
-            int[] tab;
+            int m = 0;
+            int depart = 6;
+            //int[] tab;
             int lecteur = 0;
             string ligne = "";
             string[] tabContenuFichier;
+            string[,] fragments = new string[grillePersistance.Nombre, grillePersistance.Nombre];
             Console.WriteLine(cheminFichier);
 
 
@@ -502,63 +514,66 @@ namespace CarreMagique
                 }
             }
             tabContenuFichier = listeContenuFichier.ToArray();
-            /*
-             convention liée à la structure du fichier
-             ligne 1 d'indice l 0 de tabContenuFichier
-             ligne 4 d'incice l 3 nombre 
-             ligne 6 d'incice l 5 total à trouver
-             ligne 8 d'incice l 7 début des valeurs du carré magique             
-             */
-            // affichage contenu fichier
-            tab = new int[grillePersistance.Nombre * grillePersistance.Nombre];
-            for (l = 0; l < tabContenuFichier.Length; l++)
+
+
+            //
+            // pour une ligne du fichier
+            for (l = depart; l < (depart + grillePersistance.Nombre); l++)
             {
-                if (l >= 7)
+                // récuper la valeur
+                //Console.WriteLine(tabContenuFichier[l]);
+                ligne = tabContenuFichier[l];
+                //Console.WriteLine(" ligne " + ligne);
+                // remplir le fragment  d'un nombre de la ligne
+                while (c < ligne.Length)
                 {
-                    ligne = tabContenuFichier[l];
-                    // ligne à traiter pour extraire les valeurs
-                    foreach (char caractere in ligne)
+                    if (ligne[c] != '-')
                     {
-                        if (caractere != '-')
+                        fragment = ligne[c].ToString();
+                        if (ligne[c + 1] == '-')
                         {
-                            fragment += caractere;
-                            // conversion du fragment en entier
-                            if (int.TryParse(fragment, out valeur))
+                            //Console.WriteLine(fragment);
+                        }
+                        while (ligne[c + 1] != '-') // lorsque le fragment compte plus d'un chiffre
+                        {
+                            c++;
+                            fragment += ligne[c];
+                            if (ligne[c + 1] == '-')
                             {
-                                //tab[i, j] = valeur;
-                                tab[k] = valeur;
-                                Console.WriteLine("indice " + k + " valeur " + tab[k]);
-                                k++;
+                                //Console.WriteLine(fragment);
                             }
-                            else
+                        }
+                        // fragment à convertir en entier
+                        //Console.WriteLine(fragment);
+                        if (int.TryParse(fragment, out valeur))
+                        {
+                            // c'est un entier
+                            //Console.WriteLine(valeur);
+                            Console.WriteLine("case " + i + "." + j + " : " + valeur);
+                            // remplissage dans la grille
+                            grillePersistance.ChangeValeurCelluleGrille(i, j, valeur);
+                            j++;
+                            if (j == grillePersistance.Nombre)
                             {
-                                Console.WriteLine("impossible");
+                                i++;
+                                j = 0;
                             }
                         }
                         else
                         {
-                            fragment = "";
+                            Console.WriteLine("impossible");
                         }
-
                     }
-
+                    c++;
                 }
+                c = 0;
+                // à placer dans le damier
             }
-            // charger depuis le tableau une dimension la grille du damier
-            i = 0;
-            j = 0;
-            k = 0;           
-            for (i = 0; i < grillePersistance.Nombre; i++)
-            {
-                for (j = 0; j < grillePersistance.Nombre; j++)
-                {
-                    grillePersistance.ChangeValeurCelluleGrille(i, j, tab[k]);
-                    k++;
-                }
-            }   
+
             //afficher le damier
             grillePersistance.AffiDamier();
             Console.WriteLine();
+
             // comment jouer avec maintenant
         }
 
@@ -566,7 +581,7 @@ namespace CarreMagique
         {
             Uti.Info("Persistance", "ChoixFichierAOuvrir", "");
             /* ***************************************************************
-                   OuvrirFichier
+                   ChoixFichierAOuvrir
 
              * Fonction pour que l'utilisateur précise quelle fichier il veut 
              * ouvrir en spécitiant :
@@ -574,7 +589,7 @@ namespace CarreMagique
              *   - la nature en-cours ou résolu du fichier
              *   - l'occurrence
              * les paramètres:
-             * 1 : + (+)
+             * 1 : grille (Grille)
              * 2 : + (+)
              * 3 : + (+)
              * 4 : + (+)
