@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 
@@ -318,6 +319,7 @@ namespace CarreMagique
 
             ConsoleKeyInfo saisie = Console.ReadKey(true);
 
+
             if (saisie.Key == ConsoleKey.O)
             {
                 Console.WriteLine("On s'arrête ...");
@@ -537,8 +539,36 @@ public static class utiExemple
             iTheme = -1;
             Console.WriteLine("Il faut entrer un nombre.");
         }
+
     }
-  
+    public static void Brouillon()
+    {
+
+        string pathD = @""; 
+        string pathF = @""; 
+        List<string> listring = new List<string>();
+        listring.Add("abricot");
+        listring.Add("ananas");
+        listring.Add("avocat");
+        listring.Add("banane");
+        listring.Add("figue");
+        listring.Add("pomme");
+        listring.Add("poire");
+        File.AppendAllLines(pathF, listring);
+        // ajout au fichier sans faire disparaître le contenu précédent
+        File.AppendAllLines(pathF, listring);
+        //if (!File.Exists(pathF))
+        //{
+        // Create a file to write to.
+        using (StreamWriter sw = File.CreateText(pathF))
+        {
+            // écrase le précédent contenu du fichier et inscrit le contenu qui suit
+            sw.WriteLine("Hello");
+            sw.WriteLine("And");
+            sw.WriteLine("Welcome");
+        }
+        //}
+    }
     //public void T1dim()
     //{
     //    Uti.Info("DesTableaux", "T1dim", "");

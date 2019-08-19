@@ -308,6 +308,63 @@ namespace CarreMagique
             }
             return 0;
         }
+        
+        public void ManipulationCarreMagique()
+        {
+            /* ***************************************************************
+             +
+             * Fonction pour opérer les permutations et résoudre le carré magique
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Grille", "ManipulationCarreMagique", "");
+            // affichage du damier
+            AffiDamier();
+
+            bool quitter = false;
+            int cpt = 0;
+            do
+            {
+                ProposerPermutation();
+                if (Gagne())
+                {
+
+                    quitter = true;
+                }
+                else
+                {
+                    // proposer sauvegarde et arrêt du jeu toutes les 4 permutations
+
+                    if (cpt == 3)
+                    {
+                        quitter = Uti.Quitter("Arrêter de jouer?");
+                        cpt = 0;
+                    }
+                }
+                cpt++;
+            } while (!quitter);
+            // proposer de sauvegarder si le joueur quitte le jeu en ayant ou non résolu le carré magique.
+            if (quitter)
+            {
+                if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
+                {
+
+
+
+                    persistance.SauvegarderDansFichierTxt(this);
+                }
+            }
+        }
+
         public void DeterminationTaille()
         {
             /* ***************************************************************
@@ -589,38 +646,7 @@ namespace CarreMagique
             // transit vers valeur2 dans damier
             Damier[cellule2.CoorHori, cellule2.CoorVerti].Valeur = transit.Valeur;
 
-            // rapport de situation
-            //Uti.Sep("*", 40);
-            //Console.WriteLine("transit\n : " + transit.ToString());
-            //Uti.Sep(".", 40);
-            //Console.WriteLine("cellule1\n : " + cellule1.ToString());
-            //Uti.Sep("-", 40);
-            //Console.WriteLine("Damier[cellule1.CoorHori, cellule1.CoorVerti]\n : " + Damier[cellule1.CoorHori, cellule1.CoorVerti].ToString());
-            //Uti.Sep(".", 40);
-            //Console.WriteLine("cellule2\n : " + cellule2.ToString());
-            //Uti.Sep("-", 40);
-            //Console.WriteLine("Damier[cellule2.CoorHori, cellule2.CoorVerti]\n : " + Damier[cellule2.CoorHori, cellule2.CoorVerti].ToString());
-            //Uti.Sep("*", 40);
-            //// reaffectation pour contrôle
-            //cellule1.Valeur = Damier[cellule1.CoorHori, cellule1.CoorVerti].Valeur;
-            //cellule2.Valeur = Damier[cellule2.CoorHori, cellule2.CoorVerti].Valeur;
-            // contrôle
-            //if (Damier[cellule1.CoorHori, cellule1.CoorVerti].Valeur == cellule1.Valeur)
-            //{
-            //    Console.WriteLine("la valeur 1 n'a pas permutée et reste : " + Damier[0, 0].Valeur + " de coordonnées : " + Damier[0, 0].CoorHori + " " + Damier[0, 0].CoorVerti);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("la valeur 1 est devenue : " + Damier[0, 0].Valeur + " de coordonnées : " + Damier[0, 0].CoorHori + " " + Damier[0, 0].CoorVerti);
-            //}
-            //if (Damier[cellule2.CoorHori, cellule2.CoorVerti].Valeur == cellule2.Valeur)
-            //{
-            //    Console.WriteLine("la valeur 2 n'a pas permutée et reste : " + Damier[0, 1].Valeur + " de coordonnées : " + Damier[0, 1].CoorHori + " " + Damier[0, 1].CoorVerti);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("la valeur 1 est devenue : " + Damier[0, 1].Valeur + " de coordonnées : " + Damier[0, 1].CoorHori + " " + Damier[0, 1].CoorVerti);
-            //}
+            
 
         }
         public void ProcederTotaux()
@@ -868,7 +894,7 @@ namespace CarreMagique
             }
             else
             {
-                Console.WriteLine("Essayez encore.");
+                Console.WriteLine("A vous de décider:");
                 return false;
             }
         }

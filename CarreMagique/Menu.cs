@@ -6,6 +6,8 @@ namespace CarreMagique
 {
     class Menu
     {
+        private Grille grille;
+        private Persistance persistance;
         public void DefinitionCarreMagique()
         {// les régles du jeu...
             Console.WriteLine("Règles du carré magique");
@@ -19,29 +21,100 @@ namespace CarreMagique
 
         }
 
-        public void NouveauCarreMagique()
+        public void PréparationCarreMagique()
         {
             /* ***************************************************************
-    +
-    * Fonction pour créer une instance de menu qui va 
-    *   - créer l'instance de persistance
-    *   - créer la grille la persistance en paramètre
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
-            Uti.Info("Menu", "NouveauCarreMagique", "");
+             +
+             * Fonction pour créer une instance de menu qui va 
+             *   - créer l'instance de persistance
+             *   - créer la grille la persistance en paramètre
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Menu", "PréparationCarreMagique", "");
+            //// contenu de Main chargé dans le menu
+            // persistance = new Persistance();
+            // grille = new Grille();
+            //// initialisation 
+            //grille.InitialisationDamier();
+            //if (grille.Nombre != 0)
+            //{
+            //    grille.SommeATrouver().ToString();
+            //}
+            //else
+            //{
+            //    Console.WriteLine("y a rien!!!");
+            //}
+            CreationCarreMagique();
+
+            //// affichage du damier
+            //grille.AffiDamier();
+
+            //bool quitter = false;
+            //int cpt = 0;
+            //do
+            //{
+            //    grille.ProposerPermutation();
+            //    if (grille.Gagne())
+            //    {
+
+            //        quitter = true;
+            //    }
+            //    else
+            //    {
+            //        // proposer sauvegarde et arrêt du jeu toutes les 4 permutations
+
+            //        if (cpt == 3)
+            //        {
+            //            quitter = Uti.Quitter("");
+            //            cpt = 0;
+            //        }
+            //    }
+            //    cpt++;
+            //} while (!quitter);
+            //// proposer de sauvegarder si le joueur quitte le jeu en ayant ou non résolu le carré magique.
+            //if (quitter)
+            //{
+            //    if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
+            //    {
+
+
+
+            //        persistance.SauvegarderDansFichierTxt(grille);
+            //    }
+            //}
+            grille.ManipulationCarreMagique();
+        }
+        public void CreationCarreMagique()
+        {
+            /* ***************************************************************
+             +
+             * Fonction pour créer le carré magique s'il n'existe pas
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Menu", "CreationCarreMagique", "");
             // contenu de Main chargé dans le menu
-            Persistance persistance = new Persistance();
-            Grille grille = new Grille();
+            persistance = new Persistance();
+            grille = new Grille();
             // initialisation 
             grille.InitialisationDamier();
             if (grille.Nombre != 0)
@@ -52,62 +125,27 @@ namespace CarreMagique
             {
                 Console.WriteLine("y a rien!!!");
             }
-
-
-            // affichage du damier
-            grille.AffiDamier();
-
-            bool quitter = false;
-            int cpt = 0;
-            do
-            {
-                grille.ProposerPermutation();
-                if (grille.Gagne())
-                {
-
-                    quitter = true;
-                }
-                else
-                {
-                    // proposer sauvegarde et arrêt du jeu toutes les 4 permutations
-
-                    if (cpt == 3)
-                    {
-                        quitter = Uti.Quitter("");
-                        cpt = 0;
-                    }
-                }
-                cpt++;
-            } while (!quitter);
-            // proposer de sauvegarder si le joueur quitte le jeu en ayant ou non résolu le carré magique.
-            if (quitter)
-            {
-                if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
-                {
-
-
-
-                    persistance.SauvegarderDansFichierTxt(grille);
-                }
-            }
         }
+
+
+
         public void CarreMagiqueEnMemoire()
         {
             /* ***************************************************************
-    +
-    * Fonction pour aller chercher le contenu d'un fichier en mémoire s'il existe
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+            +
+            * Fonction pour aller chercher le contenu d'un fichier en mémoire s'il existe
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Uti.Info("Menu", "CarreMagiqueEnMemoire", "");
 
             /*
@@ -121,24 +159,20 @@ namespace CarreMagique
             string NomFichier = persistance.RetourneAdresseDossierSvg();
             Uti.Mess("affichage de tous les fichiers confondus");
             persistance.AfficheListeFichiersExistants();
-            // création grille
-            Grille grille = new Grille();
-
-            // demander la taille du carré
-           
-            
-            grille.DeterminationTaille();
-            
-            // choix du fichier à ouvrir
-           persistance.ChoixFichierAOuvrir(grille);
-
-
+            // lancer les permutations
+            this.persistance = persistance;
+            this.grille = persistance.GrillePersistance;
+            this.grille.Persistance = this.persistance;
+            this.grille.ManipulationCarreMagique();
         }
         public void MenuJeu()
         {
             /* ***************************************************************
             +
             * Fonction pour afficher les options disponibles au menu
+            * - afficher les règles du jeu
+            * - créer un carré magique de la taille souhaitée et le résoudre
+            * - charger un carré magique en cours de résolution depuis un fichier
             * les paramètres:
             * 1 : + (+)
             * 2 : + (+)
@@ -224,7 +258,7 @@ namespace CarreMagique
                         DefinitionCarreMagique();
                         break;
                     case 2:
-                        NouveauCarreMagique();
+                        PréparationCarreMagique();
                         break;
                     case 3:
                         CarreMagiqueEnMemoire();
