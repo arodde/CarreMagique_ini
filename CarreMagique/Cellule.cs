@@ -58,20 +58,20 @@ namespace CarreMagique
         public override string ToString()
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+        +
+        * Fonction pour afficher les coordonnées et la valeur des cellules dans le damier
+        * les paramètres:
+        * 1 : + (+)
+        * 2 : + (+)
+        * 3 : + (+)
+        * 4 : + (+)
+        * 5 : + (+)
+        * retour: + (+)
+        * exemple(s):
+        * +
+        * Ce qui est impossible:
+        * +
+       **************************************************************** */
 
             string description = "Valeur " + Valeur + " CoorHori " + CoorHori + " coorVerti " + CoorVerti;
             return description;

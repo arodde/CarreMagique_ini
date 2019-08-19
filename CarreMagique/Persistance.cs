@@ -55,20 +55,20 @@ namespace CarreMagique
         public void SauvegarderDansFichierTxt(Grille pGrille)
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+            +  xx*ici*xx
+            * Fonction pour +
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Uti.Info("Persistance", "SauvegarderDansFichier", "");
             string fichierOrigine = "";
             string dossParent = "";
@@ -77,35 +77,23 @@ namespace CarreMagique
             //accéder au dossier de sauvegarde svg
             //    s'il n'existe pas 
             //       le créer 
-
-
-
             if (!(Directory.Exists(racine + dossSvg)))
             {
                 Console.WriteLine("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(racine + dossSvg);
             }
-
             //    si carre résolu
-
             if (grillePersistance.CarreMagiqueResolu)
             {
                 // suppression du fichier ouvert en 'encours' car la sauvegarde sera en 'resolus'
                 if (nomFichierChargeDansMemoire != "" || nomFichierChargeDansMemoire != null)
                 {
                     fichierOrigine = racine + dossSvg + typeCMLongs + nomFichierChargeDansMemoire;
-
                 }
                 //        aller au dossier des solutions 
                 //            s'il n'existe pas 
                 //               le créer 
-
-                dossParent = @"resolus\";
-                //dossSvg += dossParent;
-                //if (!Directory.Exists(racine + dossSvg + dossParent))
-                //{
-                //    CreationFichierSauvegarde(racine + dossSvg, dossParent);
-                //}
+                dossParent = @"resolus\";                
                 Console.WriteLine("Sauvegarder du carré magique résolu.");
             }
             else
@@ -116,11 +104,9 @@ namespace CarreMagique
                 //                le créer 
                 dossParent += @"en-cours\";
                 // prépare le nom du fichier de sauvegarde et crée le fichier de sauvegarde
-
                 Console.WriteLine("Sauvegarder l'état actuel du damier pour reprendre le jeu plus tard.");
             }
             // accéder au sous dossier 'resolus' ou 'en-cours'
-
             if (!Directory.Exists(racine + dossSvg + dossParent))
             {
                 Console.WriteLine("Création du dossier de sauvegarde");
@@ -136,14 +122,14 @@ namespace CarreMagique
             // fichier d'origine dont le contenu va être remplacé
             if (nomFichierChargeDansMemoire != "" || nomFichierChargeDansMemoire != null)
             {
-
                 //nomFichier = dossSvg + typeCMLongs + nomFichierChargeDansMemoire;
                 nomFichierChargeDansMemoire = null;
             }
         }
 
         public void ChargerDepuisFichierTxt()
-        {         /* ***************************************************************
+        {    
+             /* ***************************************************************
              +
              * Fonction pour +
              * les paramètres:
@@ -164,20 +150,20 @@ namespace CarreMagique
         public void CreationFichierSauvegarde(string dossSvg, string dossParent)
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+            +
+            * Fonction pour +
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             Uti.Info("Persistance", "CreationFichierSauvegarde", "");
             // prépare le nom du fichier de sauvegarde et crée le fichier de sauvegarde
             bool ok = false;

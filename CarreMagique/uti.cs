@@ -295,27 +295,27 @@ namespace CarreMagique
         static public bool Quitter(string commentaire)
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+            +
+            * Fonction pour permettre à l'utilisateur de quitter une boucle
+            * les paramètres:
+            * 1 : message complémentaire (string)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             // true pour quitter ; false pour continuer
             Console.Write("Voulez-vous quitter");
             if (commentaire != "")
             {
-                Console.Write(commentaire + " ");
+                Console.Write(commentaire  );
             }
-            Console.WriteLine("(O/N)?");
+            Console.WriteLine(" "+"(O/N)?");
 
             ConsoleKeyInfo saisie = Console.ReadKey(true);
 

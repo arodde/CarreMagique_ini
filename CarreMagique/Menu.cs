@@ -41,57 +41,10 @@ namespace CarreMagique
              * +
             **************************************************************** */
             Uti.Info("Menu", "PréparationCarreMagique", "");
-            //// contenu de Main chargé dans le menu
-            // persistance = new Persistance();
-            // grille = new Grille();
-            //// initialisation 
-            //grille.InitialisationDamier();
-            //if (grille.Nombre != 0)
-            //{
-            //    grille.SommeATrouver().ToString();
-            //}
-            //else
-            //{
-            //    Console.WriteLine("y a rien!!!");
-            //}
             CreationCarreMagique();
 
-            //// affichage du damier
-            //grille.AffiDamier();
-
-            //bool quitter = false;
-            //int cpt = 0;
-            //do
-            //{
-            //    grille.ProposerPermutation();
-            //    if (grille.Gagne())
-            //    {
-
-            //        quitter = true;
-            //    }
-            //    else
-            //    {
-            //        // proposer sauvegarde et arrêt du jeu toutes les 4 permutations
-
-            //        if (cpt == 3)
-            //        {
-            //            quitter = Uti.Quitter("");
-            //            cpt = 0;
-            //        }
-            //    }
-            //    cpt++;
-            //} while (!quitter);
-            //// proposer de sauvegarder si le joueur quitte le jeu en ayant ou non résolu le carré magique.
-            //if (quitter)
-            //{
-            //    if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
-            //    {
-
-
-
-            //        persistance.SauvegarderDansFichierTxt(grille);
-            //    }
-            //}
+            // affichage du damier et résolution
+            
             grille.ManipulationCarreMagique();
         }
         public void CreationCarreMagique()
@@ -230,7 +183,6 @@ namespace CarreMagique
                 MenuJeu();
                 while (!okSaisie)
                 {
-
                     Console.WriteLine("Votre choix doit être compris entre 1 et " + nbOptionMenu + ".");
                     // récupération d'une chaine pour la convertir en entier
                     sInput = Console.ReadLine();
