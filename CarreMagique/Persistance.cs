@@ -91,10 +91,10 @@ namespace CarreMagique
             if (grillePersistance.CarreMagiqueResolu)
             {
                 // suppression du fichier ouvert en 'encours' car la sauvegarde sera en 'resolus'
-                if(nomFichierChargeDansMemoire != "" || nomFichierChargeDansMemoire != null)
+                if (nomFichierChargeDansMemoire != "" || nomFichierChargeDansMemoire != null)
                 {
-                    fichierOrigine = racine + dossSvg +typeCMLongs + nomFichierChargeDansMemoire;
-                   
+                    fichierOrigine = racine + dossSvg + typeCMLongs + nomFichierChargeDansMemoire;
+
                 }
                 //        aller au dossier des solutions 
                 //            s'il n'existe pas 
@@ -200,7 +200,7 @@ namespace CarreMagique
                 }
                 else
                 {
-                 
+
 
                     //        créer fichier
                     /*
@@ -226,11 +226,11 @@ namespace CarreMagique
                         // remplir avec le damier le fichier 
                         try
                         {
-                            // code provoquant une exception
-                            for (int j = 0; j < grillePersistance.Nombre; j++)
+                            for (int i = 0; i < grillePersistance.Nombre; i++)
                             {
-                                for (int i = 0; i < grillePersistance.Nombre; i++)
+                                for (int j = 0; j < grillePersistance.Nombre; j++)
                                 {
+
                                     // inscrire dans le fichier                                    
                                     sw.Write(grillePersistance.Damier[i, j].Valeur + "-");
                                 }
