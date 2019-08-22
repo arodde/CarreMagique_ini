@@ -9,7 +9,7 @@ namespace CarreMagique
         {
             Uti.Info("Program", "Main", "");
 
-            Uti.Mess("toilettage code à faire sur br-1 et master");
+            Uti.Mess("PERSISTANCE JSON A IMPLEMENTER");
             
             Menu menu = new Menu();
             menu.MethodesMenuJeu();

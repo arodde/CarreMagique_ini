@@ -44,8 +44,7 @@ namespace CarreMagique
             Uti.Info("Persistance", "Persistance", "");
             /* un moyen de permettre à l'utilisateur de fournir une autre adresse de racine
             devra être prévu */
-            //racine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
-            racine = @"Bureau\";
+          racine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
             dossSvg = @"svg\";
 
         }
@@ -520,8 +519,7 @@ namespace CarreMagique
 
                         while (/*(indiceLigne + 1) < ligne.Length || */ligne[indiceLigne + 1] != '-') // lorsque le fragment compte plus d'un chiffre
                         {
-                            if ((indiceLigne + 1) == (ligne.Length - 1))
-
+                            if ((indiceLigne + 1) != (ligne.Length - 1))
                                 indiceLigne++;
                             fragment += ligne[indiceLigne];
 
@@ -859,7 +857,5 @@ namespace CarreMagique
             // retourne le chemin du fichier à ouvrir
             return chaine;
         }
-       
-
     }
 }
