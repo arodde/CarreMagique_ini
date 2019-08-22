@@ -65,7 +65,7 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("DesTableaux", "T2dim", "");
+            Uti.Info("Grille", "T2dim", "");
             DeterminationTaille();
             Damier = new Cellule[Nombre, Nombre];
             InitialisationDamier();
@@ -592,7 +592,7 @@ namespace CarreMagique
         {
             /* ***************************************************************
             +
-            * Fonction pour +
+            * Fonction pour les valeurs de deux cellules du damier
             * les paramètres:
             * 1 : + (+)
             * 2 : + (+)
@@ -685,10 +685,11 @@ namespace CarreMagique
             }
         }
         public void SommeColonnes()
-        {         
+        {
             /* ***************************************************************
              +
-             * Fonction pour +
+             * Fonction pour effectuer la somme des nombres de chaque colonne
+             * et affectation du résultat dans le tableau totalColonne                
              * les paramètres:
              * 1 : + (+)
              * 2 : + (+)
@@ -700,8 +701,7 @@ namespace CarreMagique
              * +
              * Ce qui est impossible:
              * +
-            **************************************************************** */
-            // somme des nombres de chaque colonne et affectation du résultat dans le tableau totalColonne 
+            **************************************************************** */            
             Uti.Info("Grille", "SommeColonnes", "");
             int valeur = 0;
 
@@ -753,21 +753,22 @@ namespace CarreMagique
         public void SommeLignes()
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
-            // somme des nombres de chaque Ligne et affectation du résultat dans le tableau totalLigne 
+            +
+            * Fonction pour somme des nombres de chaque Ligne et affectation du 
+            * résultat dans le tableau totalLigne  la 
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+           
             //Uti.Info("Grille", "SommeLignes", "");
             int valeur = 0;
 
@@ -781,20 +782,20 @@ namespace CarreMagique
         public void SommeDiagDesc()
         {
             /* ***************************************************************
-    +
-    * Fonction pour calculer la somme des valeur de la diagonale principale descendante
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */           
+            +
+            * Fonction pour calculer la somme des valeur de la diagonale principale descendante
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */           
             int i = 0;
             int j = 0;
             while (i < nombre && j < nombre)

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 
 
 namespace CarreMagique
@@ -134,10 +135,10 @@ namespace CarreMagique
         {// méthode d'échange générique
             /* ***************************************************************
     +
-    * Fonction pour +
+    * Fonction générique pour échange de variables
     * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
+    * 1 : valeur à échanger... (T)
+    * 2 : ... avec celle-ci (T)
     * 3 : + (+)
     * 4 : + (+)
     * 5 : + (+)
@@ -155,10 +156,10 @@ namespace CarreMagique
         {// teste qu'il s'agit de la même instance
             /* ***************************************************************
     +
-    * Fonction pour +
+    * Fonction générique pour vérifier si deux instances sont de même type
     * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
+    * 1 : instance 1 (T)
+    * 2 : instance 2 (U)
     * 3 : + (+)
     * 4 : + (+)
     * 5 : + (+)
@@ -313,9 +314,9 @@ namespace CarreMagique
             Console.Write("Voulez-vous quitter");
             if (commentaire != "")
             {
-                Console.Write(commentaire  );
+                Console.Write(commentaire);
             }
-            Console.WriteLine(" "+"(O/N)?");
+            Console.WriteLine(" " + "(O/N)?");
 
             ConsoleKeyInfo saisie = Console.ReadKey(true);
 
@@ -429,7 +430,7 @@ namespace CarreMagique
             int a = 0;
             int b = 0;
 
-           
+
             // identifie les bonnes occurrences de motif1 
             int k = 0;
             while (k < chaine.Length)
@@ -474,8 +475,106 @@ namespace CarreMagique
             return sousChaine;
         }
     }
+
+    class ExempleFichierJSON
+    {
+        string racine = @"C:\Users\demon\source\testouille\testouille\test\";
+        string fiJSON = @"student.json";
+        string path;
+        public string CreationFichierJSONAPartirDUnObjet()
+        {
+            Uti.Info("fichierJSON", "CreationFichierJSONAPartirDUnObjet", "");
+            path = racine + fiJSON;
+            //  https://www.c-sharpcorner.com/article/working-with-json-in-C-Sharp/
+            /*
+             **************************************************************************
+
+                                      CREATION D'UN FICHIER JSON
+
+             **************************************************************************
+             */
+            // déclaration et instantiation de l'étudiant student
+            Student student = new Student()
+            {
+                Id = 1,
+                Name = "Balaji",
+                Degree = "MCA",
+                Hobbies = new List<string>
+                {
+                    "Reading","Playing Games"
+                }
+            };
+            //
+            // conversion en une chaîne de caractères au format JSON 
+            string strResultJson = JsonConvert.SerializeObject(student);
+            //
+            // affichage de la chaîne
+            Console.WriteLine(strResultJson);
+            //
+            // création du fichier au chemin (avec le nom du fichier) 
+            // et la string au format JSON.
+            File.WriteAllText(path, strResultJson);
+            //
+            // Confirmation
+            if (File.Exists(path))
+            {
+                Console.WriteLine("Stored!");
+            }
+            else
+            {
+                Console.WriteLine("échec création fichier JSON");
+            }
+            return strResultJson;
+        }
+        public void CreationDUnObjetAPartirFichierJSON(string strResultJson)
+        {
+            Uti.Info("fichierJSON", "CreationDUnObjetAPartirFichierJSON", "");
+
+            /*
+            **************************************************************************
+
+                                     CREATION D'UN OBJET DE TYPE 
+                                       DETERMINE A PARTIR D'UN 
+                                            FICHIER JSON
+            *   strResultJson est une chaine décrivant un objet en notation JSON
+            **************************************************************************
+            */
+            // vide la chaine 
+            strResultJson = string.Empty;
+            Console.WriteLine("---> JSON --> objet " + strResultJson);
+            //
+            // stockE le contenu du fichier dans la variable ???
+            strResultJson = File.ReadAllText(path);
+            //
+            // charge le fichier JSON dans un fichier adapté           
+            Student resultStudent = JsonConvert.DeserializeObject<Student>(strResultJson);
+            Console.WriteLine("Deserialization --->" + resultStudent);
+        }
+        public void AffichageAvecDictionaryDunObjetJSON(string strResultJson)
+        {
+            Uti.Info("fichierJSON", "AffichageAvecDictionaryDunObjetJSON", "");
+            /*
+           **************************************************************************
+
+                                    CREATION D'UNE PRESENTATION
+                                          PAR DICTIONARY
+                                      DETERMINE A PARTIR D'UN 
+                                           FICHIER JSON
+           *   strResultJson est une chaine décrivant un objet en notation JSON
+           *   utilisable avec tout fichier JSON
+           **************************************************************************
+           */
+            Console.WriteLine("---> JSON --> dictionnaire ");
+            var dictionary = JsonConvert.DeserializeObject<System.Collections.IDictionary>(strResultJson);
+            foreach (System.Collections.DictionaryEntry entry in dictionary)
+            {
+                Console.WriteLine(entry.Key + ": " + entry.Value);
+            }
+
+        }
+    }
 }
-public static class utiExemple
+public static class UtiExemple
 {
     public static void ConversionTypesProches()
     {
@@ -544,8 +643,8 @@ public static class utiExemple
     public static void Brouillon()
     {
 
-        string pathD = @""; 
-        string pathF = @""; 
+        string pathD = @"";
+        string pathF = @"";
         List<string> listring = new List<string>();
         listring.Add("abricot");
         listring.Add("ananas");
@@ -677,7 +776,7 @@ public static class utiExemple
         Samedi,
         Dimanche
     }
-    static public void exception()
+    static public void Exception()
     {
         try
         {
@@ -787,7 +886,7 @@ public static class utiExemple
         }
     }
 }
-public static class pelemele
+public static class PeleMele
 {
 
     enum Jours
@@ -1033,6 +1132,21 @@ public class ListeChainee<T>
                 temp.Precedent = precedent.Suivant;
             }
         }
+    }
+}
+
+
+class Student
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Degree { get; set; }
+    public List<string> Hobbies { get; set; }
+    public override string ToString()
+    {
+        // affiche le contenu de l'objet
+        return string.Format("Student Information:\n\tId:{0},\n\tName :{1},\n\tDegree :{2},\n\tHobbies :{3}",
+            Id, Name, Degree, string.Join(", ", Hobbies.ToArray()));
     }
 }
 

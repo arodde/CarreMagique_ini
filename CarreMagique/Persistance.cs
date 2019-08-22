@@ -23,7 +23,7 @@ namespace CarreMagique
             ec = 1,
             r
         }
-
+        
         public Persistance()
         {
             /* ***************************************************************
@@ -44,7 +44,8 @@ namespace CarreMagique
             Uti.Info("Persistance", "Persistance", "");
             /* un moyen de permettre à l'utilisateur de fournir une autre adresse de racine
             devra être prévu */
-            racine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
+            //racine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
+            racine = @"Bureau\";
             dossSvg = @"svg\";
 
         }
@@ -151,7 +152,8 @@ namespace CarreMagique
         {
             /* ***************************************************************
             +
-            * Fonction pour +
+            * Fonction pour créer le fichier .txt dans le bon dossier sans 
+            * écraser les fichiers concernant un carré magique de même taille
             * les paramètres:
             * 1 : + (+)
             * 2 : + (+)
@@ -186,8 +188,6 @@ namespace CarreMagique
                 }
                 else
                 {
-
-
                     //        créer fichier
                     /*
                      le contenu du fichier doit obéir à la structure suivante
@@ -239,8 +239,6 @@ namespace CarreMagique
                         {
                             Console.WriteLine("Toutes les autres exceptions : " + ex);
                         }
-
-
                     }
                     ok = true;
 
@@ -251,20 +249,21 @@ namespace CarreMagique
         public string CategorieFichier(string dossParent)
         {
             /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
+            +
+            * Fonction pour savoir si le dossier parent est le dossier 'en-cours' 
+            * ou 'resolus'
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
             if (dossParent == @"en-cours\")
             {
                 return "ec";
@@ -275,23 +274,25 @@ namespace CarreMagique
             }
         }
         public void CreerDossierALEmplacement(string chemin)
-        {         /* ***************************************************************
-             +
-             * Fonction pour +
-             * les paramètres:
-             * 1 : + (+)
-             * 2 : + (+)
-             * 3 : + (+)
-             * 4 : + (+)
-             * 5 : + (+)
-             * retour: + (+)
-             * exemple(s):
-             * +
-             * Ce qui est impossible:
-             * +
-            **************************************************************** */
+        {        
+                /* ***************************************************************
+                 +
+                 * Fonction pour créer un dossier au chemin voulu s'il n'existe pas déjà
+                 * les paramètres:
+                 * 1 : + (+)
+                 * 2 : + (+)
+                 * 3 : + (+)
+                 * 4 : + (+)
+                 * 5 : + (+)
+                 * retour: + (+)
+                 * exemple(s):
+                 * +
+                 * Ce qui est impossible:
+                 * +
+                **************************************************************** */
             Uti.Info("Persistance", "CreerDossierALEmplacement", "");
-            // crée un dossier à l'emplacement spécifier s'il n'existe pas, rien s'il existe déjà
+            // crée un dossier à l'emplacement spécifier s'il n'existe pas, rien 
+            // s'il existe déjà
             if (!Directory.Exists(chemin))
             {
                 Directory.CreateDirectory(chemin);
@@ -300,6 +301,21 @@ namespace CarreMagique
         }
         public bool PresenceDossierSvg()
         {
+                 /* ***************************************************************
+                 +
+                 * Fonction pour créer un dossier svg
+                 * les paramètres:
+                 * 1 : + (+)
+                 * 2 : + (+)
+                 * 3 : + (+)
+                 * 4 : + (+)
+                 * 5 : + (+)
+                 * retour: + (+)
+                 * exemple(s):
+                 * +
+                 * Ce qui est impossible:
+                 * +
+                **************************************************************** */
             if (Directory.Exists(racine))
             {
                 if (Directory.Exists(racine + dossSvg))
@@ -330,41 +346,25 @@ namespace CarreMagique
         public void AfficheListeFichiersExistants()
         {
             /* ***************************************************************
-    +
-    * Fonction pour lister les fichiers de sauvegardes existants de carrés magiques
-    * en cours ou résolus
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
-            Uti.Info("Persistance", "AfficheListeFichiersExistants", "");
-            //bool sauvegardeARestaurer = true;
-
-            // tant que sauvegardeARestaurer est vrai
-
-            //while (sauvegardeARestaurer)
-            //{
+            +
+            * Fonction pour lister les fichiers de sauvegardes existants de carrés magiques
+            * en cours ou résolus
+            * les paramètres:
+            * 1 : + (+)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+            Uti.Info("Persistance", "AfficheListeFichiersExistants", "");            
             // dossier: test 
-            string str = racine + dossSvg;
-            int nResultat = 0;
-            string sResultat = "";
-            string cheminFichier = "";
-            //if (!Directory.Exists(racine + dossSvg))
-            //{
-            //    sauvegardeARestaurer = false;
-            //    Console.WriteLine("Aucun dossier de sauvegarde à restaurer.");
-            //    //Console.WriteLine(racine + dossSvg);
-            //}
-            //else
-            //{
+            string str = racine + dossSvg;           
+            string cheminFichier = "";            
             if (!PresenceDossierSvg())
             {
                 Console.WriteLine("Aucune sauvegarde à ce jour.");
@@ -372,9 +372,7 @@ namespace CarreMagique
             else
             {
                 Console.WriteLine("fichier de sauvegarde trouvé.");
-                // -- -- --
-                int i = 0;
-                // choisi entre fichiers résolus ou en cours
+                // choisit entre fichiers résolus ou en-cours
                 ChoixTypeFichier();
                 // affiche les fichiers selon le choix réalisé
                 AfficheListeFichiersExistantsCibles();
@@ -387,15 +385,9 @@ namespace CarreMagique
                 // ouverture du fichier
                 OuvrirFichier(cheminFichier);
             }
-
-
-            //}
-            //}
-
         }
         public void AfficheListeFichiersExistantsCibles()
         {
-            // -- -- --
             Uti.Info("Persistance", "AfficheListeFichiersExistantsEC", "");
             int nResultat = 0;
             string sResultat = "";
@@ -411,14 +403,8 @@ namespace CarreMagique
                     Console.WriteLine("le fichier " + typeCMLongsLib + " existe");
                     //sauvegardeARestaurer = true;
                     tabCibles = Directory.GetFiles(racine + dossSvg + typeCMLongs);
-                }
-                //else
-                //{
-                //    sauvegardeARestaurer = false;
-                //}
-                // ajout au tableau des titres de fichiers existants dans la liste concernée 
-
-
+                }               
+                // ajout au tableau des titres de fichiers existants dans la liste concernée
                 foreach (string cheminFichier in tabCibles)
                 {
                     if (cheminFichier != "")
@@ -445,8 +431,6 @@ namespace CarreMagique
         {
             Uti.Info("Persistance", "ObtenirNomFichier", "");
             /* ***************************************************************
-                   
-
              * Fonction pour extraire le nom du fichier
              * les paramètres:
              * 1 : chemin du fichier (string)
@@ -460,12 +444,9 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-
-
             int nResultat = cheminFichier.LastIndexOf(@"\");
             //Console.WriteLine("position de " + @"\" + " dans " + s+" est "+ nResultat.ToString());
             // prélève la sous-chaine correspondant au nom du dossier
-
             nomFichierChargeDansMemoire = cheminFichier.Substring((nResultat + 1), (cheminFichier.Length - nResultat - 1));
         }
         public void OuvrirFichier(string cheminFichier)
@@ -488,18 +469,16 @@ namespace CarreMagique
              * +
             **************************************************************** */
 
-            /*
-          convention liée à la structure du fichier
-          indice l 0 de tabContenuFichier
-          incice l 2 nombre 
-          incice l 4 total à trouver
-          incice l 6 début des valeurs du carré magique             
+          /*
+              convention liée à la structure du fichier
+              indice l 0 de tabContenuFichier
+              incice l 2 nombre 
+              incice l 4 total à trouver
+              incice l 6 début des valeurs du carré magique             
           */
 
             List<string> listeContenuFichier = new List<string>();
-            int compteurMarqueur = 0;
             int valeur = 0;
-
             string fragment = "";
             //string resultat = "";
             int i = 0;
@@ -509,8 +488,6 @@ namespace CarreMagique
             int l = 0;
             int m = 0;
             int depart = 6;
-            //int[] tab;
-            int lecteur = 0;
             string ligne = "";
             string[] tabContenuFichier;
             string[,] fragments = new string[grillePersistance.Nombre, grillePersistance.Nombre];
@@ -527,9 +504,6 @@ namespace CarreMagique
                 }
             }
             tabContenuFichier = listeContenuFichier.ToArray();
-
-
-            //
             // pour une ligne du fichier
             for (l = depart; l < (depart + grillePersistance.Nombre); l++)
             {
@@ -578,12 +552,9 @@ namespace CarreMagique
                 indiceLigne = 0;
                 // à placer dans le damier
             }
-
             //afficher le damier
             grillePersistance.AffiDamier();
-            Console.WriteLine();
-
-            // comment jouer avec maintenant
+            Console.WriteLine();   
         }
 
         public void ChoixFichierAOuvrir(Grille grille)
@@ -624,11 +595,6 @@ namespace CarreMagique
             {
                 Console.WriteLine("Ce dossier est introuvable.");
             }
-            // affichage des fichiers de ce dossiers
-
-
-
-
         }
         public void InterrogeUtilisateurSurFichierAOuvrir(Grille pGrille)
         {
@@ -655,7 +621,6 @@ namespace CarreMagique
             grillePersistance = pGrille;
             Uti.MessErr("grille toujours nulle?");
             grillePersistance.DeterminationTaille();
-
         }
         public void SelectionCMSelonTaille()
         {
@@ -679,17 +644,10 @@ namespace CarreMagique
             int ordre = 0;
             int nResultat = 0;
             int precedent = 0;
-            //int tailleDemandee = 0;
-            //string chaine = "";
             List<string> listeFichiersRetenus = new List<string>();
             // demande taille pour carré magique
-
             // instanciation grille
             grillePersistance = new Grille(Grille.DeterminationTailleSansInstance());
-            //grillePersistance.SaisieValeurPossible();
-            //chaine = Console.ReadLine();
-
-
             // affichage
             if (typeCMCours == "ec")
             {
@@ -797,8 +755,8 @@ namespace CarreMagique
             TypeCarreMagique choix = TypeCarreMagique.ec;
             string saisie = "";
             int nSaisie = 0;
-
-
+            // actualise les propriétés relatives au fichier en fonction de 
+            //la saisie utilisateur
             while (nSaisie < 1 || nSaisie > 2)
             {
                 Console.WriteLine("Choisisser le fichier de carré magique à ouvrir:");
@@ -845,23 +803,23 @@ namespace CarreMagique
         public string ChoixOccurrenceFichierTailleDeterminee()
         {
             Uti.Info("TestsDeveloppement", "ChoixOccurrenceFichierTailleDetermine", "");
-            /* ***************************************************************
+             /* ***************************************************************
                Ouvrir occurence fichier précise
 
-         * Fonction pour déterminer s'il s'agit d'un fichier en cours ou
-         * d'un fichier resolus et renseigne la variable de classe typeDossier
-         * les paramètres:
-         * 1 : + (+)
-         * 2 : + (+)
-         * 3 : + (+)
-         * 4 : + (+)
-         * 5 : + (+)
-         * retour: + (+)
-         * exemple(s):
-         * +
-         * Ce qui est impossible:
-         * +
-        **************************************************************** */
+             * Fonction pour déterminer s'il s'agit d'un fichier en cours ou
+             * d'un fichier resolus et renseigne la variable de classe typeDossier
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
             string saisie = "";
             //int nSaisie = 0;
             int indice = 99;
@@ -901,99 +859,7 @@ namespace CarreMagique
             // retourne le chemin du fichier à ouvrir
             return chaine;
         }
-        public void Intru_ManipulationDeString()
-        {
-            Uti.Info("TestsDeveloppement", "ManipulationDeString", "");
-            string alphabet = "abcdefghijklmnopqrsmnoptuvwxyz";
-            string pasDeF = "abcdeghijklmnopqrstuvwxyz";
-            string echantillon = "mnop";
-            string echantillon2 = "smnop";
-            string resultat = "";
-
-
-            int nResultat = 0;
-            bool bResultat = false;
-            char[] monTabChar = new char[100];
-            // retrait de la sous-chaîne depuis la position en paramètre p1 jusqu'à la fin de la chaîne
-            Uti.Mess("SubString 1p");
-            resultat = alphabet.Substring(10);
-            Console.WriteLine(alphabet);
-            Console.WriteLine(resultat);
-            // retrait de la sous-chaîne depuis la position en p1 pour la quantité de caractères en p2
-            Uti.Mess("SubString 2p");
-            resultat = alphabet.Substring(3, 10);
-            Console.WriteLine(alphabet);
-            Console.WriteLine(resultat);
-            // donne la position de la première occurence du caractère dans la chaine
-            Uti.Mess("IndexOf");
-            nResultat = alphabet.IndexOf("d");
-            Console.WriteLine(nResultat.ToString());
-            // trouver ou non un caractère
-            Uti.Mess("Contains");
-            bResultat = alphabet.Contains("f");
-            if (bResultat)
-            {
-                Console.WriteLine("le caractère f est trouvé.");
-            }
-            else
-            {
-                Console.WriteLine("le caractère f n'est pas trouvé.");
-            }
-            bResultat = pasDeF.Contains("f");
-            if (bResultat)
-            {
-                Console.WriteLine(" le caractère f est trouvé.");
-            }
-            else
-            {
-                Console.WriteLine("le caractère f n'est pas trouvé.");
-            }
-            // copier une sous-chaine dans un tableau de char
-            Uti.Mess("CopyTo");
-            alphabet.CopyTo(3, monTabChar, 4, 9);
-            Console.Write("*");
-            foreach (char c in monTabChar)
-            {
-                Console.Write(c + "-");
-            }
-            Console.WriteLine("*");
-            Console.WriteLine(monTabChar);
-            // insertion d'une chaine dans une autre
-            Uti.Mess("Insert");
-            resultat = alphabet.Insert(6, nResultat.ToString());
-            Console.WriteLine(resultat);
-            // donne l'index de position du tableau de char dans la chaîne
-            Console.WriteLine(alphabet);
-            nResultat = alphabet.IndexOfAny(echantillon.ToCharArray());
-            Console.WriteLine(nResultat.ToString());
-            // position de m dans la première occurence de mnop dans alphabet
-            Uti.Mess("IndexOfAny");
-            Console.WriteLine(alphabet);
-            nResultat = alphabet.IndexOfAny(echantillon.ToCharArray());
-            Console.WriteLine(nResultat.ToString() + " position de " + echantillon + " dans " + alphabet);
-            // position de p dans la dernière occurence de mnop dans alphabet
-            Uti.Mess("LastIndexOfAny");
-            Console.WriteLine(alphabet);
-            nResultat = alphabet.LastIndexOfAny(echantillon.ToCharArray());
-            Console.WriteLine(nResultat.ToString() + " position de " + echantillon + " dans " + alphabet);
-            string s1 = "cm4ec0.txt";
-            char c1 = 'm';
-            char c2 = 'e';
-            string sr = Uti.ExtractionChainesEntreDeuxCaracteres(s1, c1, 1, c2, 1);
-            Console.WriteLine(sr);
-            c1 = 'c';
-            c2 = '.';
-            sr = Uti.ExtractionChainesEntreDeuxCaracteres(s1, c1, 2, c2, 1);
-            Console.WriteLine(sr);
-            Console.WriteLine();
-            string sch = Uti.ExtractionChainesEntreDeuxCaracteres("salut \"coco\" t'aimes la banane?", '"', 1, '"', 2);
-            Console.WriteLine(sch);
-            Console.WriteLine();
-            sch = Uti.ExtractionChainesEntreDeuxCaracteres("salut \"coco\" t'aimes la banane?", '\\', 2, '\\', 4);
-            Console.WriteLine(sch);
-            Console.WriteLine();
-        }
-        //
+       
 
     }
 }
