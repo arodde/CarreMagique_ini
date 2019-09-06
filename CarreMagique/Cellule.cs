@@ -6,40 +6,40 @@ namespace CarreMagique
 {
     public class Cellule
     {
-        private int valeur;
-        private int coorHori;
-        private int coorVerti;
-        public int Valeur
+        private int iValeur;
+        private int iCoorHori;
+        private int iCoorVerti;
+        public int IValeur
         {
             get
             {
-                return valeur;
+                return iValeur;
             }
             set
             {
-                valeur = value;
+                iValeur = value;
             }
         }
-        public int CoorHori
+        public int ICoorHori
         {
             get
             {
-                return coorHori;
+                return iCoorHori;
             }
             set
             {
-                coorHori = value;
+                iCoorHori = value;
             }
         }
-        public int CoorVerti
+        public int ICoorVerti
         {
             get
             {
-                return coorVerti;
+                return iCoorVerti;
             }
             set
             {
-                coorVerti = value;
+                iCoorVerti = value;
             }
         }
         public override bool Equals(object obj)
@@ -47,12 +47,12 @@ namespace CarreMagique
             Cellule c = obj as Cellule;
             if (c == null)
                 return false;
-            return Valeur == c.Valeur && CoorHori == c.CoorHori && coorVerti == c.CoorVerti;
+            return IValeur == c.IValeur && ICoorHori == c.ICoorHori && iCoorVerti == c.ICoorVerti;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(valeur, coorHori, coorVerti, Valeur, CoorHori, CoorVerti);
+            return HashCode.Combine(iValeur, iCoorHori, iCoorVerti, IValeur, ICoorHori, ICoorVerti);
         }
 
         public override string ToString()
@@ -73,7 +73,7 @@ namespace CarreMagique
         * +
        **************************************************************** */
 
-            string description = "Valeur " + Valeur + " CoorHori " + CoorHori + " coorVerti " + CoorVerti;
+            string description = "Valeur " + IValeur + " CoorHori " + ICoorHori + " coorVerti " + ICoorVerti;
             return description;
         }
     }

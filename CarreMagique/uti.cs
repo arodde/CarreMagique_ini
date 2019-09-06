@@ -12,7 +12,7 @@ namespace CarreMagique
     public static class Uti
     {
 
-        static public void Info(string nomClasse, string nomFonction, string complements)
+        static public void Info(string sNomClasse, string sNomFonction, string sComplements)
         {
 
             /* ***************************************************************
@@ -44,25 +44,25 @@ namespace CarreMagique
              * +
             **************************************************************** */
             // les mentions à afficher
-            string classe = "----> " + nomClasse;
-            string fonction = " ----> " + nomFonction;
-            string lesComplements = "";
-            if (complements != "")
-                lesComplements = " ----> " + complements;
+            string sClasse = "----> " + sNomClasse;
+            string sFonction = " ----> " + sNomFonction;
+            string sLesComplements = "";
+            if (sComplements != "")
+                sLesComplements = " ----> " + sComplements;
             // l'affichage
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(classe);
+            Console.Write(sClasse);
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(fonction);
+            Console.Write(sFonction);
             Console.ResetColor();
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(lesComplements);
+            Console.WriteLine(sLesComplements);
             Console.ResetColor();
         }
-        static public void Mess(string message)
+        static public void Mess(string sMessage)
         {
             /* ***************************************************************
     +
@@ -81,10 +81,10 @@ namespace CarreMagique
    **************************************************************** */
             Info("Program", "Mess", "");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(message);
+            Console.WriteLine(sMessage);
             Console.ResetColor();
         }
-        static public void MessErr(string message)
+        static public void MessErr(string sMessage)
         {
             /* ***************************************************************
     +
@@ -103,10 +103,10 @@ namespace CarreMagique
    **************************************************************** */
             Info("Program", "Mess", "");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(message);
+            Console.WriteLine(sMessage);
             Console.ResetColor();
         }
-        static public void Sep(string message, int nombre)
+        static public void Sep(string sMessage, int iNombre)
         {
             /* ***************************************************************
     +
@@ -124,9 +124,9 @@ namespace CarreMagique
     * +
    **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Red;
-            for (int i = 0; i < nombre; i++)
+            for (int i = 0; i < iNombre; i++)
             {
-                Console.Write(message);
+                Console.Write(sMessage);
             }
             Console.WriteLine("\n");
             Console.ResetColor();
@@ -171,7 +171,7 @@ namespace CarreMagique
    **************************************************************** */
             return t.Equals(u);
         }
-        static void Titrer(string message)
+        static void Titrer(string sMessage)
         {
             /* ***************************************************************
     +
@@ -190,11 +190,11 @@ namespace CarreMagique
    **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("\n\t");
-            PremierTierLeTexte(message);
+            PremierTierLeTexte(sMessage);
             Console.WriteLine("\n");
             Console.ResetColor();
         }
-        private static void CentrerLeTexte(string texte)
+        private static void CentrerLeTexte(string sTexte)
         {
             /* ***************************************************************
     +
@@ -211,11 +211,11 @@ namespace CarreMagique
     * Ce qui est impossible:
     * +
    **************************************************************** */
-            int nbEspaces = (Console.WindowWidth - texte.Length) / 2;
-            Console.SetCursorPosition(nbEspaces, Console.CursorTop);
-            Console.WriteLine(texte);
+            int iNbEspaces = (Console.WindowWidth - sTexte.Length) / 2;
+            Console.SetCursorPosition(iNbEspaces, Console.CursorTop);
+            Console.WriteLine(sTexte);
         }
-        private static void PremierTierLeTexte(string texte)
+        private static void PremierTierLeTexte(string sTexte)
         {
             /* ***************************************************************
     +
@@ -232,11 +232,11 @@ namespace CarreMagique
     * Ce qui est impossible:
     * +
    **************************************************************** */
-            int nbEspaces = (Console.WindowWidth - texte.Length) / 3;
-            Console.SetCursorPosition(nbEspaces, Console.CursorTop);
-            Console.WriteLine(texte);
+            int iNbEspaces = (Console.WindowWidth - sTexte.Length) / 3;
+            Console.SetCursorPosition(iNbEspaces, Console.CursorTop);
+            Console.WriteLine(sTexte);
         }
-        static public void Avertissement(string message)
+        static public void Avertissement(string sMessage)
         {
             /* ***************************************************************
     +
@@ -257,11 +257,11 @@ namespace CarreMagique
             Console.WriteLine("\n*****\n");
             PremierTierLeTexte("AVERTISSEMENT!!!");
             Console.WriteLine();
-            Console.WriteLine(message);
+            Console.WriteLine(sMessage);
             Console.WriteLine("*****\n");
             Console.ResetColor();
         }
-        static public void GestionEspaces(int valeur)
+        static public void GestionEspaces(int iValeur)
         {
             /* ***************************************************************
     +
@@ -280,20 +280,20 @@ namespace CarreMagique
    **************************************************************** */
             //Uti.Info("Uti", "GestionEspaces", "");
             // affiche la valeur avec une série d'espace en fonction de l'importance de la valeur
-            if (valeur < 10)
+            if (iValeur < 10)
             {
-                Console.Write("   " + valeur + " ");
+                Console.Write("   " + iValeur + " ");
             }
-            else if (valeur < 100)
+            else if (iValeur < 100)
             {
-                Console.Write("  " + valeur + " ");
+                Console.Write("  " + iValeur + " ");
             }
             else // < 1000
             {
-                Console.Write(" " + valeur + " ");
+                Console.Write(" " + iValeur + " ");
             }
         }
-        static public bool Quitter(string commentaire)
+        static public bool Quitter(string sCommentaire)
         {
             /* ***************************************************************
             +
@@ -312,14 +312,15 @@ namespace CarreMagique
            **************************************************************** */
             // true pour quitter ; false pour continuer
             Console.Write("Voulez-vous quitter");
-            if (commentaire != "")
+            if (sCommentaire != "")
             {
-                Console.Write(commentaire);
+                Console.Write(sCommentaire);
             }
             Console.WriteLine(" " + "(O/N)?");
 
             ConsoleKeyInfo saisie = Console.ReadKey(true);
 
+            
 
             if (saisie.Key == ConsoleKey.O)
             {
@@ -332,7 +333,7 @@ namespace CarreMagique
                 return false;
             }
         }
-        static public bool Action(string verbeAction, string actionSiOui, string actionSiNon, string commentaire)
+        static public bool Action(string sVerbeAction, string sActionSiOui, string sActionSiNon, string sCommentaire)
         {
             /* ***************************************************************
     +
@@ -352,10 +353,10 @@ namespace CarreMagique
    **************************************************************** */
             // pour lancer une éventuelle action
             Uti.Info("Uti", "Action", "sauvegarde");
-            Console.Write("Voulez-vous " + verbeAction);
-            if (commentaire != "")
+            Console.Write("Voulez-vous " + sVerbeAction);
+            if (sCommentaire != "")
             {
-                Console.Write(commentaire + " ");
+                Console.Write(sCommentaire + " ");
             }
             Console.WriteLine("?");
             Console.WriteLine("(O/N)?");
@@ -363,20 +364,20 @@ namespace CarreMagique
             ConsoleKeyInfo saisie = Console.ReadKey(true);
             if (saisie.Key == ConsoleKey.O)
             {
-                Console.WriteLine(actionSiOui);
+                Console.WriteLine(sActionSiOui);
                 return true;
             }
             else
             {
-                Console.WriteLine(actionSiNon);
+                Console.WriteLine(sActionSiNon);
                 return false;
             }
         }
-        static public bool EstPair(int nombre)
+        static public bool EstPair(int iNombre)
         {
             /* ***************************************************************
     +
-    * Fonction pour préciser si le nombre en paramètre est pair
+    * Fonction pour préciser si le iNombre en paramètre est pair
     * les paramètres:
     * 1 : + (+)
     * 2 : + (+)
@@ -389,7 +390,7 @@ namespace CarreMagique
     * Ce qui est impossible:
     * +
    **************************************************************** */
-            if ((nombre % 2) == 0)
+            if ((iNombre % 2) == 0)
             {
                 return true;
             }
@@ -398,7 +399,7 @@ namespace CarreMagique
                 return false;
             }
         }
-        public static string ExtractionChainesEntreDeuxCaracteres(string chaine, char motif1, int occ1, char motif2, int occ2)
+        public static string ExtractionChainesEntreDeuxCaracteres(string sChaine, char sMotif1, int iOcc1, char cMotif2, int iOcc2)
         {
             /*
              ExtractionChainesEntreDeuxCaracteres
@@ -426,19 +427,19 @@ namespace CarreMagique
              * dans les paramètres 2 , 3 et 4 , 5
             */
             int i = 0;// compteur d'occurrence
-            string sousChaine = "";
+            string sSousChaine = "";
             int a = 0;
             int b = 0;
 
 
             // identifie les bonnes occurrences de motif1 
             int k = 0;
-            while (k < chaine.Length)
+            while (k < sChaine.Length)
             {
-                if (chaine[k] == motif1)
+                if (sChaine[k] == sMotif1)
                 {
                     i++;
-                    if (i == occ1)
+                    if (i == iOcc1)
                     {
                         a = k;
                         break;
@@ -449,12 +450,12 @@ namespace CarreMagique
             i = 0;
             k = 0;
             // et de motif2
-            while (k < chaine.Length)
+            while (k < sChaine.Length)
             {
-                if (chaine[k] == motif2)
+                if (sChaine[k] == cMotif2)
                 {
                     i++;
-                    if (i == occ2)
+                    if (i == iOcc2)
                     {
                         b = k;
                         break;
@@ -463,28 +464,28 @@ namespace CarreMagique
                 k++;
             }
             // trouve la sous-chaine et la renvoie
-            int longueur = b - a - 1;
-            if (longueur > 0)
+            int iLongueur = b - a - 1;
+            if (iLongueur > 0)
             {
-                sousChaine = chaine.Substring((a + 1), longueur);
+                sSousChaine = sChaine.Substring((a + 1), iLongueur);
             }
             else
             {
                 Console.WriteLine("Impossible la longueur de la sous-chaine est nulle.");
             }
-            return sousChaine;
+            return sSousChaine;
         }
     }
 
     class ExempleFichierJSON
     {
-        string racine = @"C:\Users\demon\source\testouille\testouille\test\";
-        string fiJSON = @"student.json";
-        string path;
+        string sRacine = @"C:\Users\demon\source\testouille\testouille\test\";
+        string sFiJSON = @"student.json";
+        string sPath;
         public string CreationFichierJSONAPartirDUnObjet()
         {
             Uti.Info("fichierJSON", "CreationFichierJSONAPartirDUnObjet", "");
-            path = racine + fiJSON;
+            sPath = sRacine + sFiJSON;
             //  https://www.c-sharpcorner.com/article/working-with-json-in-C-Sharp/
             /*
              **************************************************************************
@@ -497,8 +498,8 @@ namespace CarreMagique
             Student student = new Student()
             {
                 Id = 1,
-                Name = "Balaji",
-                Degree = "MCA",
+                sName = "Balaji",
+                sDegree = "MCA",
                 Hobbies = new List<string>
                 {
                     "Reading","Playing Games"
@@ -506,17 +507,17 @@ namespace CarreMagique
             };
             //
             // conversion en une chaîne de caractères au format JSON 
-            string strResultJson = JsonConvert.SerializeObject(student);
+            string sResultJson = JsonConvert.SerializeObject(student);
             //
             // affichage de la chaîne
-            Console.WriteLine(strResultJson);
+            Console.WriteLine(sResultJson);
             //
             // création du fichier au chemin (avec le nom du fichier) 
             // et la string au format JSON.
-            File.WriteAllText(path, strResultJson);
+            File.WriteAllText(sPath, sResultJson);
             //
             // Confirmation
-            if (File.Exists(path))
+            if (File.Exists(sPath))
             {
                 Console.WriteLine("Stored!");
             }
@@ -524,9 +525,9 @@ namespace CarreMagique
             {
                 Console.WriteLine("échec création fichier JSON");
             }
-            return strResultJson;
+            return sResultJson;
         }
-        public void CreationDUnObjetAPartirFichierJSON(string strResultJson)
+        public void CreationDUnObjetAPartirFichierJSON(string sResultJson)
         {
             Uti.Info("fichierJSON", "CreationDUnObjetAPartirFichierJSON", "");
 
@@ -540,17 +541,17 @@ namespace CarreMagique
             **************************************************************************
             */
             // vide la chaine 
-            strResultJson = string.Empty;
-            Console.WriteLine("---> JSON --> objet " + strResultJson);
+            sResultJson = string.Empty;
+            Console.WriteLine("---> JSON --> objet " + sResultJson);
             //
             // stockE le contenu du fichier dans la variable ???
-            strResultJson = File.ReadAllText(path);
+            sResultJson = File.ReadAllText(sPath);
             //
             // charge le fichier JSON dans un fichier adapté           
-            Student resultStudent = JsonConvert.DeserializeObject<Student>(strResultJson);
+            Student resultStudent = JsonConvert.DeserializeObject<Student>(sResultJson);
             Console.WriteLine("Deserialization --->" + resultStudent);
         }
-        public void AffichageAvecDictionaryDunObjetJSON(string strResultJson)
+        public void AffichageAvecDictionaryDunObjetJSON(string sResultJson)
         {
             Uti.Info("fichierJSON", "AffichageAvecDictionaryDunObjetJSON", "");
             /*
@@ -565,7 +566,7 @@ namespace CarreMagique
            **************************************************************************
            */
             Console.WriteLine("---> JSON --> dictionnaire ");
-            var dictionary = JsonConvert.DeserializeObject<System.Collections.IDictionary>(strResultJson);
+            var dictionary = JsonConvert.DeserializeObject<System.Collections.IDictionary>(sResultJson);
             foreach (System.Collections.DictionaryEntry entry in dictionary)
             {
                 Console.WriteLine(entry.Key + ": " + entry.Value);
@@ -581,9 +582,9 @@ public static class UtiExemple
         Console.WriteLine("---> ConversionTypesProches");
         /* la conversion est possible mais de la responsabilité du 
          * programmeur ici une perte d'information la partie décimale */
-        double prix = 125.55;
-        int valeur = (int)prix; // valeur vaut 125
-        Console.WriteLine(prix + " double converti en int " + valeur);
+        double dPrix = 125.55;
+        int iValeur = (int)dPrix; // valeur vaut 125
+        Console.WriteLine(dPrix + " double converti en int " + iValeur);
         /* Ceci est propre au fonctionnement de l'énumération */
         Console.WriteLine(Jours.Jeudi + " cas d'une énumération " + (int)Jours.Jeudi);
     }
@@ -591,30 +592,30 @@ public static class UtiExemple
     {
         Console.WriteLine("---> ConversionTypesDifferents");
         // méthode 1
-        string chaineAge = "20"; // le nombre doit être écrit en chiffres.
-        int age = Convert.ToInt32(chaineAge);
+        string sChaineAge = "20"; // le iNombre doit être écrit en chiffres.
+        int iAge = Convert.ToInt32(sChaineAge);
         // age vaut 20
         // méthode 2
-        string chaineAge2 = "20";
-        int age2 = int.Parse(chaineAge2);
+        string sChaineAge2 = "20";
+        int iAge2 = int.Parse(sChaineAge2);
         // age vaut 20
         // méthode 3
-        string chaineAge3 = "ab20cd";
-        int age3;
-        string chaine = "9";
-        int nombre;
-        if (int.TryParse(chaine, out nombre))
+        string sChaineAge3 = "ab20cd";
+        int iAge3;
+        string sChaine = "9";
+        int iNombre;
+        if (int.TryParse(sChaine, out iNombre))
         {
-            Console.WriteLine(nombre);
+            Console.WriteLine(iNombre);
         }
         else
         {
             Console.WriteLine("impossible");
         }
-        chaineAge3 = "188";
-        if (int.TryParse(chaineAge3, out age3))
+        sChaineAge3 = "188";
+        if (int.TryParse(sChaineAge3, out iAge3))
         {
-            Console.WriteLine("La conversion de \"188\" est possible, age vaut " + age3);
+            Console.WriteLine("La conversion de \"188\" est possible, age vaut " + iAge3);
         }
         else
         {
@@ -625,13 +626,13 @@ public static class UtiExemple
     public static void UtilisationDUnConsoleKeyInfo()
     {
         int iTheme = 0;
-        bool ok = false;
+        bool bOk = false;
         // récupération d'une ConsoleKeyInfo (un caractère) pour la convertir en entier (un chiffre)
         ConsoleKeyInfo saisie = Console.ReadKey(true);
         if (char.IsDigit(saisie.KeyChar))
         {
             iTheme = int.Parse(saisie.KeyChar.ToString());
-            ok = true;
+            bOk = true;
         }
         else
         {
@@ -643,8 +644,8 @@ public static class UtiExemple
     public static void Brouillon()
     {
 
-        string pathD = @"";
-        string pathF = @"";
+        string sPathD = @"";
+        string sPathF = @"";
         List<string> listring = new List<string>();
         listring.Add("abricot");
         listring.Add("ananas");
@@ -653,13 +654,13 @@ public static class UtiExemple
         listring.Add("figue");
         listring.Add("pomme");
         listring.Add("poire");
-        File.AppendAllLines(pathF, listring);
+        File.AppendAllLines(sPathF, listring);
         // ajout au fichier sans faire disparaître le contenu précédent
-        File.AppendAllLines(pathF, listring);
+        File.AppendAllLines(sPathF, listring);
         //if (!File.Exists(pathF))
         //{
         // Create a file to write to.
-        using (StreamWriter sw = File.CreateText(pathF))
+        using (StreamWriter sw = File.CreateText(sPathF))
         {
             // écrase le précédent contenu du fichier et inscrit le contenu qui suit
             sw.WriteLine("Hello");
@@ -807,31 +808,31 @@ public static class UtiExemple
     {
         Console.WriteLine("---> MonMenu");
         // mise en forme
-        string sl = "\n";
-        string tbl = "\t";
+        string sSl = "\n";
+        string sTbl = "\t";
         // élaboration du menu
-        string sMenu = "MENU" + sl + tbl;
-        sMenu += "1. +" + sl + tbl;
-        sMenu += "2. +" + sl + tbl;
-        sMenu += "3. " + sl + tbl;
-        sMenu += "4. " + sl + tbl;
-        sMenu += "5. " + sl + tbl;
-        sMenu += "6. " + sl + tbl;
-        sMenu += "7. " + sl + tbl;
-        sMenu += "8. " + sl + tbl;
-        sMenu += "9. " + sl + tbl;
-        sMenu += "10. " + sl + tbl;
-        sMenu += "11. " + sl + tbl;
-        sMenu += "12. " + sl + tbl;
-        sMenu += "13. +" + sl + tbl;
-        sMenu += "14. +" + sl + tbl;
+        string sMenu = "MENU" + sSl + sTbl;
+        sMenu += "1. +" + sSl + sTbl;
+        sMenu += "2. +" + sSl + sTbl;
+        sMenu += "3. " + sSl + sTbl;
+        sMenu += "4. " + sSl + sTbl;
+        sMenu += "5. " + sSl + sTbl;
+        sMenu += "6. " + sSl + sTbl;
+        sMenu += "7. " + sSl + sTbl;
+        sMenu += "8. " + sSl + sTbl;
+        sMenu += "9. " + sSl + sTbl;
+        sMenu += "10. " + sSl + sTbl;
+        sMenu += "11. " + sSl + sTbl;
+        sMenu += "12. " + sSl + sTbl;
+        sMenu += "13. +" + sSl + sTbl;
+        sMenu += "14. +" + sSl + sTbl;
         Console.WriteLine(sMenu);
     }
     static void MenuCoursObjet()
     {
         Console.WriteLine("---> MonMenu");
-        string sl = "\n";
-        string tbl = "\t";
+        string sSl = "\n";
+        string sTbl = "\t";
         string sInput = "";
         // menu
         int iTheme = 0;
@@ -927,16 +928,16 @@ public static class PeleMele
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.BackgroundColor = ConsoleColor.Red;
         Console.WriteLine("Hello world");
-        int x = Console.CursorLeft;
-        int y = Console.CursorTop;
+        int iX = Console.CursorLeft;
+        int iY = Console.CursorTop;
         Console.SetCursorPosition(25, 7);
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.BackgroundColor = ConsoleColor.DarkMagenta;
         Console.WriteLine("Hello world aussi");
-        Console.SetCursorPosition(x, y);
+        Console.SetCursorPosition(iX, iY);
         Console.ForegroundColor = ConsoleColor.DarkBlue;
         Console.BackgroundColor = ConsoleColor.Yellow;
-        Console.WriteLine("\tEn dessous du premier " + x + " " + y);
+        Console.WriteLine("\tEn dessous du premier " + iX + " " + iY);
         Console.ResetColor();
 
     }
@@ -946,8 +947,8 @@ public static class PeleMele
         Console.WriteLine("---> DessineUneVoitureEtLaDeplace");
         int i = 0;
         int j = 0;
-        int largeur = 21;
-        int hauteur = 4;
+        int iLargeur = 21;
+        int iHauteur = 4;
         Console.Clear();
         Console.WriteLine(@"      .--------.");
         Console.WriteLine(@" ____/_____|___ \___");
@@ -961,26 +962,26 @@ public static class PeleMele
                 case ConsoleKey.LeftArrow:
                     if (i > 0)
                     {
-                        Console.MoveBufferArea(i, j, largeur, hauteur, i - 1, j);
+                        Console.MoveBufferArea(i, j, iLargeur, iHauteur, i - 1, j);
                         i--;
                     }
                     break;
                 case ConsoleKey.RightArrow:
-                    if (i < Console.WindowWidth - largeur)
+                    if (i < Console.WindowWidth - iLargeur)
                     {
-                        Console.MoveBufferArea(i, j, largeur, hauteur, i + 1, j);
+                        Console.MoveBufferArea(i, j, iLargeur, iHauteur, i + 1, j);
                         i++;
                     }
                     break;
                 case ConsoleKey.UpArrow:
                     if (j > 0)
                     {
-                        Console.MoveBufferArea(i, j, largeur, hauteur, i, j - 1);
+                        Console.MoveBufferArea(i, j, iLargeur, iHauteur, i, j - 1);
                         j--;
                     }
                     break;
                 case ConsoleKey.DownArrow:
-                    Console.MoveBufferArea(i, j, largeur, hauteur, i, j + 1);
+                    Console.MoveBufferArea(i, j, iLargeur, iHauteur, i, j + 1);
                     j++;
                     break;
             }
@@ -991,23 +992,23 @@ public static class PeleMele
     private static void Sons()
     {
         Console.WriteLine("---> Sons");
-        int noteDo = 262;
-        int noteRe = 294;
-        int noteMi = 330;
-        int noire = 400;
-        int blanche = 800;
+        int iNoteDo = 262;
+        int iNoteRe = 294;
+        int iNoteMi = 330;
+        int iNoire = 400;
+        int iBlanche = 800;
 
-        Console.Beep(noteDo, noire);
-        Console.Beep(noteDo, noire);
-        Console.Beep(noteDo, noire);
-        Console.Beep(noteRe, noire);
-        Console.Beep(noteMi, blanche);
-        Console.Beep(noteRe, blanche);
-        Console.Beep(noteDo, noire);
-        Console.Beep(noteMi, noire);
-        Console.Beep(noteRe, noire);
-        Console.Beep(noteRe, noire);
-        Console.Beep(noteDo, noire);
+        Console.Beep(iNoteDo, iNoire);
+        Console.Beep(iNoteDo, iNoire);
+        Console.Beep(iNoteDo, iNoire);
+        Console.Beep(iNoteRe, iNoire);
+        Console.Beep(iNoteMi, iBlanche);
+        Console.Beep(iNoteRe, iBlanche);
+        Console.Beep(iNoteDo, iNoire);
+        Console.Beep(iNoteMi, iNoire);
+        Console.Beep(iNoteRe, iNoire);
+        Console.Beep(iNoteRe, iNoire);
+        Console.Beep(iNoteDo, iNoire);
     }
     public static void ManipulationListe()
     {
@@ -1030,10 +1031,10 @@ public static class PeleMele
         }
 
         // Find an item and replace it with new item  
-        int idx = AuthorList.IndexOf("Nipun Tomar");
-        if (idx >= 0)
+        int iIdx = AuthorList.IndexOf("Nipun Tomar");
+        if (iIdx >= 0)
         {
-            AuthorList[idx] = "New Author";
+            AuthorList[iIdx] = "New Author";
         }
         Console.WriteLine("\nIndexOf ");
         foreach (var author in AuthorList)
@@ -1139,14 +1140,14 @@ public class ListeChainee<T>
 class Student
 {
     public int Id { get; set; }
-    public string Name { get; set; }
-    public string Degree { get; set; }
+    public string sName { get; set; }
+    public string sDegree { get; set; }
     public List<string> Hobbies { get; set; }
     public override string ToString()
     {
         // affiche le contenu de l'objet
         return string.Format("Student Information:\n\tId:{0},\n\tName :{1},\n\tDegree :{2},\n\tHobbies :{3}",
-            Id, Name, Degree, string.Join(", ", Hobbies.ToArray()));
+            Id, sName, sDegree, string.Join(", ", Hobbies.ToArray()));
     }
 }
 

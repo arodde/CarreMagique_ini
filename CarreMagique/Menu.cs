@@ -6,10 +6,21 @@ namespace CarreMagique
 {
     class Menu
     {
-        private Grille grille;
-        private Persistance persistance;
+        private Grille menuGrille;
+        private Persistance menuPersistance;
+        enum optionMenu
+        {
+            PreparationCarreMagique = 2,
+            CreationCarreMagique
+        }
+        public Menu()
+        {
+            menuPersistance = new Persistance();
+
+        }
         public void DefinitionCarreMagique()
-        {// les régles du jeu...
+        {
+            // les régles du jeu...
             Console.WriteLine("Règles du carré magique");
             Console.WriteLine("Ce jeu mathématique consiste à disposer dans une grille carré " +
                 "les nombres en commençant par 1 et en incrémentant de 1. La plus forte valeur " +
@@ -21,7 +32,7 @@ namespace CarreMagique
 
         }
 
-        public void PréparationCarreMagique()
+        public void PreparationCarreMagique()
         {
             /* ***************************************************************
              +
@@ -42,10 +53,8 @@ namespace CarreMagique
             **************************************************************** */
             Uti.Info("Menu", "PréparationCarreMagique", "");
             CreationCarreMagique();
-
             // affichage du damier et résolution
-            
-            grille.ManipulationCarreMagique();
+            menuGrille.ManipulationCarreMagique();
         }
         public void CreationCarreMagique()
         {
@@ -66,17 +75,19 @@ namespace CarreMagique
             **************************************************************** */
             Uti.Info("Menu", "CreationCarreMagique", "");
             // contenu de Main chargé dans le menu
-            persistance = new Persistance();
-            grille = new Grille();
+            menuGrille = new Grille();
+            menuGrille.Construire();
             // initialisation 
-            grille.InitialisationDamier();
-            if (grille.Nombre != 0)
+            menuGrille.InitialisationDamier();
+            menuPersistance.PersistanceGrille = menuGrille;
+            menuGrille.GrillePersistance = menuPersistance;
+            if (menuGrille.INombre != 0)
             {
-                grille.SommeATrouver().ToString();
+                menuGrille.SommeATrouver().ToString();
             }
             else
             {
-                Console.WriteLine("y a rien!!!");
+                Console.WriteLine("Le damier de la grille ne peut pas être créé.");
             }
         }
 
@@ -105,18 +116,12 @@ namespace CarreMagique
              *  consulter le dossier de sauvegarde et le fichier de 
              *  sauvegarde si dossier n'existe pas le créer sinon 
              *  aller dedans si aucun fichier alors dire aucun fichier
-             *  sinon l'ouvrir lire le nombre créer le damier et le 
+             *  sinon l'ouvrir lire le iNombre créer le damier et le 
              *  remplir de chaque valeur rencontrée
              */
-            Persistance persistance = new Persistance();
-            string NomFichier = persistance.RetourneAdresseDossierSvg();
+            string NomFichier = menuPersistance.RetourneAdresseDossierSvg();
             Uti.Mess("affichage de tous les fichiers confondus");
-            persistance.AfficheListeFichiersExistants();
-            // lancer les permutations
-            this.persistance = persistance;
-            this.grille = persistance.GrillePersistance;
-            this.grille.Persistance = this.persistance;
-            this.grille.ManipulationCarreMagique();
+            menuPersistance.AfficheListeFichiersExistants();
         }
         public void MenuJeu()
         {
@@ -175,11 +180,14 @@ namespace CarreMagique
             // menu
             int iTheme = 0;
             int nbOptionMenu = 3;
+            optionMenu choixDOption = 0;
+
             bool okSaisie = false;
 
             // charge le menu l'option choisie puis repropose le menu
             do
             {
+
                 MenuJeu();
                 while (!okSaisie)
                 {
@@ -210,12 +218,16 @@ namespace CarreMagique
                         DefinitionCarreMagique();
                         break;
                     case 2:
-                        PréparationCarreMagique();
+                        menuPersistance.OptionMenu = (int)optionMenu.PreparationCarreMagique;
+                        PreparationCarreMagique();
+
                         break;
                     case 3:
+                        menuPersistance.OptionMenu = (int)optionMenu.CreationCarreMagique;
                         CarreMagiqueEnMemoire();
                         break;
                 }
+                //Reinitialiser();
                 okSaisie = false;
             } while (!(Uti.Quitter("")));
 
