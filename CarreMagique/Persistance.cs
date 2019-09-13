@@ -50,15 +50,92 @@ namespace CarreMagique
             **************************************************************** */
             Uti.Info("Persistance", "Persistance", "");
             Uti.MessErr("Un truc à faire dans cette fonction");
-            /* un moyen de permettre à l'utilisateur de fournir une autre adresse de racine
-            devra être prévu */
-            sRacine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
-            sDossSvg = @"svg\";
+            ///* un moyen de permettre à l'utilisateur de fournir une autre adresse de racine
+            //devra être prévu */
+            //// l'utilisateur entre une adresse dans la console pour fixer l'adresse de la racine
+            //if (sRacine == @"")
+            //{
+            //    TrouverEmplacementDossierRacine();
+            //}
+
+            sRacine = @"";
+            sDossSvg = @"svgCarresMagiques\";
+            //sRacine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
+            //sDossSvg = @"svg\";
             fichierOuverture = new NomFichier("");
             fichierSauvegarde = new NomFichier("");
 
         }
+        public void CreationDossierSauvegardeSiInexistant()
+        {
+            // création du fichier de sauvegarde s'il n'exite pas
+            // Specify the directory you want to manipulate.
+            //string path = sRacine + sDossSvg;
 
+
+
+        }
+        public void DefinirEmplacementDossierRacine()
+        {
+            Uti.Info("Persistance", "TrouverEmplacementDossierRacine", "");
+
+            sRacine = @"";
+            bool bDossierExiste = false;
+            while (!bDossierExiste)
+            {
+                //Console.WriteLine("Faîtes un copier-coller du chemin de dossier pour donne un emplacement au dossier de sauvegarde");
+                //sRacine = Console.ReadLine();
+                // trouver un emplacement au dossier de sauvegarde
+                // si le dossier existe déjà
+                // le dossier "Mes Documents"
+
+
+
+
+                try
+                {
+                    // code provoquant une exception
+                    //sRacine = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    sRacine = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                    //sRacine = sRacine += @"\";
+                    sRacine = AjouterSeparateurFichier(sRacine);
+                    string provisoire = Path.Combine(sRacine, sDossSvg);
+
+                    string s = @"en-cours";
+                    string provisoire2 = Path.Combine(provisoire, s);
+                    Directory.CreateDirectory(provisoire2);
+                    s = @"resolus";
+                    string provisoire3 = Path.Combine(provisoire, s);
+                    Directory.CreateDirectory(provisoire3);
+                    if (Directory.Exists(provisoire2) && (Directory.Exists(provisoire3)))
+                    {
+                        bDossierExiste = true;
+                    }
+                }
+                catch (FormatException ex)
+                {
+                    Console.WriteLine("Erreur de format : " + ex);
+                }
+                catch (NullReferenceException ex)
+                {
+                    Console.WriteLine("Erreur de référence nulle : " + ex);
+                }
+                catch (SystemException ex)
+                {
+                    Console.WriteLine("Erreur système autres que FormatException et NullReferenceException : " + ex);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Toutes les autres exceptions : " + ex);
+                }
+
+            }
+        }
+        public string AjouterSeparateurFichier(string sChemin)
+        {
+            sChemin += @"\";
+            return sChemin;
+        }
         public void ProposerSauvegarderGrille(bool bOuiSauvegarder)
         {
             /* ***************************************************************
@@ -81,6 +158,8 @@ namespace CarreMagique
             {
                 if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
                 {
+                    DefinirEmplacementDossierRacine();
+                    CreationDossierSauvegardeSiInexistant();
                     bool bOk = false;
                     while (!bOk)
                     {
@@ -132,36 +211,45 @@ namespace CarreMagique
                 Console.WriteLine("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(sRacine + sDossSvg);
             }
+            FichierSauvegarde.SSuffixe = ".txt";
             //    si carre résolu
             if (persistanceGrille.BCarreMagiqueResolu)
             {
-                // si avant en cours ec vers r
-                if (fichierOuverture.STypeFichierCourt != "r")
+                if (optionMenu == 2)
                 {
-                    fichierSauvegarde.SPrefixe = fichierOuverture.SPrefixe;
-                    fichierSauvegarde.INombre = fichierOuverture.INombre;
-                    fichierSauvegarde.STypeFichierCourt = "ec";
-                    fichierSauvegarde.STypeFichierLib = "en cours";
-                    fichierSauvegarde.STypeFichierPath = @"en-cours\";
+                    fichierSauvegarde.INombre = persistanceGrille.INombre;
+                    fichierSauvegarde.STypeFichierCourt = "r";
+                    fichierSauvegarde.STypeFichierLib = "résolus";
+                    fichierSauvegarde.STypeFichierPath = @"resolus\";
                     // occurrence et extension à déterminer plus tard
-                    // suppression du fichier en cours 
-                    File.Delete(sRacine + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
                 }
-                // si avant résolu r reste r
                 else
                 {
-                    // copie du nom de fichier mais fichier de remplacement non encore créé
-                    fichierSauvegarde.Copier(fichierOuverture);
-
+                    // si avant en cours 'ec' vers 'r'
+                    if (fichierOuverture.STypeFichierCourt != "r")// avant 'ec' passer à 'r'
+                    {
+                        fichierSauvegarde.SPrefixe = fichierOuverture.SPrefixe;
+                        fichierSauvegarde.INombre = fichierOuverture.INombre;
+                        fichierSauvegarde.STypeFichierCourt = "r";
+                        fichierSauvegarde.STypeFichierLib = "résolus";
+                        fichierSauvegarde.STypeFichierPath = @"resolus\";
+                        // occurrence et extension à déterminer plus tard
+                        // suppression du fichier en cours 
+                        File.Delete(sRacine + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                    }
+                    else// avant rester à 'r'
+                    {
+                        // copie du nom de fichier mais fichier de remplacement non encore créé
+                        fichierSauvegarde.Copier(fichierOuverture);
+                    }
                 }
 
-
-                Console.WriteLine("Sauvegarder du carré magique résolu.");
+                Console.WriteLine("Sauvegarde du carré magique résolu.");
             }
             else
             {
                 // non résolue
-                // si avant r
+                // si avant 'r' on passe à 'ec'
                 if (fichierOuverture.STypeFichierCourt == "r")
                 {
                     // ne pas le supprimer
@@ -173,11 +261,21 @@ namespace CarreMagique
                     // occurrence et extension à déterminer plus tard
                 }
                 else
-                {// si avant ec
-                    fichierSauvegarde.Copier(fichierOuverture);
+                {// si avant 'ec' , garder la même chose
+                    if (optionMenu == 2)
+                    {
+
+                        fichierSauvegarde.INombre = persistanceGrille.INombre;
+                        fichierSauvegarde.STypeFichierCourt = "ec";
+                        fichierSauvegarde.STypeFichierLib = "en cours";
+                        fichierSauvegarde.STypeFichierPath = @"en-cours\";
+                    }
+                    else
+                    {
+                        fichierSauvegarde.Copier(fichierOuverture);
+                        FichierSauvegarde.SSuffixe = ".txt";
+                    }
                 }
-
-
                 // prépare le nom du fichier de sauvegarde et crée le fichier de sauvegarde
                 Console.WriteLine("Sauvegarder l'état actuel du damier pour reprendre le jeu plus tard.");
             }
@@ -254,8 +352,6 @@ namespace CarreMagique
             if (optionMenu == 2)
             {
                 FichierSauvegarde.INombre = persistanceGrille.INombre;
-
-
             }
             else
             {
@@ -267,9 +363,6 @@ namespace CarreMagique
                 Console.WriteLine("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath);
             }
-
-
-
             // connaitre occurrence
 
             // création donc incrémentation 
@@ -281,15 +374,16 @@ namespace CarreMagique
                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                     {
                         FichierSauvegarde.IOccurence++;
+                        FichierSauvegarde.SSuffixe = ".json"; // l'utilisation du fichier json est privilégiée
                         Console.WriteLine("Incrémentation");
                     }
                     break;
                 case 3:
-
+                    //  gestion du suffixe
+                    FichierSauvegarde.SSuffixe = ".json";
                     if (persistanceGrille.BCarreMagiqueResolu)
                     {
-                        //  gestion du suffixe
-                        FichierSauvegarde.SSuffixe = ".json";
+
                         // fichier sauvegarde 'r'
                         if (fichierOuverture.STypeFichierCourt == fichierSauvegarde.STypeFichierCourt)
                         {
@@ -320,16 +414,40 @@ namespace CarreMagique
                     else
                     {
                         // carré magique non résolu suppression du fichier ouverture création d'un fichier de même nom
-                        if (fichierOuverture.STypeFichierCourt == "ec")
+                        if (fichierOuverture.STypeFichierCourt == "ec") // 'ec' reste 'ec'
                         {
-                            FichierSauvegarde.Copier(fichierOuverture);
+
                             //  gestion du suffixe (qd fichier ouv est txt)
-                            FichierSauvegarde.SSuffixe = ".json";
-                            FichierSauvegarde.IOccurence = 0;
-                            while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
+                            if (optionMenu == 2)// création de fichier
                             {
-                                FichierSauvegarde.IOccurence++;
-                                Console.WriteLine("Incrémentation");
+                                fichierSauvegarde.INombre = persistanceGrille.INombre;
+                                FichierSauvegarde.STypeFichierCourt = "ec";
+                                FichierSauvegarde.STypeFichierLib = "en cours";
+                                FichierSauvegarde.STypeFichierPath = @"en-cours\";
+                                // occurence déja à zéro
+                                while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
+                                {
+                                    FichierSauvegarde.IOccurence++;
+                                    Console.WriteLine("Incrémentation");
+                                }
+
+                            }
+                            else // remplacement de fichier
+                            {
+                                // copie nom fichier mais si change ext alors change occ
+                                FichierSauvegarde.Copier(fichierOuverture);
+                                //  gestion du suffixe
+                                FichierSauvegarde.SSuffixe = ".json";
+                                // si le suffixe change, l'occurrence doit repartir de zéro
+                                if (FichierOuverture.SSuffixe != FichierSauvegarde.SSuffixe)
+                                {
+                                    FichierSauvegarde.IOccurence = 0;
+                                    while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
+                                    {
+                                        FichierSauvegarde.IOccurence++;
+                                        Console.WriteLine("Incrémentation");
+                                    }
+                                }
                             }
                             File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture);
                         }
@@ -349,7 +467,7 @@ namespace CarreMagique
                     break;
             }
             // l'objet grille est passé en fichier JSON
-            CreationFichierJSON(persistanceGrille, sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString());            
+            CreationFichierJSON(persistanceGrille, sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString());
         }
         public void ChargerDepuisFichierTxt()
         {
@@ -591,6 +709,7 @@ namespace CarreMagique
             string sCheminFichier = @"";
             int iPosExt;
             int iPosBarre;
+
             TypeCarreMagique type;
             if (!PresenceDossierSvg())
             {
@@ -601,59 +720,58 @@ namespace CarreMagique
                 Console.WriteLine("fichier de sauvegarde trouvé.");
                 // choisit entre fichiers résolus ou en-cours
                 ChoixTypeFichierTxt();
-                // affiche les fichiers selon le choix réalisé
-                AfficheListeFichiersExistantsCibles();
-                // choix du numéro du carré magique
-                SelectionCMSelonTaille();
-                if (optionMenu == 3)
+                // affiche les fichiers selon le choix réalisé si la liste n'est pas vide
+                if (AfficheListeFichiersExistantsCibles())
                 {
-                    fichierOuverture.INombre = persistanceGrille.INombre;
+                    // choix du numéro du carré magique
+                    SelectionCMSelonTaille();
+                    if (optionMenu == 3)
+                    {
+                        fichierOuverture.INombre = persistanceGrille.INombre;
+                    }
+                    // limitation liste à des propostions pour une seule liste de fichiers de mêmes taille
+                    ChoixOccurrence();
+                    // choix de l'utilisateur
+                    sCheminFichier = ChoixOccurrenceFichierTailleDeterminee();
+
+                    //remplit les propriétés de l'objet à partir du nom de fichier
+                    fichierOuverture.TraitementChaine(sCheminFichier);
+
+
+                    iPosExt = sCheminFichier.LastIndexOf(@".");
+                    iPosBarre = sCheminFichier.LastIndexOf(@"\");
+
+                    // analyse le nom du fichier pour remplir le fichierOuverture (NomFichier)
+                    if (OptionMenu == 3)   // ouverture fichier existant pour y prendre les informations
+                    {
+                        // remplacement fichier
+                        Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
+                        // longueur de la partie extension (avec le point)
+                        int tailleExt = (sCheminFichier.Substring(iPosExt, (sCheminFichier.Length - iPosExt))).Length;
+                        int tailleNomFichier = iPosExt - (iPosBarre + 1);
+                        // donne le nom du fichier sans l'extension
+                        Console.WriteLine(sCheminFichier.Substring((iPosBarre + 1), tailleNomFichier));
+                    }
+
+                    // ouverture du fichier
+                    if (fichierOuverture.SSuffixe == ".txt")
+                    {
+                        // ???
+                        OuvrirFichierTxt(sCheminFichier);
+                    }
+                    else
+                    {
+                        OuvrirFichierJSON(sCheminFichier);
+                    }
+                    // lancer les permutations menu ---> persistance 
+                    Console.WriteLine();
+                    // fournir la persistance à la grille
+                    PersistanceGrille.GrillePersistance = this;
+                    persistanceGrille.ManipulationCarreMagique();
                 }
-                // limitation liste à des propostions pour une seule liste de fichiers de mêmes taille
-                ChoixOccurrence();
-                // choix de l'utilisateur
-                sCheminFichier = ChoixOccurrenceFichierTailleDeterminee();
-
-                //remplit les propriétés de l'objet à partir du nom de fichier
-                fichierOuverture.TraitementChaine(sCheminFichier);
-
-
-                iPosExt = sCheminFichier.LastIndexOf(@".");
-                iPosBarre = sCheminFichier.LastIndexOf(@"\");
-
-                // analyse le nom du fichier pour remplir le fichierOuverture (NomFichier)
-                if (OptionMenu == 3)   // ouverture fichier existant pour y prendre les informations
-                {
-                    // remplacement fichier
-                    Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
-                    // longueur de la partie extension (avec le point)
-                    int tailleExt = (sCheminFichier.Substring(iPosExt, (sCheminFichier.Length - iPosExt))).Length;
-                    int tailleNomFichier = iPosExt - (iPosBarre + 1);
-                    // donne le nom du fichier sans l'extension
-                    Console.WriteLine(sCheminFichier.Substring((iPosBarre + 1), tailleNomFichier));
-                }
-
-                // ouverture du fichier
-                if (fichierOuverture.SSuffixe == ".txt")
-                {
-                    // ???
-                    OuvrirFichierTxt(sCheminFichier);
-                }
-                else
-                {
-                    OuvrirFichierJSON(sCheminFichier);
-                }
-                //
-                // lancer les permutations menu ---> persistance 
-                Console.WriteLine();
-                // fournir la persistance à la grille
-                //  PersistanceGrille = null;
-
-                PersistanceGrille.GrillePersistance = this;
-                persistanceGrille.ManipulationCarreMagique();
             }
         }
-        public void AfficheListeFichiersExistantsCibles()
+        public bool AfficheListeFichiersExistantsCibles()
         {
             Uti.Info("Persistance", "AfficheListeFichiersExistantsEC", "");
             int iResultat = 0;
@@ -691,10 +809,22 @@ namespace CarreMagique
                     // donne le nom du fichier seul
                     Console.WriteLine(sResultat);
                 }
+
+            }
+            if (listeFichiersCibles.Count> 0)
+            {
+                // liste remplie 
+                return true;
+            }
+            else
+            {
+                // liste vide
+                Console.WriteLine("Aucun fichier sauvegarder dans ce dossier.");
+                return false;
             }
         }
 
-       
+
         public void OuvrirFichierTxt(string sCheminFichier)
         {
             Uti.Info("Persistance", "OuvrirFichier", "");

@@ -119,6 +119,8 @@ namespace CarreMagique
              *  sinon l'ouvrir lire le iNombre créer le damier et le 
              *  remplir de chaque valeur rencontrée
              */
+            menuPersistance.DefinirEmplacementDossierRacine();
+            
             string NomFichier = menuPersistance.RetourneAdresseDossierSvg();
             Uti.Mess("affichage de tous les fichiers confondus");
             menuPersistance.AfficheListeFichiersExistants();
@@ -229,8 +231,7 @@ namespace CarreMagique
                 }
                 //Reinitialiser();
                 okSaisie = false;
-            } while (!(Uti.Quitter("")));
-
+            } while (!(Uti.Quitter(" le jeu?")));
         }
     }
 }

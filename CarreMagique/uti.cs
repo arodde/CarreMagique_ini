@@ -171,6 +171,11 @@ namespace CarreMagique
    **************************************************************** */
             return t.Equals(u);
         }
+       public static string DonneNomDossier(string sChemin)
+        {
+            int position = sChemin.LastIndexOf(@"\");
+            return sChemin.Substring(position + 1);
+        }
         static void Titrer(string sMessage)
         {
             /* ***************************************************************
