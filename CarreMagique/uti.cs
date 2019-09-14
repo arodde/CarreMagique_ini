@@ -299,6 +299,7 @@ namespace CarreMagique
             }
         }
         static public bool Quitter(string sCommentaire)
+
         {
             /* ***************************************************************
             +

@@ -195,6 +195,16 @@ namespace CarreMagique
                 Console.WriteLine("Conversion impossible");
             }
         }
+        public void RAZNomFichier()
+        {
+            sPrefixe = "cm";
+            iNombre = 0;
+            iOccurence = 0;
+            sSuffixe = "";
+            sTypeFichierCourt = "";
+            sTypeFichierLib = "";
+            sTypeFichierPath = @"";
+        }
         public void Copier(NomFichier nf)
         {
             // nf le fichier dont les propriétés de  l'instance

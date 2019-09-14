@@ -120,7 +120,7 @@ namespace CarreMagique
              *  remplir de chaque valeur rencontrée
              */
             menuPersistance.DefinirEmplacementDossierRacine();
-            
+
             string NomFichier = menuPersistance.RetourneAdresseDossierSvg();
             Uti.Mess("affichage de tous les fichiers confondus");
             menuPersistance.AfficheListeFichiersExistants();
@@ -229,7 +229,11 @@ namespace CarreMagique
                         CarreMagiqueEnMemoire();
                         break;
                 }
-                //Reinitialiser();
+                if (menuPersistance != null)
+                {
+                    menuPersistance.Reinitialiser();
+                }
+
                 okSaisie = false;
             } while (!(Uti.Quitter(" le jeu?")));
         }

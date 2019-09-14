@@ -75,6 +75,12 @@ namespace CarreMagique
 
 
         }
+        public void Reinitialiser()
+        {
+            fichierOuverture.RAZNomFichier();
+            fichierSauvegarde.RAZNomFichier();
+        }
+
         public void DefinirEmplacementDossierRacine()
         {
             Uti.Info("Persistance", "TrouverEmplacementDossierRacine", "");
@@ -100,7 +106,6 @@ namespace CarreMagique
                     //sRacine = sRacine += @"\";
                     sRacine = AjouterSeparateurFichier(sRacine);
                     string provisoire = Path.Combine(sRacine, sDossSvg);
-
                     string s = @"en-cours";
                     string provisoire2 = Path.Combine(provisoire, s);
                     Directory.CreateDirectory(provisoire2);
@@ -285,13 +290,17 @@ namespace CarreMagique
                 Console.WriteLine("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(sRacine + sDossSvg + fichierSauvegarde.STypeFichierPath);
             }
+
+            // si le nouveau fichier a le même nom qu'un fichier existant, le fichier ancien doit être supprimé
+            if (optionMenu == 3)
+            {
+                if (File.Exists(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet()))
+                {
+                    File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                }
+            }
             // créer le fichier de sauvegarde
             CreationFichierSauvegardeTxt(sRacine + sDossSvg, fichierSauvegarde.STypeFichierPath);
-            // si le nouveau fichier existe alors le précédent fichier doit être supprimé
-            if (File.Exists(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet()))
-            {
-                File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
-            }
         }
         public void SauvegarderDansFichierJSON()
         {
@@ -366,7 +375,8 @@ namespace CarreMagique
             // connaitre occurrence
 
             // création donc incrémentation 
-
+            FichierSauvegarde.SSuffixe = ".json";
+            FichierSauvegarde.IOccurence = 0;
             switch (optionMenu)
             {
                 case 2:
@@ -374,13 +384,12 @@ namespace CarreMagique
                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                     {
                         FichierSauvegarde.IOccurence++;
-                        FichierSauvegarde.SSuffixe = ".json"; // l'utilisation du fichier json est privilégiée
+
                         Console.WriteLine("Incrémentation");
                     }
                     break;
                 case 3:
                     //  gestion du suffixe
-                    FichierSauvegarde.SSuffixe = ".json";
                     if (persistanceGrille.BCarreMagiqueResolu)
                     {
 
@@ -394,7 +403,10 @@ namespace CarreMagique
                                 FichierSauvegarde.IOccurence++;
                                 Console.WriteLine("Incrémentation");
                             }
-                            // on envisage qu'il existe plusieurs combinaisons de carrés magiques gagnants
+                            /* 
+                             il est supposé qu'il existe plusieurs combinaisons de carrés magiques gagnants
+                             pas de suppression du carré magique même d'extention .txt 
+                             */
                         }
                         else
                         {
@@ -402,7 +414,7 @@ namespace CarreMagique
 
                             // supprimer le fichier 'ec' et créer un fichier 'r'
                             File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.ToString());
-                            FichierSauvegarde.SSuffixe = ".json";
+                            //FichierSauvegarde.SSuffixe = ".json";
                             FichierSauvegarde.IOccurence = 0;
                             while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                             {
@@ -436,7 +448,7 @@ namespace CarreMagique
                             {
                                 // copie nom fichier mais si change ext alors change occ
                                 FichierSauvegarde.Copier(fichierOuverture);
-                                //  gestion du suffixe
+                                //  gestion du suffixe à mettre json (il peut avoir été modifié par la copie précédente)
                                 FichierSauvegarde.SSuffixe = ".json";
                                 // si le suffixe change, l'occurrence doit repartir de zéro
                                 if (FichierOuverture.SSuffixe != FichierSauvegarde.SSuffixe)
@@ -730,44 +742,45 @@ namespace CarreMagique
                         fichierOuverture.INombre = persistanceGrille.INombre;
                     }
                     // limitation liste à des propostions pour une seule liste de fichiers de mêmes taille
-                    ChoixOccurrence();
-                    // choix de l'utilisateur
-                    sCheminFichier = ChoixOccurrenceFichierTailleDeterminee();
-
-                    //remplit les propriétés de l'objet à partir du nom de fichier
-                    fichierOuverture.TraitementChaine(sCheminFichier);
-
-
-                    iPosExt = sCheminFichier.LastIndexOf(@".");
-                    iPosBarre = sCheminFichier.LastIndexOf(@"\");
-
-                    // analyse le nom du fichier pour remplir le fichierOuverture (NomFichier)
-                    if (OptionMenu == 3)   // ouverture fichier existant pour y prendre les informations
+                    if (ChoixOccurrence())
                     {
-                        // remplacement fichier
-                        Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
-                        // longueur de la partie extension (avec le point)
-                        int tailleExt = (sCheminFichier.Substring(iPosExt, (sCheminFichier.Length - iPosExt))).Length;
-                        int tailleNomFichier = iPosExt - (iPosBarre + 1);
-                        // donne le nom du fichier sans l'extension
-                        Console.WriteLine(sCheminFichier.Substring((iPosBarre + 1), tailleNomFichier));
-                    }
+                        // choix de l'utilisateur
+                        sCheminFichier = ChoixOccurrenceFichierTailleDeterminee();
 
-                    // ouverture du fichier
-                    if (fichierOuverture.SSuffixe == ".txt")
-                    {
-                        // ???
-                        OuvrirFichierTxt(sCheminFichier);
+                        //remplit les propriétés de l'objet à partir du nom de fichier
+                        fichierOuverture.TraitementChaine(sCheminFichier);
+
+
+                        iPosExt = sCheminFichier.LastIndexOf(@".");
+                        iPosBarre = sCheminFichier.LastIndexOf(@"\");
+
+                        // analyse le nom du fichier pour remplir le fichierOuverture (NomFichier)
+                        if (OptionMenu == 3)   // ouverture fichier existant pour y prendre les informations
+                        {
+                            // remplacement fichier
+                            Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
+                            // longueur de la partie extension (avec le point)
+                            int tailleExt = (sCheminFichier.Substring(iPosExt, (sCheminFichier.Length - iPosExt))).Length;
+                            int tailleNomFichier = iPosExt - (iPosBarre + 1);
+                            // donne le nom du fichier sans l'extension
+                            Console.WriteLine(sCheminFichier.Substring((iPosBarre + 1), tailleNomFichier));
+                        }
+                        // ouverture du fichier
+                        if (fichierOuverture.SSuffixe == ".txt")
+                        {
+                            // ???
+                            OuvrirFichierTxt(sCheminFichier);
+                        }
+                        else
+                        {
+                            OuvrirFichierJSON(sCheminFichier);
+                        }
+                        // lancer les permutations menu ---> persistance 
+                        Console.WriteLine();
+                        // fournir la persistance à la grille
+                        PersistanceGrille.GrillePersistance = this;
+                        persistanceGrille.ManipulationCarreMagique();
                     }
-                    else
-                    {
-                        OuvrirFichierJSON(sCheminFichier);
-                    }
-                    // lancer les permutations menu ---> persistance 
-                    Console.WriteLine();
-                    // fournir la persistance à la grille
-                    PersistanceGrille.GrillePersistance = this;
-                    persistanceGrille.ManipulationCarreMagique();
                 }
             }
         }
@@ -811,7 +824,7 @@ namespace CarreMagique
                 }
 
             }
-            if (listeFichiersCibles.Count> 0)
+            if (listeFichiersCibles.Count > 0)
             {
                 // liste remplie 
                 return true;
@@ -1139,7 +1152,7 @@ namespace CarreMagique
             File.WriteAllText(s, jsonSerializedObj);
             Console.WriteLine(jsonSerializedObj);
         }
-        public void ChoixOccurrence()
+        public bool ChoixOccurrence()
         {
             /* ***************************************************************
                    
@@ -1162,13 +1175,22 @@ namespace CarreMagique
             Uti.Info("Persistance", "ChoixOccurrence", "");
             string[] propositionsCM;
             int iIndice = 0;
-            propositionsCM = listeFichiersCibles.ToArray();
-            Console.WriteLine("les propositions:");
-            foreach (string sProposition in propositionsCM)
+            if (listeFichiersCibles.Count > 0)
             {
-                Console.WriteLine(iIndice + ". " + sProposition);
-                iIndice++;
+                propositionsCM = listeFichiersCibles.ToArray();
+                Console.WriteLine("les propositions:");
+                foreach (string sProposition in propositionsCM)
+                {
+                    Console.WriteLine(iIndice + ". " + sProposition);
+                    iIndice++;
+                }
+                return true;
             }
+            else
+            {
+                return false;
+            }
+
 
         }
         public void ChoixTypeFichierTxt()
