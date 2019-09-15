@@ -122,7 +122,7 @@ namespace CarreMagique
             menuPersistance.DefinirEmplacementDossierRacine();
 
             string NomFichier = menuPersistance.RetourneAdresseDossierSvg();
-            Uti.Mess("affichage de tous les fichiers confondus");
+            Console.WriteLine("Choisissez une valeur de carré magique parmi ceux présentés.");
             menuPersistance.AfficheListeFichiersExistants();
         }
         public void MenuJeu()

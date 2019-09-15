@@ -240,7 +240,9 @@ namespace CarreMagique
                         fichierSauvegarde.STypeFichierPath = @"resolus\";
                         // occurrence et extension à déterminer plus tard
                         // suppression du fichier en cours 
-                        File.Delete(sRacine + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                        Console.WriteLine("Chemin du fichier à supprimer:");
+                        Console.WriteLine(sRacine + sDossSvg+ fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                        File.Delete(sRacine +sDossSvg+ fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
                     }
                     else// avant rester à 'r'
                     {
@@ -976,8 +978,8 @@ namespace CarreMagique
             int j = 0;
             string sGrilleJSON;
             Console.WriteLine(sCheminFichier);
-            // stockE le contenu du fichier dans la variable 
-            Uti.Mess("le fichier à récupérer doit être un json pas un txt");
+            // stocke le contenu du fichier dans la variable 
+           
             sGrilleJSON = File.ReadAllText(sCheminFichier);
             // charge le fichier JSON dans une instance adaptée    
             Grille plop = new Grille();
