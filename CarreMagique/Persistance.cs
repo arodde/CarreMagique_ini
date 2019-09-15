@@ -757,12 +757,13 @@ namespace CarreMagique
             if (listeFichiersCibles.Count > 0)
             {
                 // liste remplie 
+                Console.WriteLine("Filtrez en fonction de la valeur du carré magique qui vous intéresse.");
                 return true;
             }
             else
             {
                 // liste vide
-                Console.WriteLine("Aucun fichier sauvegarder dans ce dossier.");
+                Console.WriteLine("Aucun fichier sauvegardé dans ce dossier.");
                 return false;
             }
         }
@@ -1125,7 +1126,7 @@ namespace CarreMagique
             //la saisie utilisateur
             while (iSaisie < 1 || iSaisie > 2)
             {
-                Console.WriteLine("Choisisser le fichier de carré magique à ouvrir:");
+                Console.WriteLine("Choisisser la catégorie de fichier de carré magique à ouvrir:");
                 Console.WriteLine("1. en cours");
                 Console.WriteLine("2. résolus");
                 sSaisie = Console.ReadLine();
