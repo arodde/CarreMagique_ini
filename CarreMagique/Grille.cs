@@ -143,7 +143,6 @@ namespace CarreMagique
             Uti.Info("Grille", "Grille", "");
             DeterminationTaille();
 
-
             BCarreMagiqueResolu = false;
             // instanciations 
             Damier = new Cellule[INombre, INombre];
@@ -171,20 +170,8 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
+            // ne fais plus rien depuis la mise en place du fichier json qui appel le constructeur
 
-            //// création à partir d'aucune grille 
-            //DeterminationTaille();
-
-
-            //BCarreMagiqueResolu = false;
-            //// instanciations 
-            //Damier = new Cellule[INombre, INombre];
-            //TotalParColonnes = new int[iNombre];
-            //TotalParLignes = new int[iNombre];
-            //cellule1 = new Cellule();
-            //cellule2 = new Cellule();
-            //// initialisation 
-            //InitialisationDamier();
         }
         public void InitialisationDamier()
         {
@@ -1175,11 +1162,9 @@ namespace CarreMagique
             // iNombre divisé par deux donne un entier 
             iNombreAtrouver = iNombre / 2 * (1 + (iNombre * iNombre));
             if ((INombre % 2) != 0)
-            {// si iNombre est impair               
-                Console.WriteLine("impair");
+            {// si iNombre est impair 
                 iNombreAtrouver += ((iNombre * iNombre - 1) / 2) + 1;
             }
-            //Console.WriteLine("iNombre à trouver : " + iNombreAtrouver);
             return iNombreAtrouver;
         }
     }
