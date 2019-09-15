@@ -368,6 +368,7 @@ namespace CarreMagique
             AffiDamier();
             do
             {
+
                 ProposerValeursDamierAPermuter();
                 if (Gagne())
                 {
