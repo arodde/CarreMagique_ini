@@ -161,7 +161,7 @@ namespace CarreMagique
             Uti.Info("Persistance", "ProposerSauvegarderGrille", "");
             if (bOuiSauvegarder)
             {
-                if (Uti.Action("sauvegarder", "Sauvegarde lancée.", "Perte du damier actuel", ""))
+                if (Uti.Action("sauvegarder", "Sauvegarde en cours.", "Perte du damier actuel", ""))
                 {
                     DefinirEmplacementDossierRacine();
                     CreationDossierSauvegardeSiInexistant();
@@ -386,8 +386,6 @@ namespace CarreMagique
                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                     {
                         FichierSauvegarde.IOccurence++;
-
-                        Console.WriteLine("Incrémentation");
                     }
                     break;
                 case 3:
@@ -399,11 +397,9 @@ namespace CarreMagique
                         if (fichierOuverture.STypeFichierCourt == fichierSauvegarde.STypeFichierCourt)
                         {
                             // fichier ouverture 'r'
-                            // fichierOuverture.Copier(FichierSauvegarde);
                             while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                             {
                                 FichierSauvegarde.IOccurence++;
-                                Console.WriteLine("Incrémentation");
                             }
                             /* 
                              il est supposé qu'il existe plusieurs combinaisons de carrés magiques gagnants
@@ -413,15 +409,12 @@ namespace CarreMagique
                         else
                         {
                             // fichier ouverture 'ec' 
-
                             // supprimer le fichier 'ec' et créer un fichier 'r'
                             File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.ToString());
-                            //FichierSauvegarde.SSuffixe = ".json";
                             FichierSauvegarde.IOccurence = 0;
                             while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                             {
                                 FichierSauvegarde.IOccurence++;
-                                Console.WriteLine("Incrémentation");
                             }
                         }
                     }
@@ -442,7 +435,7 @@ namespace CarreMagique
                                 while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                                 {
                                     FichierSauvegarde.IOccurence++;
-                                    Console.WriteLine("Incrémentation");
+
                                 }
 
                             }
@@ -459,7 +452,6 @@ namespace CarreMagique
                                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                                     {
                                         FichierSauvegarde.IOccurence++;
-                                        Console.WriteLine("Incrémentation");
                                     }
                                 }
                             }
@@ -474,7 +466,6 @@ namespace CarreMagique
                             while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                             {
                                 FichierSauvegarde.IOccurence++;
-                                Console.WriteLine("Incrémentation");
                             }
                         }
                     }
@@ -483,26 +474,7 @@ namespace CarreMagique
             // l'objet grille est passé en fichier JSON
             CreationFichierJSON(persistanceGrille, sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString());
         }
-        public void ChargerDepuisFichierTxt()
-        {
-            /* ***************************************************************
-            +
-            * Fonction pour +
-            * les paramètres:
-            * 1 : + (+)
-            * 2 : + (+)
-            * 3 : + (+)
-            * 4 : + (+)
-            * 5 : + (+)
-            * retour: + (+)
-            * exemple(s):
-            * +
-            * Ce qui est impossible:
-            * +
-           **************************************************************** */
-            Uti.Info("Persistance", "ChargerDepuisFichier", "");
-            Console.WriteLine("Souhaitez vous charger un carré magique sauvegarder?");
-        }
+        
         public void CreationFichierSauvegardeTxt(string sDossSvg, string sDossParent)
         {
             /* ***************************************************************
@@ -629,32 +601,7 @@ namespace CarreMagique
                 return "r";
             }
         }
-        public void CreerDossierALEmplacement(string sChemin)
-        {
-            /* ***************************************************************
-             +
-             * Fonction pour créer un dossier au chemin voulu s'il n'existe pas déjà
-             * les paramètres:
-             * 1 : + (+)
-             * 2 : + (+)
-             * 3 : + (+)
-             * 4 : + (+)
-             * 5 : + (+)
-             * retour: + (+)
-             * exemple(s):
-             * +
-             * Ce qui est impossible:
-             * +
-            **************************************************************** */
-            Uti.Info("Persistance", "CreerDossierALEmplacement", "");
-            // crée un dossier à l'emplacement spécifier s'il n'existe pas, rien 
-            // s'il existe déjà
-            if (!Directory.Exists(sChemin))
-            {
-                Directory.CreateDirectory(sChemin);
-                Console.WriteLine("Création dossier à l'emplacement " + sChemin + ".");
-            }
-        }
+       
         public bool PresenceDossierSvg()
         {
             /* ***************************************************************
@@ -824,7 +771,6 @@ namespace CarreMagique
                     // donne le nom du fichier seul
                     Console.WriteLine(sResultat);
                 }
-
             }
             if (listeFichiersCibles.Count > 0)
             {
@@ -971,9 +917,6 @@ namespace CarreMagique
                 incice l 6 début des valeurs du carré magique             
             */
             List<string> listeContenuFichier = new List<string>();
-            //int iValeur = 0;
-            //string sFragment = "";
-            //string resultat = "";
             int i = 0;
             int j = 0;
             string sGrilleJSON;
@@ -1038,29 +981,7 @@ namespace CarreMagique
                 Console.WriteLine("Ce dossier est introuvable.");
             }
         }
-        public void InterrogeUtilisateurSurFichierAOuvrir(Grille pGrille)
-        {
-            /* ***************************************************************
-                  OuvrirFichier
-
-            * Fonction pour 
-            * les paramètres:
-            * 1 : + (+)
-            * 2 : + (+)
-            * 3 : + (+)
-            * 4 : + (+)
-            * 5 : + (+)
-            * retour: + (+)
-            * exemple(s):
-            * +
-            * Ce qui est impossible:
-            * +
-           **************************************************************** */
-            Uti.Info("Persistance", "InterrogeUtilisateurSurFichierAOuvrir", "");
-            persistanceGrille = pGrille;
-            Uti.MessErr("grille toujours nulle?");
-            persistanceGrille.DeterminationTaille();
-        }
+     
         public void SelectionCMSelonTaille()
         {
             /* ***************************************************************
@@ -1099,7 +1020,6 @@ namespace CarreMagique
                     sResultat = sCheminFichier.Substring((iPosCaracAvPreLettNomFic + 1), (sCheminFichier.Length - iPosCaracAvPreLettNomFic - 1));
                     if (iPosCaracAvPreLettNomFic != iPrecedent)
                     {
-                        //ordre++;
                         iOrdre = listeFichiersCibles.IndexOf(sCheminFichier) + 1;
                         // si le fichier correspond à la valeur du carré magique, afficher le nom
                         // du fichier et le stocker dans la list

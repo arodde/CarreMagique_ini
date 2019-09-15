@@ -481,6 +481,32 @@ namespace CarreMagique
             }
             return sSousChaine;
         }
+        public static void CreerDossierALEmplacement(string sChemin)
+        {
+            /* ***************************************************************
+             +
+             * Fonction pour créer un dossier au chemin voulu s'il n'existe pas déjà
+             * les paramètres:
+             * 1 : + (+)
+             * 2 : + (+)
+             * 3 : + (+)
+             * 4 : + (+)
+             * 5 : + (+)
+             * retour: + (+)
+             * exemple(s):
+             * +
+             * Ce qui est impossible:
+             * +
+            **************************************************************** */
+            Uti.Info("Uti", "CreerDossierALEmplacement", "");
+            // crée un dossier à l'emplacement spécifier s'il n'existe pas, rien 
+            // s'il existe déjà
+            if (!Directory.Exists(sChemin))
+            {
+                Directory.CreateDirectory(sChemin);
+                Console.WriteLine("Création dossier à l'emplacement " + sChemin + ".");
+            }
+        }
     }
 
     class ExempleFichierJSON
