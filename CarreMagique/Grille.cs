@@ -363,7 +363,7 @@ namespace CarreMagique
             Uti.Info("Grille", "ManipulationCarreMagique", "");
             // affichage du damier            
             bool bQuitter = false;
-            int iSeuilPermutations = 1;
+            int iSeuilPermutations = 4;
             int iPermutationsAEffectuer = iSeuilPermutations;
             AffiDamier();
             do

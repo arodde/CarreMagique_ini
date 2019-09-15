@@ -507,6 +507,13 @@ namespace CarreMagique
                 Console.WriteLine("Création dossier à l'emplacement " + sChemin + ".");
             }
         }
+        public static void ReferencesProgramme(string sDevNom, string sDevPrenom,string sProgNom, string sProgVersion )
+        {
+            Console.WriteLine("Programme : "+ sProgNom);
+            Console.WriteLine(" Version : "+ sProgVersion);
+            Console.WriteLine("Développeur : "+ sDevPrenom + " " + sDevNom);
+            Console.WriteLine("");
+        }
     }
 
     class ExempleFichierJSON
