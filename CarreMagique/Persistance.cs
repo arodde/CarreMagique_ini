@@ -49,32 +49,16 @@ namespace CarreMagique
              * +
             **************************************************************** */
             Uti.Info("Persistance", "Persistance", "");
-            Uti.MessErr("Un truc à faire dans cette fonction");
-            ///* un moyen de permettre à l'utilisateur de fournir une autre adresse de racine
-            //devra être prévu */
-            //// l'utilisateur entre une adresse dans la console pour fixer l'adresse de la racine
-            //if (sRacine == @"")
-            //{
-            //    TrouverEmplacementDossierRacine();
-            //}
+           
 
             sRacine = @"";
             sDossSvg = @"svgCarresMagiques\";
-            //sRacine = @"C:\Users\demon\source\CarreMagique\CarreMagique\test\";
-            //sDossSvg = @"svg\";
             fichierOuverture = new NomFichier("");
             fichierSauvegarde = new NomFichier("");
 
         }
-        public void CreationDossierSauvegardeSiInexistant()
-        {
-            // création du fichier de sauvegarde s'il n'exite pas
-            // Specify the directory you want to manipulate.
-            //string path = sRacine + sDossSvg;
-
-
-
-        }
+       
+     
         public void Reinitialiser()
         {
             fichierOuverture.RAZNomFichier();
@@ -101,9 +85,7 @@ namespace CarreMagique
                 try
                 {
                     // code provoquant une exception
-                    //sRacine = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     sRacine = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                    //sRacine = sRacine += @"\";
                     sRacine = AjouterSeparateurFichier(sRacine);
                     string provisoire = Path.Combine(sRacine, sDossSvg);
                     string s = @"en-cours";
@@ -164,7 +146,7 @@ namespace CarreMagique
                 if (Uti.Action("sauvegarder", "Sauvegarde en cours.", "Perte du damier actuel", ""))
                 {
                     DefinirEmplacementDossierRacine();
-                    CreationDossierSauvegardeSiInexistant();
+                    
                     bool bOk = false;
                     while (!bOk)
                     {
