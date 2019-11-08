@@ -11,36 +11,18 @@ namespace CarreMagique
         private int iCoorVerti;
         public int IValeur
         {
-            get
-            {
-                return iValeur;
-            }
-            set
-            {
-                iValeur = value;
-            }
+            get => iValeur;
+            set => iValeur = value;
         }
         public int ICoorHori
         {
-            get
-            {
-                return iCoorHori;
-            }
-            set
-            {
-                iCoorHori = value;
-            }
+            get => iCoorHori;
+            set => iCoorHori = value;
         }
         public int ICoorVerti
         {
-            get
-            {
-                return iCoorVerti;
-            }
-            set
-            {
-                iCoorVerti = value;
-            }
+            get => iCoorVerti;
+            set => iCoorVerti = value;
         }
         public override bool Equals(object obj)
         {

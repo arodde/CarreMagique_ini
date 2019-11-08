@@ -15,54 +15,54 @@ namespace CarreMagique
         static public void Info(string sNomClasse, string sNomFonction, string sComplements)
         {
 
-            /* ***************************************************************
-            Info
-            * Fonction pour aider le développeur à savoir par quelle classe et fonction le programme passe.
-            * les paramètres:
-            * 1 : nom de la classe (string)
-            * 2 : nom de la fonction (string)
-            * 3 : commentaire (string)
-            * retour: (void)
-            * exemple(s):
-            * +
-            * Ce qui est impossible:
-            * +
-            **************************************************************** */
-            /* ***************************************************************
-             +
-             * Fonction pour +
-             * les paramètres:
-             * 1 : + (+)
-             * 2 : + (+)
-             * 3 : + (+)
-             * 4 : + (+)
-             * 5 : + (+)
-             * retour: + (+)
-             * exemple(s):
-             * +
-             * Ce qui est impossible:
-             * +
-            **************************************************************** */
-            // les mentions à afficher
-            string sClasse = "----> " + sNomClasse;
-            string sFonction = " ----> " + sNomFonction;
-            string sLesComplements = "";
-            if (sComplements != "")
-                sLesComplements = " ----> " + sComplements;
-            // l'affichage
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(sClasse);
-            Console.ResetColor();
+            //    /* ***************************************************************
+            //    Info
+            //    * Fonction pour aider le développeur à savoir par quelle classe et fonction le programme passe.
+            //    * les paramètres:
+            //    * 1 : nom de la classe (string)
+            //    * 2 : nom de la fonction (string)
+            //    * 3 : commentaire (string)
+            //    * retour: (void)
+            //    * exemple(s):
+            //    * +
+            //    * Ce qui est impossible:
+            //    * +
+            //    **************************************************************** */
+            //    /* ***************************************************************
+            //     +
+            //     * Fonction pour +
+            //     * les paramètres:
+            //     * 1 : + (+)
+            //     * 2 : + (+)
+            //     * 3 : + (+)
+            //     * 4 : + (+)
+            //     * 5 : + (+)
+            //     * retour: + (+)
+            //     * exemple(s):
+            //     * +
+            //     * Ce qui est impossible:
+            //     * +
+            //    **************************************************************** */
+            //    // les mentions à afficher
+            //    string sClasse = "----> " + sNomClasse;
+            //    string sFonction = " ----> " + sNomFonction;
+            //    string sLesComplements = "";
+            //    if (sComplements != "")
+            //        sLesComplements = " ----> " + sComplements;
+            //    // l'affichage
+            //    Console.ForegroundColor = ConsoleColor.Magenta;
+            //    Console.Write(sClasse);
+            //    Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(sFonction);
-            Console.ResetColor();
+            //    Console.ForegroundColor = ConsoleColor.Yellow;
+            //    Console.Write(sFonction);
+            //    Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(sLesComplements);
-            Console.ResetColor();
+            //    Console.ForegroundColor = ConsoleColor.Green;
+            //    Console.WriteLine(sLesComplements);
+            //    Console.ResetColor();
         }
-        static public void Mess(string sMessage)
+    static public void Mess(string sMessage)
         {
             /* ***************************************************************
     +

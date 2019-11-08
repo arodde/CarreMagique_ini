@@ -17,10 +17,7 @@ namespace CarreMagique
         private Persistance grillePersistance;
         public int INombre
         {
-            get
-            {
-                return iNombre;
-            }
+            get => iNombre;
             private set
             {
                 Console.WriteLine("nombre est actualisé à " + value);
@@ -35,14 +32,8 @@ namespace CarreMagique
         public bool BCarreMagiqueResolu { get => bCarreMagiqueResolu; set => bCarreMagiqueResolu = value; }
         public Cellule[,] Damier
         {
-            get
-            {
-                return damier;
-            }
-             set
-            {
-                damier = value;
-            }
+            get => damier;
+             set => damier = value;
         }
         public Cellule Cellule1 { get => cellule1; set => cellule1 = value; }
         public Cellule Cellule2 { get => cellule2; set => cellule2 = value; }
