@@ -62,28 +62,28 @@ namespace CarreMagique
             //    Console.WriteLine(sLesComplements);
             //    Console.ResetColor();
         }
-    static public void Mess(string sMessage)
-        {
-            /* ***************************************************************
-    +
-    * Fonction pour +
-    * les paramètres:
-    * 1 : + (+)
-    * 2 : + (+)
-    * 3 : + (+)
-    * 4 : + (+)
-    * 5 : + (+)
-    * retour: + (+)
-    * exemple(s):
-    * +
-    * Ce qui est impossible:
-    * +
-   **************************************************************** */
-            Info("Program", "Mess", "");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(sMessage);
-            Console.ResetColor();
-        }
+   //     static public void Mess(string sMessage)
+   //     {
+   //         /* ***************************************************************
+   // +
+   // * Fonction pour +
+   // * les paramètres:
+   // * 1 : + (+)
+   // * 2 : + (+)
+   // * 3 : + (+)
+   // * 4 : + (+)
+   // * 5 : + (+)
+   // * retour: + (+)
+   // * exemple(s):
+   // * +
+   // * Ce qui est impossible:
+   // * +
+   //**************************************************************** */
+   //         Info("Program", "Mess", "");
+   //         Console.ForegroundColor = ConsoleColor.Green;
+   //         Console.WriteLine(sMessage);
+   //         Console.ResetColor();
+   //     }
         static public void MessErr(string sMessage)
         {
             /* ***************************************************************

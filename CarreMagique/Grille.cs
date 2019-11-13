@@ -696,7 +696,7 @@ namespace CarreMagique
                 {
                     bValeurOk = false;
                     Uti.MessErr("Indice de colonne doit être compris entre 0 et nombre-1 inclus.");
-                    Uti.Mess("Exception à implémenter?");
+                    //Uti.Mess("Exception à implémenter?");
                 }
                 else
                 {
@@ -761,7 +761,7 @@ namespace CarreMagique
                 {
                     valeurOk = false;
                     Uti.MessErr("Indice de Ligne doit être compris entre 0 et nombre-1 inclus.");
-                    Uti.Mess("Exception à implémenter?");
+                    //Uti.Mess("Exception à implémenter?");
                 }
                 else
                 {
