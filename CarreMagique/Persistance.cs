@@ -143,7 +143,7 @@ namespace CarreMagique
             Uti.Info("Persistance", "ProposerSauvegarderGrille", "");
             if (bOuiSauvegarder)
             {
-                if (Uti.Action("sauvegarder", "Sauvegarde en cours.", "Perte du damier actuel", ""))
+                if (Uti.Action("sauvegarder", "Opération de sauvegarde engagée.", "Perte du damier actuel", ""))
                 {
                     DefinirEmplacementDossierRacine();
                     
@@ -537,7 +537,7 @@ namespace CarreMagique
                     iIndice++;
                     sNomFichier = sDossSvg + sDossParent + "cm" + persistanceGrille.INombre + sTf + iIndice + ".txt";
 
-                    Console.WriteLine("incrémentation.");
+                    //Console.WriteLine("incrémentation.");
                 }
                 else
                 {
@@ -1097,7 +1097,9 @@ namespace CarreMagique
             Uti.Info("Persistance", "ChoixOccurrence", "");
             string jsonSerializedObj = JsonConvert.SerializeObject(persistanceGrille);
             File.WriteAllText(s, jsonSerializedObj);
-            Console.WriteLine(jsonSerializedObj);
+            // affiche le contenu du fichier json
+            //Console.WriteLine(jsonSerializedObj);
+            Console.WriteLine("Fichier de sauvegarde au format .json créé.");
         }
         public bool ChoixOccurrence()
         {
