@@ -195,15 +195,19 @@ namespace CarreMagique
             //       le créer 
             if (!(Directory.Exists(sRacine + sDossSvg)))
             {
-                Console.WriteLine("Création du dossier de sauvegarde");
+                Uti.Mess("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(sRacine + sDossSvg);
             }
             FichierSauvegarde.SSuffixe = ".txt";
             //    si carre résolu
+            Uti.Mess("--->  sauvegarde dans fichier .txt");
             if (persistanceGrille.BCarreMagiqueResolu)
             {
+                Uti.Mess("--->  carre magique résolu");
                 if (optionMenu == 2)
                 {
+                    Uti.Mess("--->  option 2 : pas de fichier d'origine");
+                    // création fichier sauvegarde dans 'resolu'
                     fichierSauvegarde.INombre = persistanceGrille.INombre;
                     fichierSauvegarde.STypeFichierCourt = "r";
                     fichierSauvegarde.STypeFichierLib = "résolus";
@@ -212,9 +216,15 @@ namespace CarreMagique
                 }
                 else
                 {
+                    Uti.Mess("--->  option 3 : utilisation d'un fichier d'origine");
                     // si avant en cours 'ec' vers 'r'
                     if (fichierOuverture.STypeFichierCourt != "r")// avant 'ec' passer à 'r'
                     {
+                        /*
+                           carré résolu à partir d'un fichier en cours et donc à supprimer
+                           sauvegarde à faire dans résolu (nouveau fichier)
+                        */
+                        Uti.Mess("--->  fichier d'origine de type en-cours à supprimer");
                         fichierSauvegarde.SPrefixe = fichierOuverture.SPrefixe;
                         fichierSauvegarde.INombre = fichierOuverture.INombre;
                         fichierSauvegarde.STypeFichierCourt = "r";
@@ -224,23 +234,33 @@ namespace CarreMagique
                         // suppression du fichier en cours 
                         Console.WriteLine("Chemin du fichier à supprimer:");
                         Console.WriteLine(sRacine + sDossSvg+ fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                        Uti.Mess("--->  suppression fichier origine" + fichierOuverture.DonneNomFichierComplet());
                         File.Delete(sRacine +sDossSvg+ fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
                     }
                     else// avant rester à 'r'
                     {
+
+                        /**/
+                        Uti.Mess("--->  fichier d'origine de type resolu");
                         // copie du nom de fichier mais fichier de remplacement non encore créé
                         fichierSauvegarde.Copier(fichierOuverture);
                     }
                 }
 
-                Console.WriteLine("Sauvegarde du carré magique résolu.");
+                Uti.Mess("Sauvegarde du carré magique résolu.");
             }
             else
             {
-                // non résolue
+                // non résolu
+                Uti.Mess("--->  carré magique non résolu");
                 // si avant 'r' on passe à 'ec'
                 if (fichierOuverture.STypeFichierCourt == "r")
                 {
+                    /*
+                     cm non résolu à partir fichier cm résolu (à conserver)
+                     création sauvegarde dans 'en-cour'
+                     */
+                    Uti.Mess("--->  fichier d'origine était de type résolu");
                     // ne pas le supprimer
                     fichierSauvegarde.SPrefixe = fichierOuverture.SPrefixe;
                     fichierSauvegarde.INombre = fichierOuverture.INombre;
@@ -253,7 +273,7 @@ namespace CarreMagique
                 {// si avant 'ec' , garder la même chose
                     if (optionMenu == 2)
                     {
-
+                        Uti.Mess("--->  option 2 : carré magique créée sans fichier d'origine");
                         fichierSauvegarde.INombre = persistanceGrille.INombre;
                         fichierSauvegarde.STypeFichierCourt = "ec";
                         fichierSauvegarde.STypeFichierLib = "en cours";
@@ -261,6 +281,7 @@ namespace CarreMagique
                     }
                     else
                     {
+                        Uti.Mess("--->  option 3 : carré magique chargé depuis un fichier d'origine");
                         fichierSauvegarde.Copier(fichierOuverture);
                         FichierSauvegarde.SSuffixe = ".txt";
                     }
@@ -280,7 +301,13 @@ namespace CarreMagique
             {
                 if (File.Exists(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet()))
                 {
-                    File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                    // supprimer fichier ouverture si de type en cours
+                    if (fichierOuverture.STypeFichierCourt.Equals("ec"))
+                    {
+                        Uti.Mess("--->  carré magique résolu");
+                        File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.DonneNomFichierComplet());
+                    }
+                    
                 }
             }
             // créer le fichier de sauvegarde
@@ -329,14 +356,17 @@ namespace CarreMagique
                 Directory.CreateDirectory(sRacine + sDossSvg);
             }
             // selon que le cm est ou non résolu
+            Uti.Mess("--->  sauvegarde dans fichier json");
             if (PersistanceGrille.BCarreMagiqueResolu)
             {
+                Uti.Mess("--->  carré magique résolu");
                 FichierSauvegarde.STypeFichierCourt = "r";
                 FichierSauvegarde.STypeFichierLib = "résolus";
                 FichierSauvegarde.STypeFichierPath = @"resolus\";
             }
             else
             {
+                Uti.Mess("--->  carré magique non résolu");
                 FichierSauvegarde.STypeFichierCourt = "ec";
                 FichierSauvegarde.STypeFichierLib = "en cours";
                 FichierSauvegarde.STypeFichierPath = @"en-cours\";
@@ -344,16 +374,18 @@ namespace CarreMagique
             // prefixe nombre suffixe
             if (optionMenu == 2)
             {
+                Uti.Mess("--->  option 2 : pas de fichier d'origine");
                 FichierSauvegarde.INombre = persistanceGrille.INombre;
             }
             else
             {
+                Uti.Mess("--->  carré magique utilisé chargé depuis un fichier d'origine");
                 FichierSauvegarde.INombre = fichierOuverture.INombre;
             }
             // vérification existence dossierParent
             if (!Directory.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath))
             {
-                Console.WriteLine("Création du dossier de sauvegarde");
+                Uti.Mess("Création du dossier de sauvegarde");
                 Directory.CreateDirectory(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath);
             }
             // connaitre occurrence
@@ -365,6 +397,7 @@ namespace CarreMagique
             {
                 case 2:
                     // fichier 'r' ou 'ec' créé, il n'existait pas avant. Incrémentation obligatoire si risque d'écraser un fichier existant
+                    Uti.Mess("--->  option 2");
                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                     {
                         FichierSauvegarde.IOccurence++;
@@ -372,12 +405,14 @@ namespace CarreMagique
                     break;
                 case 3:
                     //  gestion du suffixe
+                    Uti.Mess("--->  option 3");
                     if (persistanceGrille.BCarreMagiqueResolu)
                     {
-
+                        Uti.Mess("--->  carré magique résolu");
                         // fichier sauvegarde 'r'
                         if (fichierOuverture.STypeFichierCourt == fichierSauvegarde.STypeFichierCourt)
                         {
+                            Uti.Mess("--->  fichier origine type résolu");
                             // fichier ouverture 'r'
                             while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                             {
@@ -390,6 +425,7 @@ namespace CarreMagique
                         }
                         else
                         {
+                            Uti.Mess("--->  fichier origine type en cours");
                             // fichier ouverture 'ec' 
                             // supprimer le fichier 'ec' et créer un fichier 'r'
                             File.Delete(sRacine + sDossSvg + fichierOuverture.STypeFichierPath + fichierOuverture.ToString());
@@ -402,13 +438,15 @@ namespace CarreMagique
                     }
                     else
                     {
+                        Uti.Mess("--->  carré magique non résolu");
                         // carré magique non résolu suppression du fichier ouverture création d'un fichier de même nom
                         if (fichierOuverture.STypeFichierCourt == "ec") // 'ec' reste 'ec'
                         {
-
+                            Uti.Mess("--->  fichier ouverture de type en cours");
                             //  gestion du suffixe (qd fichier ouv est txt)
                             if (optionMenu == 2)// création de fichier
                             {
+                                Uti.Mess("--->  option 2");
                                 fichierSauvegarde.INombre = persistanceGrille.INombre;
                                 FichierSauvegarde.STypeFichierCourt = "ec";
                                 FichierSauvegarde.STypeFichierLib = "en cours";
@@ -423,6 +461,7 @@ namespace CarreMagique
                             }
                             else // remplacement de fichier
                             {
+                                Uti.Mess("--->  option 3");
                                 // copie nom fichier mais si change ext alors change occ
                                 FichierSauvegarde.Copier(fichierOuverture);
                                 //  gestion du suffixe à mettre json (il peut avoir été modifié par la copie précédente)
@@ -430,6 +469,7 @@ namespace CarreMagique
                                 // si le suffixe change, l'occurrence doit repartir de zéro
                                 if (FichierOuverture.SSuffixe != FichierSauvegarde.SSuffixe)
                                 {
+
                                     FichierSauvegarde.IOccurence = 0;
                                     while (File.Exists(sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString()))
                                     {
@@ -441,6 +481,7 @@ namespace CarreMagique
                         }
                         else
                         {
+                            Uti.Mess("--->  fichier ouverture de type résolu");
                             //FichierSauvegarde.Copier(fichierOuverture);
                             //  gestion du suffixe
                             FichierSauvegarde.SSuffixe = ".json";
@@ -454,6 +495,7 @@ namespace CarreMagique
                     break;
             }
             // l'objet grille est passé en fichier JSON
+            Uti.Mess("--->  création du fichier json");
             CreationFichierJSON(persistanceGrille, sRacine + sDossSvg + FichierSauvegarde.STypeFichierPath + FichierSauvegarde.ToString());
         }
         
@@ -474,9 +516,9 @@ namespace CarreMagique
             * +
             * Ce qui est impossible:
             * +
-           **************************************************************** */
+            **************************************************************** */
             Uti.Info("Persistance", "CreationFichierSauvegardeTxt", "");
-            Uti.MessErr("Emplacement à revoir");
+           
             // prépare le nom du fichier de sauvegarde et crée le fichier de sauvegarde
             bool bOk = false;
             int iIndice = 0;
@@ -717,7 +759,7 @@ namespace CarreMagique
         }
         public bool AfficheListeFichiersExistantsCibles()
         {
-            Uti.Info("Persistance", "AfficheListeFichiersExistantsEC", "");
+            Uti.Info("Persistance", "AfficheListeFichiersExistantsCibles", "");
             int iResultat = 0;
             string sResultat = "";
             int i = 0;
