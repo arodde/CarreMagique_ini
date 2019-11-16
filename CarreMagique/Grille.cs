@@ -20,7 +20,7 @@ namespace CarreMagique
             get => iNombre;
             private set
             {
-                Console.WriteLine("nombre est actualisé à " + value);
+              //  Console.WriteLine("nombre est actualisé à " + value);
                 iNombre = value;
             }
         }
