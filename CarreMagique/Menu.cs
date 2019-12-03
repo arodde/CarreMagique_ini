@@ -21,13 +21,16 @@ namespace CarreMagique
         public void DefinitionCarreMagique()
         {
             // les régles du jeu...
-            Console.WriteLine("Règles du carré magique");
-            Console.WriteLine("Ce jeu mathématique consiste à disposer dans une grille carré " +
-                "les nombres en commençant par 1 et en incrémentant de 1. La plus forte valeur " +
-                "est de n² pour un carré de n cases sur n. " +
-                "Pour résoudre le carré magique il faut disposer les nombres dans la grille de " +
-                "façon à ce que la somme des valeurs sur chaque colonne, sur chaque ligne et " +
-                "sur chaque diagonale de n cases soient identiques.");
+          
+
+            Console.WriteLine("Règles du carré magique\n\n" +
+                "Ce jeu mathématique consiste à disposer dans une grille carré.\n" +
+                "Les nombres en commençant par 1 et en incrémentant de 1.\n" +
+                "La plus forte valeur est de n² pour un carré de n cases sur n.\n" +
+                "Pour résoudre le carré magique il faut disposer les nombres\n" +
+                "dans la grille de façon à ce que la somme des valeurs sur\n" +
+                "chaque colonne, sur chaque ligne et sur chaque diagonale\n" +
+                "de n cases soient identiques.\n\n");
             Console.WriteLine("A vous de jouer!!!");
 
         }
