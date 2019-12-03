@@ -298,6 +298,48 @@ namespace CarreMagique
                 Console.Write(" " + iValeur + " ");
             }
         }
+
+        static public bool Continuer(string sCommentaire)
+
+        {
+            /* ***************************************************************
+            +
+            * Fonction pour permettre à l'utilisateur de quitter une boucle
+            * les paramètres:
+            * 1 : message complémentaire (string)
+            * 2 : + (+)
+            * 3 : + (+)
+            * 4 : + (+)
+            * 5 : + (+)
+            * retour: + (+)
+            * exemple(s):
+            * +
+            * Ce qui est impossible:
+            * +
+           **************************************************************** */
+            // true pour quitter ; false pour continuer
+            Console.Write("Voulez-vous Commencer à jouer");
+            if (sCommentaire != "")
+            {
+                Console.Write(sCommentaire);
+            }
+            Console.WriteLine(" " + "(O/N)?");
+
+            ConsoleKeyInfo saisie = Console.ReadKey(true);
+
+
+
+            if (saisie.Key == ConsoleKey.O)
+            {
+                Console.WriteLine("On continue ...");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("On s'arrête ...");
+                return false;
+            }
+        }
         static public bool Quitter(string sCommentaire)
 
         {
