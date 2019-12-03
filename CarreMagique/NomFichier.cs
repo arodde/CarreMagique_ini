@@ -79,7 +79,7 @@ namespace CarreMagique
                 && IOccurence == nf.IOccurence
                 && SSuffixe == nf.SSuffixe;
         }
-        public void TraitementChaine( string sFichierAvecExtension)
+        public void DecompositionNomFichier( string sFichierAvecExtension)
         {/*
             fonction ventiler le nom du fichier dans les différentes propriétés 
             de l'objet de type NomFichier selon une structure 
@@ -89,7 +89,7 @@ namespace CarreMagique
             occurrence en chiffres
             suffixe selon échantillon
              */
-            //Uti.Info("NomFichier", "TraitementChaine", "");
+            Uti.Info("NomFichier", "DecompositionNomFichier", "");
             int iPosBarre = sFichierAvecExtension.LastIndexOf(@"\");
             string sFich = sFichierAvecExtension.Substring(iPosBarre, sFichierAvecExtension.Length - (iPosBarre));
             int iPosPoint = sFich.LastIndexOf('.');

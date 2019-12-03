@@ -438,8 +438,9 @@ namespace CarreMagique
                     }
                     else
                     {
-                  //      Uti.Mess("--->  carré magique non résolu");
+                        //      Uti.Mess("--->  carré magique non résolu");
                         // carré magique non résolu suppression du fichier ouverture création d'un fichier de même nom
+
                         if (fichierOuverture.STypeFichierCourt == "ec") // 'ec' reste 'ec'
                         {
                           //  Uti.Mess("--->  fichier ouverture de type en cours");
@@ -600,6 +601,7 @@ namespace CarreMagique
         }
         public string CategorieFichier(string sDossParent)
         {
+            Uti.Info("Persistance", "CategorieFichier", "");
             /* ***************************************************************
             +
             * Fonction pour savoir si le dossier parent est le dossier 'en-cours' 
@@ -628,6 +630,7 @@ namespace CarreMagique
        
         public bool PresenceDossierSvg()
         {
+            Uti.Info("Persistance", "PresenceDossierSvg", "");
             /* ***************************************************************
             +
             * Fonction pour créer un dossier svg
@@ -660,6 +663,7 @@ namespace CarreMagique
         }
         public bool PresenceDossier(string sNomDossier)
         {
+            Uti.Info("Persistance", "PresenceDossier", "");
             if (Directory.Exists(sRacine + sDossSvg + sNomDossier))
             {
                 return true;
@@ -721,7 +725,7 @@ namespace CarreMagique
                         sCheminFichier = ChoixOccurrenceFichierTailleDeterminee();
 
                         //remplit les propriétés de l'objet à partir du nom de fichier
-                        fichierOuverture.TraitementChaine(sCheminFichier);
+                        fichierOuverture.DecompositionNomFichier(sCheminFichier);
 
 
                         iPosExt = sCheminFichier.LastIndexOf(@".");
@@ -731,7 +735,7 @@ namespace CarreMagique
                         if (OptionMenu == 3)   // ouverture fichier existant pour y prendre les informations
                         {
                             // remplacement fichier
-                            Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
+                            //Console.WriteLine("fichOuv ext : " + fichierOuverture.SSuffixe);
                             // longueur de la partie extension (avec le point)
                             int tailleExt = (sCheminFichier.Substring(iPosExt, (sCheminFichier.Length - iPosExt))).Length;
                             int tailleNomFichier = iPosExt - (iPosBarre + 1);
@@ -813,7 +817,7 @@ namespace CarreMagique
 
         public void OuvrirFichierTxt(string sCheminFichier)
         {
-            Uti.Info("Persistance", "OuvrirFichier", "");
+            Uti.Info("Persistance", "OuvrirFichierTxt", "");
             /* ***************************************************************
                    OuvrirFichier
 
@@ -853,7 +857,7 @@ namespace CarreMagique
             string sLigne = "";
             string[] tabContenuFichier;
             string[,] fragments = new string[persistanceGrille.INombre, persistanceGrille.INombre];
-            Console.WriteLine(sCheminFichier);
+            //Console.WriteLine(sCheminFichier);
             // renseigne la propriété 'nomFichierChargeDansMemoire'
             //ObtenirNomFichier(sCheminFichier);
             // remplissage liste contenu fichier
@@ -891,7 +895,7 @@ namespace CarreMagique
                         if (int.TryParse(sFragment, out iValeur))
                         {
                             // c'est un entier
-                            Console.WriteLine("case " + i + "." + j + " : " + iValeur);
+                            //Console.WriteLine("case " + i + "." + j + " : " + iValeur);
                             // remplissage dans la grille
                             persistanceGrille.ChangeValeurCelluleGrille(i, j, iValeur);
                             j++;
@@ -911,13 +915,12 @@ namespace CarreMagique
                 iIndiceLigne = 0;
                 // à placer dans le damier
             }
-            //afficher le damier
-            persistanceGrille.AffiDamier();
-            Console.WriteLine();
+            ////afficher le damier
+            //persistanceGrille.AffiDamier();
         }
         public void OuvrirFichierJSON(string sCheminFichier)
         {
-            Uti.Info("Persistance", "OuvrirFichier", "");
+            Uti.Info("Persistance", "OuvrirFichierJSON", "");
             /* ***************************************************************
                    OuvrirFichier
 
@@ -959,14 +962,12 @@ namespace CarreMagique
                 j++;
                 if (j == persistanceGrille.INombre)
                 {
-                    Console.WriteLine();
                     i++;
                     j = 0;
                 }
             }
-            //afficher le damier
-            persistanceGrille.AffiDamier();
-            Console.WriteLine();
+            ////afficher le damier
+            //persistanceGrille.AffiDamier();
         }
         public void ChoixFichierAOuvrir(Grille grille)
         {
@@ -1249,7 +1250,7 @@ namespace CarreMagique
                     if (iIndice >= 0 && iIndice < choixPossibles.Length)
                     {
                         sChaine = choixPossibles[iIndice];
-                        fichierOuverture.TraitementChaine(sChaine);
+                        fichierOuverture.DecompositionNomFichier(sChaine);
                         bOkIndice = true;
                     }
                 }

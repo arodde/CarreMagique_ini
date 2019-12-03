@@ -235,7 +235,7 @@ namespace CarreMagique
                 }
 
                 okSaisie = false;
-            } while (!(Uti.Quitter(" le jeu?")));
+            } while (!(Uti.Quitter(" CARRE MAGIQUE?")));
         }
     }
 }
