@@ -459,7 +459,7 @@ namespace CarreMagique
                     GestionEspaces(Damier[i, j].IValeur);
                 }
                 EspaceAvant();
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write(TotalParLignes[i]);
                 Console.ResetColor();
                 Console.WriteLine();
@@ -974,7 +974,7 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Green;
             foreach (int iElt in totalParColonnes)
             {
                 GestionEspaces(iElt);
