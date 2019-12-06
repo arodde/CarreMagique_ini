@@ -43,24 +43,24 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            // les mentions à afficher
-            string sClasse = "----> " + sNomClasse;
-            string sFonction = " ----> " + sNomFonction;
-            string sLesComplements = "";
-            if (sComplements != "")
-                sLesComplements = " ----> " + sComplements;
-            // l'affichage
-            Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.Write(sClasse);
-            Console.ResetColor();
+            //// les mentions à afficher
+            //string sClasse = "----> " + sNomClasse;
+            //string sFonction = " ----> " + sNomFonction;
+            //string sLesComplements = "";
+            //if (sComplements != "")
+            //    sLesComplements = " ----> " + sComplements;
+            //// l'affichage
+            //Console.ForegroundColor = ConsoleColor.Magenta;
+            //Console.Write(sClasse);
+            //Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(sFonction);
-            Console.ResetColor();
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //Console.Write(sFonction);
+            //Console.ResetColor();
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(sLesComplements);
-            Console.ResetColor();
+            //Console.ForegroundColor = ConsoleColor.Green;
+            //Console.WriteLine(sLesComplements);
+            //Console.ResetColor();
         }
    //     static public void Mess(string sMessage)
    //     {
