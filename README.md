@@ -4,11 +4,10 @@ sauvegarde oui
 commencé le 06/06/2019
 *** implémenté
 Le programme fonctionne en mode console avec un damier de cellules.
-Les cellules contiennes des entiers (coordonnées et valeur).
+Les cellules contiennen des entiers (coordonnées et valeur).
 Il aurait été possible de ne manipuler que des entiers plutôt que des 
-objets. Mais il aurait alors été impossible de conserver les coordonnées 
-de chaque valeur dans le damier à tout moment du programme.
-J'ai souhaité à  des fins pédagogiques manipuler des objets et ai voulu 
+objets.               
+J'ai souhaité à des fins pédagogiques manipuler des objets et ai voulu 
 envisager une éventuelle implémentation graphique du programme.
 Au final je pense que je ne le ferai pas.
 
