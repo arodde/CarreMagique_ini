@@ -215,7 +215,7 @@ namespace CarreMagique
                     i++;
                 }
             }
-            AffiDamier();
+            
         }
         public void ChangeValeurCelluleGrille(int i, int j, int iValeur)
         {
