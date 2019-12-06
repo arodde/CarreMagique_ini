@@ -1,5 +1,6 @@
 # CarreMagique
-programme interactif de jeu de carré magique
+programme interactif de jeu de carré magique en mode console
+sauvegarde oui
 commencé le 06/06/2019
 *** implémenté
 Le programme fonctionne en mode console avec un damier de cellules.
@@ -11,12 +12,6 @@ J'ai souhaité à  des fins pédagogiques manipuler des objets et ai voulu
 envisager une éventuelle implémentation graphique du programme.
 Au final je pense que je ne le ferai pas.
 
-Le programme intègre une version interactive ou le joueur procède à des 
-permutations. Le jeu devient rapidement rébarbatif. Il épargne juste à 
-l'utilisateur le travail de calcul des sommes croissant selon la taille 
-du carré.
-A noter que les fichiers sauvegardés sont en fichier texte ou json au choix, 
-et réparti en deux dossiers 'en-cours' et 'resolus'.
 
 *** Recours à la classe Uti
 
