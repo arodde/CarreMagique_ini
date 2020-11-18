@@ -728,21 +728,17 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\demon\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\demon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\demon\\source\\CarreMagique\\CarreMagique\\CarreMagique.csproj",
+      "projectUniqueName": "C:\\Users\\demon\\source\\repos\\arodde\\CarreMagique\\CarreMagique\\CarreMagique.csproj",
       "projectName": "CarreMagique",
-      "projectPath": "C:\\Users\\demon\\source\\CarreMagique\\CarreMagique\\CarreMagique.csproj",
+      "projectPath": "C:\\Users\\demon\\source\\repos\\arodde\\CarreMagique\\CarreMagique\\CarreMagique.csproj",
       "packagesPath": "C:\\Users\\demon\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\demon\\source\\CarreMagique\\CarreMagique\\obj\\",
+      "outputPath": "C:\\Users\\demon\\source\\repos\\arodde\\CarreMagique\\CarreMagique\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
         "C:\\Users\\demon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -756,6 +752,7 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
+          "targetAlias": "netcoreapp2.1",
           "projectReferences": {}
         }
       },
@@ -767,8 +764,10 @@
     },
     "frameworks": {
       "netcoreapp2.1": {
+        "targetAlias": "netcoreapp2.1",
         "dependencies": {
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
@@ -779,10 +778,16 @@
           }
         },
         "imports": [
-          "net461"
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
         ],
         "assetTargetFallback": true,
-        "warn": true
+        "warn": true,
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

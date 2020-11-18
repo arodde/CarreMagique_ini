@@ -31,7 +31,6 @@ namespace CarreMagique
                 return false;
             return IValeur == c.IValeur && ICoorHori == c.ICoorHori && iCoorVerti == c.ICoorVerti;
         }
-
         public override int GetHashCode()
         {
             return HashCode.Combine(iValeur, iCoorHori, iCoorVerti, IValeur, ICoorHori, ICoorVerti);
