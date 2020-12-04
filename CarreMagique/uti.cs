@@ -7,7 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 
 
-namespace CarreMagique
+namespace MagicSquare
 {
     public static class Uti
     {
@@ -62,28 +62,28 @@ namespace CarreMagique
             //Console.WriteLine(sLesComplements);
             //Console.ResetColor();
         }
-   //     static public void Mess(string sMessage)
-   //     {
-   //         /* ***************************************************************
-   // +
-   // * Fonction pour +
-   // * les paramètres:
-   // * 1 : + (+)
-   // * 2 : + (+)
-   // * 3 : + (+)
-   // * 4 : + (+)
-   // * 5 : + (+)
-   // * retour: + (+)
-   // * exemple(s):
-   // * +
-   // * Ce qui est impossible:
-   // * +
-   //**************************************************************** */
-   //         Info("Program", "Mess", "");
-   //         Console.ForegroundColor = ConsoleColor.Green;
-   //         Console.WriteLine(sMessage);
-   //         Console.ResetColor();
-   //     }
+        //     static public void Mess(string sMessage)
+        //     {
+        //         /* ***************************************************************
+        // +
+        // * Fonction pour +
+        // * les paramètres:
+        // * 1 : + (+)
+        // * 2 : + (+)
+        // * 3 : + (+)
+        // * 4 : + (+)
+        // * 5 : + (+)
+        // * retour: + (+)
+        // * exemple(s):
+        // * +
+        // * Ce qui est impossible:
+        // * +
+        //**************************************************************** */
+        //         Info("Program", "Mess", "");
+        //         Console.ForegroundColor = ConsoleColor.Green;
+        //         Console.WriteLine(sMessage);
+        //         Console.ResetColor();
+        //     }
         static public void MessErr(string sMessage)
         {
             /* ***************************************************************
@@ -171,7 +171,7 @@ namespace CarreMagique
    **************************************************************** */
             return t.Equals(u);
         }
-       public static string DonneNomDossier(string sChemin)
+        public static string DonneNomDossier(string sChemin)
         {
             int position = sChemin.LastIndexOf(@"\");
             return sChemin.Substring(position + 1);
@@ -368,7 +368,7 @@ namespace CarreMagique
 
             ConsoleKeyInfo saisie = Console.ReadKey(true);
 
-            
+
 
             if (saisie.Key == ConsoleKey.O)
             {
@@ -549,11 +549,11 @@ namespace CarreMagique
                 Console.WriteLine("Création dossier à l'emplacement " + sChemin + ".");
             }
         }
-        public static void ReferencesProgramme(string sDevNom, string sDevPrenom,string sProgNom, string sProgVersion )
+        public static void ReferencesProgramme(string sDevNom, string sDevPrenom, string sProgNom, string sProgVersion)
         {
-            Console.WriteLine("Programme : "+ sProgNom);
-            Console.WriteLine(" Version : "+ sProgVersion);
-            Console.WriteLine("Développeur : "+ sDevPrenom + " " + sDevNom);
+            Console.WriteLine("Programme : " + sProgNom);
+            Console.WriteLine(" Version : " + sProgVersion);
+            Console.WriteLine("Développeur : " + sDevPrenom + " " + sDevNom);
             Console.WriteLine("");
         }
     }

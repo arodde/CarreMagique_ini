@@ -2,38 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CarreMagique
+namespace MagicSquare
 {
-    public class Cellule
+    public class Cell
     {
-        private int iValeur;
-        private int iCoorHori;
-        private int iCoorVerti;
-        public int IValeur
-        {
-            get => iValeur;
-            set => iValeur = value;
-        }
-        public int ICoorHori
-        {
-            get => iCoorHori;
-            set => iCoorHori = value;
-        }
-        public int ICoorVerti
-        {
-            get => iCoorVerti;
-            set => iCoorVerti = value;
-        }
+        public int value;
+        public int horizontalPosition;
+        public int verticalPosition;
         public override bool Equals(object obj)
         {
-            Cellule c = obj as Cellule;
+            Cell c = obj as Cell;
             if (c == null)
                 return false;
-            return IValeur == c.IValeur && ICoorHori == c.ICoorHori && iCoorVerti == c.ICoorVerti;
+            return value == c.value && horizontalPosition == c.horizontalPosition && verticalPosition == c.verticalPosition;
         }
         public override int GetHashCode()
         {
-            return HashCode.Combine(iValeur, iCoorHori, iCoorVerti, IValeur, ICoorHori, ICoorVerti);
+            return HashCode.Combine(value, horizontalPosition, verticalPosition, value, horizontalPosition, verticalPosition);
         }
 
         public override string ToString()
@@ -54,7 +39,7 @@ namespace CarreMagique
         * +
        **************************************************************** */
 
-            string description = "Valeur " + IValeur + " CoorHori " + ICoorHori + " coorVerti " + ICoorVerti;
+            string description = "Valeur " + value + " CoorHori " + horizontalPosition + " coorVerti " + verticalPosition;
             return description;
         }
     }

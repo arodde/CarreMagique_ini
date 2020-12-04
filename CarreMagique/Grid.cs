@@ -1,45 +1,22 @@
 ﻿using System;
 
-namespace CarreMagique
+namespace MagicSquare
 {
-    public class Grille
+    public class Grid
     {
-        private int iNombre;
-        private int iIteration;
-        private int iDiagAsc;
-        private int iDiagDesc;
-        private int[] totalParLignes; // somme des j
-        private int[] totalParColonnes; // somme des i
-        private Cellule cellule1;
-        private Cellule cellule2;
-        private Cellule[,] damier;
-        private bool bCarreMagiqueResolu;
-        private Persistance grillePersistance;
-        public int INombre
-        {
-            get => iNombre;
-            private set
-            {
-              //  Console.WriteLine("nombre est actualisé à " + value);
-                iNombre = value;
-            }
-        }
-        public int IIteration { get => iIteration; set => iIteration = value; }
-        public int IDiagAsc { get => iDiagAsc; set => iDiagAsc = value; }
-        public int IDiagDesc { get => iDiagDesc; set => iDiagDesc = value; }
-        public int[] TotalParLignes { get => totalParLignes; set => totalParLignes = value; }
-        public int[] TotalParColonnes { get => totalParColonnes; set => totalParColonnes = value; }
-        public bool BCarreMagiqueResolu { get => bCarreMagiqueResolu; set => bCarreMagiqueResolu = value; }
-        public Cellule[,] Damier
-        {
-            get => damier;
-             set => damier = value;
-        }
-        public Cellule Cellule1 { get => cellule1; set => cellule1 = value; }
-        public Cellule Cellule2 { get => cellule2; set => cellule2 = value; }
-        internal Persistance GrillePersistance { get => grillePersistance; set => grillePersistance = value; }
-
-        public void T2dimDyna()
+        public int numerous;
+        public int iteration;
+        public int ascendingDiagonal;
+        public int downwardDiagonal;
+        public int[] totalsByLines;
+        public int[] totalsByColumns;
+        public Cell cell1;
+        public Cell cell2;
+        public Cell[,] Checkerboard;
+        public bool magicSquareSolved;
+        public Persistence persistence;
+   
+    public void DinamicCreationTwoDimensionalArray()
         {
             /* ***************************************************************
              +
@@ -56,15 +33,15 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "T2dim", "");
-            DeterminationTaille();
-            Damier = new Cellule[INombre, INombre];
-            InitialisationDamier();
-            AffiDamier();
+            Uti.Info("Grid", "T2dim", "");
+            SizeDetermination();
+            Checkerboard = new Cell[numerous, numerous];
+            CheckerboardInitialization();
+            CheckboardDisplay();
         }
-        public Grille(int iTaille)
+        public Grid(int size)
         {
-            Uti.Info("Grille", "Grille", "");
+            Uti.Info("Grid", "Grid", "");
             /* ***************************************************************
              +
              * Fonction pour créer la grille suite à la création d'une persistance pour charger une grille en mémoire
@@ -82,7 +59,7 @@ namespace CarreMagique
             **************************************************************** */
             //contenu déplacé dans dans Construction()           
         }
-        public void Construire(int iTaille)
+        public void build(int size)
         {
             /* ***************************************************************
              +
@@ -100,20 +77,20 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "Grille", "");
-            INombre = iTaille;
+            Uti.Info("Grid", "Grid", "");
+            numerous = size;
             //DeterminationTaille();
-            BCarreMagiqueResolu = false;
+            magicSquareSolved = false;
             // instanciations 
-            Damier = new Cellule[INombre, INombre];
-            TotalParColonnes = new int[iNombre];
-            TotalParLignes = new int[iNombre];
-            cellule1 = new Cellule();
-            cellule2 = new Cellule();
+            Checkerboard = new Cell[numerous, numerous];
+            totalsByColumns = new int[numerous];
+            totalsByLines = new int[numerous];
+            cell1 = new Cell();
+            cell2 = new Cell();
             //// initialisation 
             //InitialisationDamier();
         }
-        public void Construire()
+        public void Build()
         {
             /* ***************************************************************
              +
@@ -131,21 +108,22 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "Grille", "");
-            DeterminationTaille();
+            Uti.Info("Grid", "Grid", "");
+            SizeDetermination();
 
-            BCarreMagiqueResolu = false;
+
+            magicSquareSolved = false;
             // instanciations 
-            Damier = new Cellule[INombre, INombre];
-            TotalParColonnes = new int[iNombre];
-            TotalParLignes = new int[iNombre];
-            cellule1 = new Cellule();
-            cellule2 = new Cellule();
-            
+            Checkerboard = new Cell[numerous, numerous];
+            totalsByColumns = new int[numerous];
+            totalsByLines = new int[numerous];
+            cell1 = new Cell();
+            cell2 = new Cell();
+
         }
-        public Grille()
+        public Grid()
         {
-            Uti.Info("Grille", "Grille", "");
+            Uti.Info("Grid", "Grid", "");
             /* ***************************************************************
              +
              * Fonction pour créer la grille suite à la création d'une persistance pour charger une grille en mémoire
@@ -164,7 +142,7 @@ namespace CarreMagique
             // ne fais plus rien depuis la mise en place du fichier json qui appel le constructeur
 
         }
-        public void InitialisationDamier()
+        public void CheckerboardInitialization()
         {
             /* ***************************************************************
     +
@@ -182,42 +160,42 @@ namespace CarreMagique
     * Ce qui est impossible:
     * +
    **************************************************************** */
-            Uti.Info("Grille", "InitialisationDamier", "");
+            Uti.Info("Grid", "InitialisationDamier", "");
             // remplissage du tableau
             int i = 0;
             int j = 0;
-            Cellule compteur = new Cellule();
-            compteur.IValeur = 0;
-            foreach (Cellule entier in Damier)
+            Cell counter = new Cell();
+            counter.value = 0;
+            foreach (Cell integerNumber in Checkerboard)
             {
-                while (i < INombre) // lignes
+                while (i < numerous) // lignes
                 {
-                    while (j < INombre) // colonnes
+                    while (j < numerous) // colonnes
                     {
                         // mise à jour objet
-                        compteur.IValeur++;
-                        compteur.ICoorHori = i;
-                        compteur.ICoorVerti = j;
+                        counter.value++;
+                        counter.horizontalPosition = i;
+                        counter.verticalPosition = j;
                         // ajout cellule au damier 
                         // instanciation de la cellule du damier
-                        Damier[i, j] = new Cellule();
-                        // recopie de valeurs de la cellule compteur dans la cellule du damier
-                        Damier[i, j].IValeur = compteur.IValeur;
-                        Damier[i, j].ICoorHori = compteur.ICoorHori;
-                        Damier[i, j].ICoorVerti = compteur.ICoorVerti;
+                        Checkerboard[i, j] = new Cell();
+                        // recopie de valeurs de la cellule counter dans la cellule du damier
+                        Checkerboard[i, j].value = counter.value;
+                        Checkerboard[i, j].horizontalPosition = counter.horizontalPosition;
+                        Checkerboard[i, j].verticalPosition = counter.verticalPosition;
                         j++;
                     }
                     // passage à une nouvelle ligne
-                    if (j >= INombre)
+                    if (j >= numerous)
                     {
                         j = 0;
                     }
                     i++;
                 }
             }
-            
+
         }
-        public void ChangeValeurCelluleGrille(int i, int j, int iValeur)
+        public void ChangeGridCellValue(int i, int j, int value)
         {
             /* ***************************************************************
             +
@@ -234,10 +212,10 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            //Uti.Info("Grille", "ChangeValeurCelluleGrille", "");            
-            damier[i, j].IValeur = iValeur;
+            //Uti.Info("Grid", "ChangeValeurCelluleGrille", "");            
+            Checkerboard[i, j].value = value;
         }
-        public void GestionEspaces(int iValeur)
+        public void ManagmentOfEmptyCharacters(int value)
         {
             /* ***************************************************************
             +
@@ -255,21 +233,21 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            //Uti.Info("Grille", "GestionEspaces", "");
-            if (iValeur < 10)
+            //Uti.Info("Grid", "GestionEspaces", "");
+            if (value < 10)
             {
-                Console.Write("   " + iValeur + " ");
+                Console.Write("   " + value + " ");
             }
-            else if (iValeur < 100)
+            else if (value < 100)
             {
-                Console.Write("  " + iValeur + " ");
+                Console.Write("  " + value + " ");
             }
             else // < 1000
             {
-                Console.Write(" " + iValeur + " ");
+                Console.Write(" " + value + " ");
             }
         }
-        public void ModifierNombre(int iValeur)
+        public void ModifyNumber(int value)
         {         /* ***************************************************************
              +
              * Fonction pour modifier iNombre sans changer le caractère private du set de Nombre
@@ -285,8 +263,8 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Persistance", "ModifierNombre", "");
-            INombre = iValeur;
+            Uti.Info("Persistance", "ModifyNumber", "");
+            numerous = value;
         }
         public static int DeterminationTailleSansInstance()
         {
@@ -305,26 +283,26 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "DeterminationTaille()", "");
+            Uti.Info("Grid", "DeterminationTaille()", "");
             Console.WriteLine("Indiquez la taille du carré magique?");
-            bool saisieOK = false;
-            string saisie = "";
-            int valeur = 0;
-            while (!saisieOK)
+            bool isValidEntry = false;
+            string input = "";
+            int value = 0;
+            while (!isValidEntry)
             {
-                valeur = 0;
-                saisie = Console.ReadLine();
-                if (int.TryParse(saisie, out valeur))
+                value = 0;
+                input = Console.ReadLine();
+                if (int.TryParse(input, out value))
                 {
-                    if (valeur < 3)
+                    if (value < 3)
                     {
-                        saisieOK = false;
+                        isValidEntry = false;
                         Console.WriteLine("le plus petit carré magique comprend 3 cases sur 3.");
                     }
                     else
                     {
-                        saisieOK = true;
-                        return valeur;
+                        isValidEntry = true;
+                        return value;
                     }
                 }
                 else
@@ -335,7 +313,7 @@ namespace CarreMagique
             return 0;
         }
 
-        public void ManipulationCarreMagique()
+        public void MagicSquareManipulation()
         {
             /* ***************************************************************
              +
@@ -352,37 +330,37 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "ManipulationCarreMagique", "");
+            Uti.Info("Grid", "ManipulationCarreMagique", "");
             // affichage du damier            
-            bool bQuitter = false;
-            int iSeuilPermutations = 4;
-            int iPermutationsAEffectuer = iSeuilPermutations;
-            AffiDamier();
+            bool leave = false;
+            int permutationThreshold = 4;
+            int permutationToPerform = permutationThreshold;
+            CheckboardDisplay();
             do
             {
 
-                ProposerValeursDamierAPermuter();
-                if (Gagne())
+                ProposesCheckedboardValueToSwap();
+                if (IsWon())
                 {
-                    bQuitter = true;
+                    leave = true;
                 }
                 else
                 {
                     // proposer sauvegarde et arrêt du jeu toutes les (seuilPermutation+1) permutations
-                    if (iPermutationsAEffectuer == 0)
+                    if (permutationToPerform == 0)
                     {
-                        bQuitter = Uti.Quitter("");
-                        iPermutationsAEffectuer = iSeuilPermutations;
+                        leave = Uti.Quitter("");
+                        permutationToPerform = permutationThreshold;
                     }
                 }
-                iPermutationsAEffectuer--;
-            } while (!bQuitter);
+                permutationToPerform--;
+            } while (!leave);
             // proposer de sauvegarder si le joueur quitte le jeu en ayant ou non résolu le carré magique.
 
-            grillePersistance.ProposerSauvegarderGrille(bQuitter);
+            persistence.SuggestSavingTheGrid(leave);
         }
 
-        public void DeterminationTaille()
+        public void SizeDetermination()
         {
             /* ***************************************************************
             +
@@ -399,7 +377,7 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "DeterminationTaille()", "");
+            Uti.Info("Grid", "DeterminationTaille()", "");
             Console.WriteLine("Indiquez la taille du carré magique?");
             bool saisieOK = false;
             string saisie = "";
@@ -417,7 +395,7 @@ namespace CarreMagique
                     else
                     {
                         saisieOK = true;
-                        INombre = valeur;
+                        numerous = valeur;
 
                     }
                 }
@@ -427,7 +405,7 @@ namespace CarreMagique
                 }
             }
         }
-        public void AffiDamier()
+        public void CheckboardDisplay()
         {    /* ***************************************************************
              +
              * Fonction pour afficher le damier de taille grille.Nombre et les totaux 
@@ -444,32 +422,32 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "AffiDamier", "");
-            ReinitialisationTotaux();
+            Uti.Info("Grid", "AffiDamier", "");
+            ResetsTotals();
             // réalisation des totaux
             ProcederTotaux();
             // affichage du tableau
-            AffiDiagDesc();
+            DescendingDiagonalDisplay();
             // ligne damier
-            for (int i = 0; i < INombre; i++)
+            for (int i = 0; i < numerous; i++)
             {
                 // cellule damier
-                EspaceAvant();
-                for (int j = 0; j < INombre; j++)
+                IsPresentASpaceBefore();
+                for (int j = 0; j < numerous; j++)
                 {
-                    GestionEspaces(Damier[i, j].IValeur);
+                    ManagmentOfEmptyCharacters(Checkerboard[i, j].value);
                 }
-                EspaceAvant();
+                IsPresentASpaceBefore();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write(TotalParLignes[i]);
+                Console.Write(totalsByLines[i]);
                 Console.ResetColor();
                 Console.WriteLine();
             }
-            AffiDiagAsc();
-            AffiTotalColonnes();
+            AscendingDiagonalDisplay();
+            DisplayOfColumnTotals();
             Console.WriteLine();
         }
-        public void ProposerValeursDamierAPermuter()
+        public void ProposesCheckedboardValueToSwap()
         {
             /* ***************************************************************
             +
@@ -486,7 +464,7 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "ProposerPermutation", "");
+            Uti.Info("Grid", "ProposerPermutation", "");
             Console.WriteLine("Quelles valeurs de damier souhaitez-vous permuter?");
             Console.WriteLine("Saisissez la première valeur");
             int valeur1 = SaisieValeurPossible();
@@ -512,16 +490,16 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "SaisieValeurPossible", "");
+            Uti.Info("Grid", "SaisieValeurPossible", "");
             int valeur = 0;
-            while (valeur < 1 || valeur > INombre * INombre)
+            while (valeur < 1 || valeur > numerous * numerous)
             {
                 string saisie = Console.ReadLine();
                 if (int.TryParse(saisie, out valeur))
                 {
-                    if (valeur < 0 || valeur > INombre * INombre)
+                    if (valeur < 0 || valeur > numerous * numerous)
                     {
-                        Console.WriteLine("La valeur doit être comprise entre 1 et " + INombre * INombre);
+                        Console.WriteLine("La valeur doit être comprise entre 1 et " + numerous * numerous);
                     }
                     else
                     {
@@ -553,41 +531,41 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "TrouverCellule", "");
+            Uti.Info("Grid", "TrouverCellule", "");
             // Chercher une valeur du tableau
             int i = 0;
             int j = 0;
             bool bOkCell1 = false;
             bool bOkCell2 = false;
-            Cellule compteur = new Cellule();
-            compteur.IValeur = 0;
-            foreach (Cellule entier in Damier)
+            Cell compteur = new Cell();
+            compteur.value = 0;
+            foreach (Cell entier in Checkerboard)
             {
-                while (i < INombre) // lignes
+                while (i < numerous) // lignes
                 {
-                    while (j < INombre) // colonnes
+                    while (j < numerous) // colonnes
                     {
                         // mise à jour objet
-                        compteur.IValeur++;
-                        compteur.ICoorHori = i;
-                        compteur.ICoorVerti = j;
+                        compteur.value++;
+                        compteur.horizontalPosition = i;
+                        compteur.verticalPosition = j;
                         // ajout cellule au damier 
-                        if (iSaisieJoueur1 == Damier[i, j].IValeur || iSaisieJoueur2 == Damier[i, j].IValeur)
+                        if (iSaisieJoueur1 == Checkerboard[i, j].value || iSaisieJoueur2 == Checkerboard[i, j].value)
                         {
-                            if (iSaisieJoueur1 == Damier[i, j].IValeur)
+                            if (iSaisieJoueur1 == Checkerboard[i, j].value)
                             {
-                                cellule1.IValeur = Damier[i, j].IValeur;
-                                cellule1.ICoorHori = Damier[i, j].ICoorHori;
-                                cellule1.ICoorVerti = Damier[i, j].ICoorVerti;
-                                Console.WriteLine(Cellule1.ToString());
+                                cell1.value = Checkerboard[i, j].value;
+                                cell1.horizontalPosition = Checkerboard[i, j].horizontalPosition;
+                                cell1.verticalPosition = Checkerboard[i, j].verticalPosition;
+                                Console.WriteLine(cell1.ToString());
                                 bOkCell1 = true;
                             }
                             else
                             {
-                                cellule2.IValeur = Damier[i, j].IValeur;
-                                cellule2.ICoorHori = Damier[i, j].ICoorHori;
-                                cellule2.ICoorVerti = Damier[i, j].ICoorVerti;
-                                Console.WriteLine(Cellule2.ToString());
+                                cell2.value = Checkerboard[i, j].value;
+                                cell2.horizontalPosition = Checkerboard[i, j].horizontalPosition;
+                                cell2.verticalPosition = Checkerboard[i, j].verticalPosition;
+                                Console.WriteLine(cell2.ToString());
                                 bOkCell2 = true;
                             }
                         }
@@ -597,14 +575,14 @@ namespace CarreMagique
                             {
                                 PermuterValeurCellules();
 
-                                AffiDamier();
+                                CheckboardDisplay();
                                 return;
                             }
                         }
                         j++;
                     }
                     // passage à une nouvelle ligne
-                    if (j >= INombre)
+                    if (j >= numerous)
                     {
 
                         j = 0;
@@ -637,15 +615,15 @@ namespace CarreMagique
               uniquement sur les valeurs, les propriétés coorHori et coorVerti
               restent inchangées.
             */
-            Uti.Info("Grille", "PermuterCellules", "");
-            Cellule transit = new Cellule();
+            Uti.Info("Grid", "PermuterCellules", "");
+            Cell transit = new Cell();
             // permutation de valeurs de cellules
             // valeur1 dans damier vers transit
-            transit.IValeur = Damier[cellule1.ICoorHori, cellule1.ICoorVerti].IValeur;
+            transit.value = Checkerboard[cell1.horizontalPosition, cell1.verticalPosition].value;
             // valeur2 dans damier vers valeur1 dans damier
-            Damier[cellule1.ICoorHori, cellule1.ICoorVerti].IValeur = Damier[cellule2.ICoorHori, cellule2.ICoorVerti].IValeur;
+            Checkerboard[cell1.horizontalPosition, cell1.verticalPosition].value = Checkerboard[cell2.horizontalPosition, cell2.verticalPosition].value;
             // transit vers valeur2 dans damier
-            Damier[cellule2.ICoorHori, cellule2.ICoorVerti].IValeur = transit.IValeur;
+            Checkerboard[cell2.horizontalPosition, cell2.verticalPosition].value = transit.value;
         }
         public void ProcederTotaux()
         {
@@ -665,11 +643,11 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "ProcederTotaux", "");
+            Uti.Info("Grid", "ProcederTotaux", "");
             // appel des méthodes pour effectuer les totaux
             SommeColonnes();
             SommeLignes();
-            SommeDiagAsc();
+            AscendingDiagonalSum();
             SommeDiagDesc();
         }
         public void SommeColonne(int iIndiceColonne)
@@ -689,11 +667,11 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
         **************************************************************** */
-            //Uti.Info("Grille", "SommeColonne", "");
+            //Uti.Info("Grid", "SommeColonne", "");
             bool bValeurOk = false;
             while (!bValeurOk)
             {
-                if (iIndiceColonne < 0 || iIndiceColonne >= iNombre)
+                if (iIndiceColonne < 0 || iIndiceColonne >= numerous)
                 {
                     bValeurOk = false;
                     Uti.MessErr("Indice de colonne doit être compris entre 0 et nombre-1 inclus.");
@@ -702,9 +680,9 @@ namespace CarreMagique
                 else
                 {
                     bValeurOk = true;
-                    for (int i = 0; i < iNombre; i++)
+                    for (int i = 0; i < numerous; i++)
                     {
-                        TotalParColonnes[iIndiceColonne] += damier[i, iIndiceColonne].IValeur;
+                        totalsByColumns[iIndiceColonne] += Checkerboard[i, iIndiceColonne].value;
                     }
                 }
             }
@@ -727,10 +705,10 @@ namespace CarreMagique
              * Ce qui est impossible:
              * +
             **************************************************************** */
-            Uti.Info("Grille", "SommeColonnes", "");
+            Uti.Info("Grid", "SommeColonnes", "");
             int iValeur = 0;
 
-            for (int i = 0; i < iNombre; i++)
+            for (int i = 0; i < numerous; i++)
             {
                 SommeColonne(iValeur);
                 iValeur++;
@@ -753,12 +731,12 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            //Uti.Info("Grille", "SommeLigne", "");
+            //Uti.Info("Grid", "SommeLigne", "");
             // somme des nombres d'une ligne            
             bool valeurOk = false;
             while (!valeurOk)
             {
-                if (iIndiceLigne < 0 || iIndiceLigne >= iNombre)
+                if (iIndiceLigne < 0 || iIndiceLigne >= numerous)
                 {
                     valeurOk = false;
                     Uti.MessErr("Indice de Ligne doit être compris entre 0 et nombre-1 inclus.");
@@ -767,9 +745,9 @@ namespace CarreMagique
                 else
                 {
                     valeurOk = true;
-                    for (int i = 0; i < iNombre; i++)
+                    for (int i = 0; i < numerous; i++)
                     {
-                        TotalParLignes[iIndiceLigne] += damier[iIndiceLigne, i].IValeur;
+                        totalsByLines[iIndiceLigne] += Checkerboard[iIndiceLigne, i].value;
                     }
                 }
             }
@@ -793,10 +771,10 @@ namespace CarreMagique
             * +
            **************************************************************** */
 
-            //Uti.Info("Grille", "SommeLignes", "");
+            //Uti.Info("Grid", "SommeLignes", "");
             int iValeur = 0;
 
-            for (int i = 0; i < iNombre; i++)
+            for (int i = 0; i < numerous; i++)
             {
                 SommeLigne(iValeur);
                 iValeur++;
@@ -821,14 +799,14 @@ namespace CarreMagique
            **************************************************************** */
             int i = 0;
             int j = 0;
-            while (i < iNombre && j < iNombre)
+            while (i < numerous && j < numerous)
             {
-                IDiagDesc += Damier[i, j].IValeur;
+                downwardDiagonal += Checkerboard[i, j].value;
                 i++;
                 j++;
             }
         }
-        public void SommeDiagAsc()
+        public void AscendingDiagonalSum()
         {
             /* ***************************************************************
             +
@@ -845,16 +823,16 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            int i = iNombre - 1;
+            int i = numerous - 1;
             int j = 0;
-            while (i >= 0 && j < iNombre)
+            while (i >= 0 && j < numerous)
             {
-                IDiagAsc += Damier[i, j].IValeur;
+                ascendingDiagonal += Checkerboard[i, j].value;
                 i--;
                 j++;
             }
         }
-        public bool Gagne()
+        public bool IsWon()
         {
             /* ***************************************************************
             +
@@ -871,11 +849,11 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "Gagne", "");
-            if (ControleTotaux())
+            Uti.Info("Grid", "Gagne", "");
+            if (TotalsControl())
             {
-                Console.WriteLine("Bravo, vous avez résolu le carré magique de " + INombre + ".");
-                BCarreMagiqueResolu = true;
+                Console.WriteLine("Bravo, vous avez résolu le carré magique de " + numerous + ".");
+                magicSquareSolved = true;
                 return true;
             }
             else
@@ -885,7 +863,7 @@ namespace CarreMagique
                 return false;
             }
         }
-        public bool ControleTotaux()
+        public bool TotalsControl()
         {
             /* ***************************************************************
             +
@@ -904,15 +882,15 @@ namespace CarreMagique
             * +
            **************************************************************** */
             // control des valeurs des tableaux
-            if (totalParColonnes[0] == SommeATrouver()) /* si la première valeur du tableau ne donne 
+            if (totalsByColumns[0] == SumToFind()) /* si la première valeur du tableau ne donne 
                                                            rien ne correspond pas à la SommeATrouver()
                                                            alors inutile de continuer */
             {
 
-                if (ValeursEgales(TotalParColonnes) && ValeursEgales(TotalParLignes))
-                    if (TotalParColonnes[0] == TotalParLignes[0])
-                        if (TotalParColonnes[0] == IDiagAsc)
-                            if (IDiagAsc == IDiagDesc)
+                if (AreEqualsValues(totalsByColumns) && AreEqualsValues(totalsByLines))
+                    if (totalsByColumns[0] == totalsByLines[0])
+                        if (totalsByColumns[0] == ascendingDiagonal)
+                            if (ascendingDiagonal == downwardDiagonal)
                                 return true;
                             else
                                 return false;
@@ -928,7 +906,7 @@ namespace CarreMagique
                 return false;
             }
         }
-        public bool ValeursEgales(int[] tab)
+        public bool AreEqualsValues(int[] array)
         {
             /* ***************************************************************
             +
@@ -950,15 +928,15 @@ namespace CarreMagique
             bool ok = false;
             do
             {
-                if (tab[i] != tab[i + 1])
+                if (array[i] != array[i + 1])
                     return false;
                 else
                     ok = true;
                 i++;
-            } while (i < (INombre - 1));
+            } while (i < (numerous - 1));
             return ok;
         }
-        public void AffiTotalColonnes()
+        public void DisplayOfColumnTotals()
         {
             /* ***************************************************************
             +
@@ -976,14 +954,14 @@ namespace CarreMagique
             * +
            **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Green;
-            foreach (int iElt in totalParColonnes)
+            foreach (int iElt in totalsByColumns)
             {
-                GestionEspaces(iElt);
+                ManagmentOfEmptyCharacters(iElt);
             }
             Console.ResetColor();
         }
 
-        public void ReinitialisationTotaux()
+        public void ResetsTotals()
         {
             /* ***************************************************************
             +
@@ -1001,12 +979,12 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            TotalParColonnes = new int[iNombre];
-            TotalParLignes = new int[iNombre];
-            IDiagAsc = 0;
-            IDiagDesc = 0;
+            totalsByColumns = new int[numerous];
+            totalsByLines = new int[numerous];
+            ascendingDiagonal = 0;
+            downwardDiagonal = 0;
         }
-        public void AffiDiagAsc()
+        public void AscendingDiagonalDisplay()
         {
             /* ***************************************************************
             +
@@ -1025,13 +1003,13 @@ namespace CarreMagique
             * +
            **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Yellow;
-            if (IDiagAsc < 100)
-                Console.Write("  " + IDiagAsc + " ");
+            if (ascendingDiagonal < 100)
+                Console.Write("  " + ascendingDiagonal + " ");
             else
-                Console.Write(" " + IDiagAsc + " ");
+                Console.Write(" " + ascendingDiagonal + " ");
             Console.ResetColor();
         }
-        public void AffiDiagDesc()
+        public void DescendingDiagonalDisplay()
         {
             /* ***************************************************************
             +
@@ -1050,19 +1028,19 @@ namespace CarreMagique
             * +
            **************************************************************** */
             Console.ForegroundColor = ConsoleColor.Yellow;
-            if (IDiagDesc < 100)
-                Console.WriteLine("  " + IDiagDesc + " ");
+            if (downwardDiagonal < 100)
+                Console.WriteLine("  " + downwardDiagonal + " ");
             else
-                Console.WriteLine(" " + IDiagDesc + " ");
+                Console.WriteLine(" " + downwardDiagonal + " ");
             Console.ResetColor();
         }
-        public void EspaceAvant()
+        public void IsPresentASpaceBefore()
         {
             // prend en compte la place occupée  par la colonne dévolue aux 
             // diagonales 5 caractères tant que Nombre² est inférieur à 1000
             Console.Write("     ");
         }
-        public Cellule TrouverValeur(int iValeurATrouver)
+        public Cell FindValue(int valueToFind)
         {
             /* ***************************************************************
             +
@@ -1073,65 +1051,65 @@ namespace CarreMagique
             * 3 : + (+)
             * 4 : + (+)
             * 5 : + (+)
-            * retour: compteur qui est chargée des coordonnées de la cellule de la grille avec la valeur cherchée  (cellule)
+            * retour: counter qui est chargée des coordonnées de la cellule de la grille avec la valeur cherchée  (cellule)
             * exemple(s):
             * +
             * Ce qui est impossible:
             * +
            **************************************************************** */
             //
-            if (iValeurATrouver >= damier[0, 0].IValeur || iValeurATrouver <= damier[(INombre - 1), (INombre - 1)].IValeur)
+            if (valueToFind >= Checkerboard[0, 0].value || valueToFind <= Checkerboard[(numerous - 1), (numerous - 1)].value)
             {
-                Console.WriteLine("damier[0,0].Valeur : " + damier[0, 0].IValeur + " damier[Nombre, Nombre].Valeur : " + damier[(INombre - 1), (INombre - 1)].IValeur);
+                Console.WriteLine("damier[0,0].Valeur : " + Checkerboard[0, 0].value + " damier[Nombre, Nombre].Valeur : " + Checkerboard[(numerous - 1), (numerous - 1)].value);
                 int i = 0;
                 int j = 0;
-                Cellule cellule = new Cellule();
-                cellule.IValeur = 0;
-                foreach (Cellule cell in Damier)
+                Cell cell = new Cell();
+                //cellule.value = 0;
+                foreach (Cell cellZ in Checkerboard)
                 {
-                    while (i < INombre) // lignes
+                    while (i < numerous) // lignes
                     {
-                        while (j < INombre) // colonnes
+                        while (j < numerous) // colonnes
                         {
 
                             // mise à jour objet
-                            cellule.IValeur++;
-                            cellule.ICoorHori = i;
-                            cellule.ICoorVerti = j;
+                            cell.value++;
+                            cell.horizontalPosition = i;
+                            cell.verticalPosition = j;
                             // ajout cellule au damier 
                             //   instanciation de la cellule du damier
-                            Damier[i, j] = new Cellule();
-                            //   recopie de valeurs de la cellule compteur dans la cellule du damier
-                            Damier[i, j].IValeur = cellule.IValeur;
-                            Damier[i, j].ICoorHori = cellule.ICoorHori;
-                            Damier[i, j].ICoorVerti = cellule.ICoorVerti;
-                            if (iValeurATrouver == Damier[i, j].IValeur)
+                            Checkerboard[i, j] = new Cell();
+                            //   recopie de valeurs de la cellule counter dans la cellule du damier
+                            Checkerboard[i, j].value = cell.value;
+                            Checkerboard[i, j].horizontalPosition = cell.horizontalPosition;
+                            Checkerboard[i, j].verticalPosition = cell.verticalPosition;
+                            if (valueToFind == Checkerboard[i, j].value)
                             {
-                                // si la valeur est trouvée elle est copiée dans le compteur
+                                // si la valeur est trouvée elle est copiée dans le counter
                                 // avec les coordonnées dans le damier
-                                cellule.IValeur = Damier[i, j].IValeur;
-                                cellule.ICoorHori = Damier[i, j].ICoorHori;
-                                cellule.ICoorVerti = Damier[i, j].ICoorVerti;
-                                return cellule;
+                                cell.value = Checkerboard[i, j].value;
+                                cell.horizontalPosition = Checkerboard[i, j].horizontalPosition;
+                                cell.verticalPosition = Checkerboard[i, j].verticalPosition;
+                                return cell;
                             }
                             j++;
                         }
                         // passage à une nouvelle ligne
-                        if (j >= INombre)
+                        if (j >= numerous)
                         {
                             j = 0;
                         }
                         i++;
                     }
                 }
-                return cellule; // ne semble servir à rien mais réclamé par l'IDE
+                return cell; // ne semble servir à rien mais réclamé par l'IDE
             }
             else
             {
                 return null;
             }
         }
-        public int SommeATrouver()
+        public int SumToFind()
         {
             /* ***************************************************************
             +
@@ -1149,16 +1127,16 @@ namespace CarreMagique
             * Ce qui est impossible:
             * +
            **************************************************************** */
-            Uti.Info("Grille", "SommeATrouver", "");
+            Uti.Info("Grid", "SommeATrouver", "");
             // identifie la valeur de la somme à trouver sur les verticales, les horizontales et les grandes diagonales
-            int iNombreAtrouver = 0;
+            int numberToFind = 0;
             // iNombre divisé par deux donne un entier 
-            iNombreAtrouver = iNombre / 2 * (1 + (iNombre * iNombre));
-            if ((INombre % 2) != 0)
+            numberToFind = numerous / 2 * (1 + (numerous * numerous));
+            if ((numerous % 2) != 0)
             {// si iNombre est impair 
-                iNombreAtrouver += ((iNombre * iNombre - 1) / 2) + 1;
+                numberToFind += ((numerous * numerous - 1) / 2) + 1;
             }
-            return iNombreAtrouver;
+            return numberToFind;
         }
     }
 }

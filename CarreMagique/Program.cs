@@ -1,20 +1,20 @@
 ﻿using System;
 using System.IO;
 
-namespace CarreMagique
+namespace MagicSquare
 {
     class Program
     {
         static void Main(string[] args)
         {
             Uti.Info("Program", "Main", "");
-            Uti.ReferencesProgramme("RODDE","Alain","carre-magique","1.0.2");
+            Uti.ReferencesProgramme("RODDE", "Alain", "carre-magique", "1.0.2");
             Menu menu = new Menu();
             menu.MethodesMenuJeu();
             Console.WriteLine();
         }
-    }  
+    }
 
-     
+
 }
 

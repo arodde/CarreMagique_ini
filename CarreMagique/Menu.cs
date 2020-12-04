@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
-namespace CarreMagique
+namespace MagicSquare
 {
     class Menu
     {
-        private Grille menuGrille;
-        private Persistance menuPersistance;
+        private Grid grid;
+        private Persistence persistence;
         enum optionMenu
         {
             PreparationCarreMagique = 2,
@@ -15,13 +15,13 @@ namespace CarreMagique
         }
         public Menu()
         {
-            menuPersistance = new Persistance();
+            persistence = new Persistence();
 
         }
-        public void DefinitionCarreMagique()
+        public void givesMagicSquareDefinition()
         {
-            // les régles du jeu...
-          
+            // les règles du jeu...
+
 
             Console.WriteLine("Règles du carré magique\n\n" +
                 "Ce jeu mathématique consiste à disposer dans une grille carré.\n" +
@@ -35,7 +35,7 @@ namespace CarreMagique
 
         }
 
-        public void PreparationCarreMagique()
+        public void MagicSquarePreparation()
         {
             /* ***************************************************************
              +
@@ -55,11 +55,11 @@ namespace CarreMagique
              * +
             **************************************************************** */
             Uti.Info("Menu", "PréparationCarreMagique", "");
-            CreationCarreMagique();
+            MagicSquareCreation();
             // affichage du damier et résolution
-            menuGrille.ManipulationCarreMagique();
+            grid.MagicSquareManipulation();
         }
-        public void CreationCarreMagique()
+        public void MagicSquareCreation()
         {
             /* ***************************************************************
              +
@@ -78,15 +78,15 @@ namespace CarreMagique
             **************************************************************** */
             Uti.Info("Menu", "CreationCarreMagique", "");
             // contenu de Main chargé dans le menu
-            menuGrille = new Grille();
-            menuGrille.Construire();
+            grid = new Grid();
+            grid.Build();
             // initialisation 
-            menuGrille.InitialisationDamier();
-            menuPersistance.PersistanceGrille = menuGrille;
-            menuGrille.GrillePersistance = menuPersistance;
-            if (menuGrille.INombre != 0)
+            grid.CheckerboardInitialization();
+            persistence.grid = grid;
+            grid.persistence = persistence;
+            if (grid.numerous != 0)
             {
-                menuGrille.SommeATrouver().ToString();
+                grid.SumToFind().ToString();
             }
             else
             {
@@ -96,7 +96,7 @@ namespace CarreMagique
 
 
 
-        public void CarreMagiqueEnMemoire()
+        public void MagicSquareInMemory()
         {
             /* ***************************************************************
             +
@@ -122,13 +122,13 @@ namespace CarreMagique
              *  sinon l'ouvrir lire le iNombre créer le damier et le 
              *  remplir de chaque valeur rencontrée
              */
-            menuPersistance.DefinirEmplacementDossierRacine();
+            persistence.SetRootFolderLocation();
 
-            string NomFichier = menuPersistance.RetourneAdresseDossierSvg();
+            string NomFichier = persistence.returnsAddressBackUpFolder();
             Console.WriteLine("Choisissez une valeur de carré magique parmi ceux présentés.");
-            menuPersistance.AfficheListeFichiersExistants();
+            persistence.DisplayListOfExistingFiles();
         }
-        public void MenuJeu()
+        public void GameMenu()
         {
             /* ***************************************************************
             +
@@ -150,15 +150,15 @@ namespace CarreMagique
            **************************************************************** */
             Uti.Info("Menu", "MenuJeu", "");
             // mise en forme
-            string sl = "\n";
-            string tbl = "\t";
+            string lienBreak = "\n";
+            string tabulation = "\t";
             // élaboration du menu
-            string sMenu = "MENU" + sl + tbl;
-            sMenu += "1. Règles du jeu le carré magique." + sl + tbl;
-            sMenu += "2. Résoudre un nouveau Carré magique." + sl + tbl;
-            sMenu += "3. Charger un carré magique en mémoire." + sl + tbl;
+            string menu = "MENU" + lienBreak + tabulation;
+            menu += "1. Règles du jeu le carré magique." + lienBreak + tabulation;
+            menu += "2. Résoudre un nouveau Carré magique." + lienBreak + tabulation;
+            menu += "3. Charger un carré magique en mémoire." + lienBreak + tabulation;
             // affichage menu
-            Console.WriteLine(sMenu);
+            Console.WriteLine(menu);
         }
         public void MethodesMenuJeu()
         {
@@ -184,31 +184,31 @@ namespace CarreMagique
             string sInput = "";
             // menu
             int iTheme = 0;
-            int nbOptionMenu = 3;
-            optionMenu choixDOption = 0;
+            int numberOfOptionsAvailable = 3;
+            optionMenu chosenOption = 0;
 
-            bool okSaisie = false;
+            bool isCorrectInput = false;
 
             // charge le menu l'option choisie puis repropose le menu
             do
             {
 
-                MenuJeu();
-                while (!okSaisie)
+                GameMenu();
+                while (!isCorrectInput)
                 {
-                    Console.WriteLine("Votre choix doit être compris entre 1 et " + nbOptionMenu + ".");
+                    Console.WriteLine("Votre choix doit être compris entre 1 et " + numberOfOptionsAvailable + ".");
                     // récupération d'une chaine pour la convertir en entier
                     sInput = Console.ReadLine();
                     if (int.TryParse(sInput, out iTheme))
                     {
                         Console.WriteLine(iTheme);
-                        if (iTheme < 1 || iTheme > nbOptionMenu)
+                        if (iTheme < 1 || iTheme > numberOfOptionsAvailable)
                         {
-                            okSaisie = false;
+                            isCorrectInput = false;
                         }
                         else
                         {
-                            okSaisie = true;
+                            isCorrectInput = true;
                         }
                     }
                     else
@@ -220,24 +220,24 @@ namespace CarreMagique
                 switch (iTheme) // à chaque thème déclaration des variables dans la portée suffisante pour éviter les variables globales
                 {
                     case 1:
-                        DefinitionCarreMagique();
+                        givesMagicSquareDefinition();
                         break;
                     case 2:
-                        menuPersistance.OptionMenu = (int)optionMenu.PreparationCarreMagique;
-                        PreparationCarreMagique();
+                        persistence.selectedMenuOption = (int)optionMenu.PreparationCarreMagique;
+                        MagicSquarePreparation();
 
                         break;
                     case 3:
-                        menuPersistance.OptionMenu = (int)optionMenu.CreationCarreMagique;
-                        CarreMagiqueEnMemoire();
+                        persistence.selectedMenuOption = (int)optionMenu.CreationCarreMagique;
+                        MagicSquareInMemory();
                         break;
                 }
-                if (menuPersistance != null)
+                if (persistence != null)
                 {
-                    menuPersistance.Reinitialiser();
+                    persistence.Reset();
                 }
 
-                okSaisie = false;
+                isCorrectInput = false;
             } while (!(Uti.Quitter(" CARRE MAGIQUE?")));
         }
     }
